@@ -1,0 +1,46 @@
+<odoo>
+    <record id="ms_report_stock_form_report_view" model="ir.ui.view">
+        <field name="name">us.report.current.stock.form</field>
+        <field name="model">us.report.current.stock</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+
+            <form string="Stock Report">
+                <group>
+                    <group>
+                        <field name="group_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                        <field name="brand_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                        <field name="model_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                        <field name="product_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                    </group>
+                    <group>
+                        <field name="branch_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                        <field name="location_ids" widget="many2many_tags" domain="[('name','=','Stock'), ('usage', '=', 'internal')]" options="{'no_create':True, 'no_open':True}"/>
+                    </group>
+
+                </group>
+
+                <footer>
+                    <button name="get_current_stock_report" string="Get Report" type="object" class="oe_highlight"/> or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_current_report_action_mode" model="ir.actions.act_window">
+        <field name="name">Current Stock</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">us.report.current.stock</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="ms_report_stock_form_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        action="stock_current_report_action_mode"
+        id="stock_current_report_menu"
+        parent="stock.menu_warehouse_report" sequence="210"/>
+
+</odoo>

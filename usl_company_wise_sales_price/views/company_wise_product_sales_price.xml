@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="company_wise_sales_price_form" model="ir.ui.view">
+        <field name="name">company.wise.sales.price.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_information']" position="after">
+                <page name="Multi_Company_Price_Setup" string="Multi Company Price" groups="partner_credit_limit.group_partner_credit_limit_manager">
+                    <field name="default_multi_company_price">
+                        <tree editable="bottom">
+<!--                            <field name="default_product_id"/>-->
+                            <field name="default_sales_price"/>
+                            <field name="company_id" options="{'no_create': True}"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

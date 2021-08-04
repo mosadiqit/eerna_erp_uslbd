@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="cheque_in_hand_report_wizard" model="ir.ui.view">
+        <field name="name">Cheque In Hand Report</field>
+        <field name="model">cheque.in.hand.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Cheque In Hand Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+
+                        <field name="company_id" options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+
+                        <field name="location_ids" widget="many2many_tags"/>
+<!--                        <field name="buyer_category" widget="many2many_tags"/>-->
+                    </group>
+                     <group>
+                         <field name="customer_ids" widget="many2many_tags"/>
+
+
+<!--                        <field name="buyer_group"/>-->
+                    </group>
+
+                </group>
+<!--                <group>-->
+<!--                     <field name="customers"/>-->
+<!--                </group>-->
+                <footer>
+                    <button name="get_report" string="PDF Report" type="object" class="oe_highlight"/>
+                    <button name="get_excel_report" string="Excel Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cheque_in_hand_report_wizard" model="ir.actions.act_window">
+        <field name="name">Cheque In Hand Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cheque.in.hand.report.wizard</field>
+        <field name="view_mode">form</field>
+<!--        <field name="view_id" ref="sale_report_wizard"/>-->
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_cheque_in_hand_report_wizard"
+              id="menu_cheque_in_hand_report_wizard"
+              parent="account.menu_finance_reports"/>
+</odoo>

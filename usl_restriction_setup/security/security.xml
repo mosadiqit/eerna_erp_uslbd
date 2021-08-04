@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="group_sale_lock_unlock_permission" model="res.groups">
+        <field name="name">Sale order Lock/Unlock Permission</field>
+        <field name="comment">the user will have access to lock or unlock a confirmed sale order.</field>
+    </record>
+</odoo>

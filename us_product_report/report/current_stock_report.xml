@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="product_current_stock_report"
+        model="us.report.current.stock"
+        string="Product Current Stock"
+        report_type="qweb-pdf"
+        name="us_product_report.product_current_stock_report_view"
+        paperformat="us_product_report.product_current_stock_report_paper_format"
+        menu="False"/>
+
+    <template id="product_current_stock_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+<!--                <h3 class="text-center">Smart Technologies (BD) Ltd.-->
+<!--                    <br></br>-->
+<!--                    <span style="font-size: 12px;">Address: Yakub South Center, 67/D(Old), 156(New), Mirpur Road (2nd Floor), Lake Circus, Kalabagan.</span>-->
+<!--                </h3>-->
+                <h4 class="text-center">Product Current Stock
+                    <br></br>
+<!--                    <span style="font-size: 12px;">-->
+<!--                        <strong>Branch</strong>: <t t-esc="branch_name"/>  -->
+<!--                        <strong>Location</strong>: <t t-esc="location_name"/>-->
+<!--                        <strong> Group </strong>: <t t-esc="group_name"/>-->
+<!--                    </span>-->
+                </h4>
+            </div>
+            <br />
+
+            <div class="article mt1 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+<!--                    <br />-->
+<!--                    <h4><t t-esc="branch"/></h4>-->
+<!--                    <thead>-->
+<!--                        <th style="width: 4%">SL</th>-->
+<!--                        <th class="text-center" style="width: 24%">Product Name</th>-->
+<!--                        <th class="text-center" style="width: 24%">Model</th>-->
+<!--                        <th class="text-center" style="width: 24%">Quantity</th>-->
+<!--                    </thead>-->
+                    <tbody>
+                        <t t-set="all_total" t-value="0"/>
+                        <t t-foreach="current_stocks" t-as="locations_wise_products">
+                            <tr>
+                                <td class="text-left" colspan="4">Location: <t t-esc="locations_wise_products"/></td>
+                            </tr>
+                            <t t-set="location_wise_total" t-value="0"/>
+                            <t t-foreach="locations_wise_products_value" t-as="group_wise_products">
+                                <td class="text-left" colspan="4">Product Group: <t t-esc="group_wise_products"/></td>
+                                <tr>
+                                    <th style="width: 4%">SL</th>
+                                    <th class="text-center" style="width: 24%">Product Name</th>
+                                    <th class="text-center" style="width: 24%">Model</th>
+                                    <th class="text-center" style="width: 24%">Quantity</th>
+                                </tr>
+                                <t t-set="count" t-value="1"/>
+                                <t t-set="group_amount" t-value="0"/>
+                                <t t-foreach="group_wise_products_value" t-as="items">
+                                    <tr>
+                                        <td><t t-esc="count"/></td>
+                                        <td class="text-left"><t t-esc="items[1]"/></td>
+                                        <td class="text-left"><t t-esc="items[3]"/></td>
+                                        <td class="text-left"><t t-esc="items[4]"/></td>
+                                    </tr>
+                                    <t t-set="count" t-value="count + 1"/>
+                                    <t t-set="group_amount" t-value="group_amount + items[4]"/>
+                                </t>
+                                <tr>
+                                    <td class="text-right" colspan="3">Group Wise Total
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-esc="group_amount"/>
+                                    </td>
+                                </tr>
+                                <t t-set="location_wise_total" t-value="location_wise_total + group_amount"/>
+                            </t>
+                            <tr>
+                                <td class="text-right" colspan="3">Location Wise Total
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="location_wise_total"/>
+                                </td>
+                            </tr>
+                            <t t-set="all_total" t-value="all_total + location_wise_total"/>
+                        </t>
+                        <tr>
+                            <td class="text-right" colspan="3">Grand Total
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="all_total"/>
+                            </td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row">
+                    <div class="col col-12">
+                        <ul class="list-inline">
+                            <div class="text-left">
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+
+                                <li class="list-inline-item"><t t-esc="username"/></li>
+
+                            </div>
+                            <div class="text-center">
+                                <li class="list-inline-item">www.uslbd.com</li>
+                            </div>
+                            <div class="text-right">
+                                <li class="list-inline-item">Page:</li>
+                                <li class="list-inline-item">
+                                    <span class="page"/>
+                                </li>
+                                <li class="list-inline-item">/</li>
+                                <li class="list-inline-item">
+                                    <span class="topage"/>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

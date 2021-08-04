@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="group_product_extra_price_setup" model="res.groups">
+        <field name="name">Extra Price SetUp Permission</field>
+        <field name="comment">the user will have access to set extra price for product.</field>
+    </record>
+</odoo>

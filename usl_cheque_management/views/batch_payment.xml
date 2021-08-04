@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_batch_payment_tree" model="ir.ui.view">
+            <field name="name">batch.payment.tree</field>
+            <!--            <field name="model">batch.payment.line</field>-->
+            <field name="model">batch.payment</field>
+            <!--            <field eval="-1" name="priority"/>-->
+            <field name="arch" type="xml">
+                <tree decoration-info="state != 'dishonor'" decoration-muted="state in ['dishonor']" edit="false"
+                      default_order="id desc">
+                    <!--                <tree edit="false">-->
+                    <field name="payment_date"/>
+                    <field name="name"/>
+                    <field name="partner_id" string="Partner"/>
+                    <!--                    <field name="amount" sum="Amount"/>-->
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <!--                    <field name="currency_id" invisible="1"/>-->
+                    <field name="partner_type" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_batch_supplier_payment_tree" model="ir.ui.view">
+            <field name="name">account.batch.supplier.payment.tree</field>
+            <field name="model">batch.payment</field>
+            <field name="inherit_id" ref="view_batch_payment_tree"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="attributes">
+                    <attribute name="string">Vendor</attribute>
+                </field>
+            </field>
+        </record>
+        <!--        <record id="view_batch_payment_search" model="ir.ui.view">-->
+        <!--            <field name="name">batch.payment.search</field>-->
+        <!--            <field name="model">batch.payment</field>-->
+        <!--            <field eval="-1" name="priority"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <search string="Collections">-->
+        <!--                    <field name="batch_payment_line" string="Batch Collections"-->
+        <!--                        filter_domain="['|', ('partner_id', 'like', self), ('batch_payment_line', 'like', self)]"/>-->
+        <!--                    <field name="partner_id" string="Customer/Vendor"/>-->
+        <!--                    <field name="batch_payment_line" string="Payment/Cheque No./Amount/Effective Date/State"/>-->
+        <!--                </search>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="view_batch_payment_form_cheque" model="ir.ui.view">
+            <field name="name">batch_payment_form</field>
+            <field name="model">batch.payment</field>
+            <field eval="-1" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Register Payment">
+
+                    <header>
+                        <!--                        <button name="btn_sent" string="Sent" type="object"/>-->
+                        <button name="btn_submit_for_approval" string="Submit For Approval" type="object"
+                                attrs="{'invisible':[('state','in',['processing', 'dishonor', 'finished', 'approve'])]}"/>
+                        <button name="btn_dishonor_all" string="Cancel" type="object"
+                                groups="custom_customer_payment_approval.group_customer_payment_approval"
+                                attrs="{'invisible':[('state','in',['dishonor','initial','approve','finished'])]}"/>
+                        <button name="btn_approve" string="Approve" type="object"
+                                groups="custom_customer_payment_approval.group_customer_payment_approval"
+                                attrs="{'invisible':[('state','in',['dishonor','initial','approve','finished'])]}"/>
+                        <!--                        <button name="btn_reset_to_draft" string="Reset To Draft" type="object" confirm="Are you sure to do this for all cancel Checks?"/>-->
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="payment_type" widget="radio" readonly="True"/>
+                                <field name="partner_id"
+                                       attrs="{'required': [('state', '=', 'initial'), ('payment_type', 'in', ('inbound', 'outbound'))], 'invisible': [('payment_type', 'not in', ('inbound', 'outbound'))]}"
+                                       context="{'default_is_company': True}"
+                                       options="{'no_create':True, 'no_create_edit':True}"/>
+                                <field name="collected_by"
+                                       attrs="{'readonly': [('state', 'in', ['processing', 'dishonor', 'approve', 'finished'])]}"/>
+                                <field name="payment_date"/>
+                            </group>
+                            <group>
+                                <field name="partner_type" widget="selection"
+                                       attrs="{'required': [('state', '=', 'initial'), ('payment_type', 'in', ('inbound', 'outbound'))], 'invisible': [('payment_type', 'not in', ('inbound', 'outbound'))]}"/>
+                                <field name="company_id" groups="base.group_multi_company" required="1"
+                                       attrs="{'readonly': [('state', 'in', ['processing', 'dishonor', 'approve', 'finished'])]}"/>
+                                <field name="branch_id" options="{'no_create':True, 'no_create_edit':True}"
+                                       attrs="{'readonly': [('state', 'in', ['processing', 'dishonor', 'approve', 'finished'])]}"/>
+                                <field name="state"/>
+                                <field name="draft_journal_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="batch_payment_line" string="Batch Payment Information">
+                                <field id="batch_payment_line_id"
+                                       name="batch_payment_line"
+                                       context="{'default_payment_type': payment_type, 'default_partner_id': partner_id, 'default_journal_id': draft_journal_id}"
+                                       attrs="{'readonly': [('state', 'in', ['processing', 'dishonor', 'approve', 'finished'])]}"
+                                       class="tree_no_open">
+                                    <tree editable="bottom" options="{'no_open': True}" class="tree_no_open">
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="journal_id" invisible="1"/>
+                                        <field name="partner_id" invisible="1"/>
+                                        <field name="payment_type" invisible="1"/>
+                                        <field name="hide_payment_method" invisible="1"/>
+                                        <field name="collection_reference" attrs="{'invisible':[('payment_type','=','outbound')]}"/>
+                                        <field name="vendor_collection_reference" attrs="{'invisible':[('payment_type','!=','outbound')]}"/>
+                                        <field name="payment_method_id" options="{'no_create_edit':True}"/>
+                                        <field name="payment_method_code" invisible="1"/>
+                                        <field name="tt_sent_journal_id"
+                                               attrs="{'invisible': [('payment_method_code', '!=', 'tt')]}"/>
+                                        <field name="amount" sum="Total Amount"/>
+                                        <field name="effective_date" attrs="{'readonly': [('state', '=', 'posted')]}"/>
+                                        <field name="bank_id" attrs="{'readonly': [('state', '=', 'posted')]}"/>
+                                        <field name="cheque_reference"
+                                               attrs="{'readonly': [('state', '=', 'posted')]}"/>
+                                        <field name="communication" attrs="{'readonly': [('state', '=', 'posted')]}"/>
+                                        <field name="payment_type" invisible="1"/>
+                                        <field name="check_amount_in_words" invisible="1"/>
+                                        <field name="invoice_start_date"
+                                               attrs="{'invisible': [('collection_reference', '!=', 'multiple_invoice')]}"/>
+                                        <field name="invoice_end_date"
+                                               attrs="{'invisible': [('collection_reference', '!=', 'multiple_invoice')]}"/>
+                                        <!--                                        <field name="invoice_start_date" attrs="{'invisible': [('collection_reference', 'in', (False, 'previous_invoice', 'advance_collection'))]}"/>-->
+                                        <!--                                        <field name="invoice_end_date" attrs="{'invisible': [('collection_reference', 'in', (False, 'previous_invoice', 'advance_collection'))]}"/>-->
+                                        <field name="payment_invoice_ids"
+                                               attrs="{'invisible': [('collection_reference', '!=', 'multiple_invoice')]}"
+                                               widget="many2many_tags"
+                                               options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                                        <field name="dishonor_collection_ids"
+                                               attrs="{'invisible': [('collection_reference', '!=', 'cheque_adjustment')]}"
+                                               widget="many2many_tags"
+                                               options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                                        <!--                                        <field name="state" attrs="{'invisible': [('state', '=', 'draft')]}"/>-->
+                                        <field name="state" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <notebook attrs="{'invisible':[('dishonor_cheque_list', '=', False)]}">
+                            <page name="batch_payment_line" string="Dishonor Collection">
+                                <field
+                                        name="dishonor_cheque_list" readonly="1" class="tree_no_open">
+                                    <tree editable="bottom" create="false" options="{'no_open': True}"
+                                          class="tree_no_open">
+                                        <field name="cheque_reference" readonly="True"/>
+                                        <field name="amount" readonly="True"/>
+                                        <field name="dishonor_balance_adjust_amt" readonly="True"/>
+                                        <field name="total_due" readonly="True"/>
+                                        <field name="state" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_batch_payments" model="ir.actions.act_window">
+            <field name="name">Batch Collections</field>
+            <field name="res_model">batch.payment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{
+                'default_payment_type': 'inbound',
+                'default_partner_type': 'customer',
+                'search_default_inbound_filter': 1,
+                'res_partner_search_mode': 'customer',
+                }
+            </field>
+            <field name="domain">[('payment_type', '=', 'inbound')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Register batch payment
+                </p>
+                <p>
+                    Payments are used to register liquidity movements. You can process those payments by your own means
+                    or by using installed facilities.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

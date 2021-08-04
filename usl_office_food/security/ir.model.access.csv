@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+emlpoyee_meal_reserve_admin,emlpoyee_meal_reserve_admin,model_employee_meal_reserve,base.group_user,1,1,1,1
+emlpoyee_meal_eat_admin,emlpoyee_meal_eat_admin,model_employee_meal_eat,base.group_user,1,1,1,1
+guest_reserve_line_admin,guest_reserve_line_admin,model_guest_reserve_line,base.group_user,1,1,1,1
+holiday_month_date_admin,holiday_month_date_admin,model_holiday_month_date,base.group_user,1,1,1,1

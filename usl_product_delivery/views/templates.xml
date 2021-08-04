@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<template id="test_style" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/usl_product_delivery/static/js/delete.js"></script>
+            <link href="/usl_product_delivery/static/src/scss/field_barcode.scss" rel="stylesheet" type="text/scss" />
+
+        </xpath>
+    </template>
+    </odoo>

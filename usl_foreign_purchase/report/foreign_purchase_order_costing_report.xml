@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="foreign_costing_report"
+            model="foreign.costing.report"
+            string="Costing Report(Foreign Purchase)"
+            report_type="qweb-pdf"
+            name="usl_foreign_purchase.costing_report_view"
+
+    />
+    <!--    paperformat="usl_foreign_purchase_smart.paperformat_sale_summary_report"-->
+    <template id="costing_report_view">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="row " style="border-bottom: 1px solid #000000;border-top: 1px solid #000000;">
+                        <div class="col-12 text-center">
+                            <h5>Costing Details</h5>
+                        </div>
+                    </div>
+
+
+                    <!--            <div class="article mt0 o_report_layout_standard">-->
+                    <div style="border: 1px solid gray; background-color:#e6e6e6" class="mt-2">
+                        <div class="row">
+                            <div class="col-4">
+                                Costing Date:
+                                <t t-esc="master_data[0]"/>
+                            </div>
+                            <div class="col-4">
+                                LC No:
+                                <t t-esc="master_data[1]"/>
+                            </div>
+                            <div class="col-4">
+                                Exporter:
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-4">
+                                Invoice No:
+                                <t t-esc="master_data[2]"/>
+                            </div>
+                            <div class="col-4">
+                                LC Lot:
+                            </div>
+                            <div class="col-4">
+                                Delivery Date:
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col-4">
+                                order No:
+                                <t t-esc="master_data[3]"/>
+                            </div>
+                            <div class="col-4">
+                                Delivery Mode:
+                            </div>
+                            <div class="col-4">
+                                Delivery To:
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-condensed table-bordered mt-2">
+                        <thead style="background-color:#cccccc">
+                            <tr>
+                                <th rowspan="2" colspan="2">
+                                    <h5>Commercial Invoice (LC), Item Wise</h5>
+                                </th>
+                                <!--                        <th></th>-->
+                                <th>Local Currency</th>
+                                <th>BDT</th>
+                                <th>Invoice Currency</th>
+                                <th>
+                                    <t t-esc="get_commercial_invoice[0][0]"/>
+                                </th>
+                            </tr>
+                            <tr>
+
+                                <th>Date:</th>
+                                <th></th>
+                                <th>Exchange Rate:</th>
+                                <th>
+                                    <t t-esc="bank_rate"/>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>QTY</th>
+                                <th>C/I Price($)</th>
+                                <th>C/I Price(BDT)</th>
+                                <th>Amount($)</th>
+                                <th>Amount(BDT)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total_qty" t-value="0"/>
+                            <t t-set="total_ci_usd" t-value="0"/>
+                            <t t-set="total_ci_bdt" t-value="0"/>
+                            <t t-set="total_amount_usd" t-value="0"/>
+                            <t t-set="total_amount_bdt" t-value="0"/>
+
+                            <tr t-foreach="get_commercial_invoice" t-as="invoice_bank_payment">
+                                <t t-set="total_qty" t-value="total_qty+invoice_bank_payment[3]"/>
+                                <t t-set="total_ci_usd" t-value="total_ci_usd+invoice_bank_payment[4]"/>
+                                <t t-set="total_ci_bdt" t-value="total_ci_bdt+invoice_bank_payment[8]"/>
+                                <t t-set="total_amount_usd" t-value="total_amount_usd+invoice_bank_payment[5]"/>
+                                <t t-set="total_amount_bdt" t-value="total_amount_bdt+invoice_bank_payment[9]"/>
+                                <td>
+                                    <t t-esc="invoice_bank_payment[2]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_bank_payment[3]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_bank_payment[4]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_bank_payment[8]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_bank_payment[5]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_bank_payment[9]"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Total:</strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_qty"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_ci_usd"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_ci_bdt"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_amount_usd"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_amount_bdt"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--                ##############################local_payment_table#############################-->
+                    <table class="table table-condensed table-bordered">
+                        <thead style="background-color:#cccccc">
+                            <tr>
+                                <th rowspan="2" colspan="2">
+                                    <h5>Local Payment, Item Wise</h5>
+                                </th>
+                                <!--                        <th></th>-->
+                                <th>Local Currency</th>
+                                <th>BDT</th>
+                                <th>Invoice Currency</th>
+                                <th>
+                                    <t t-esc="get_commercial_invoice[0][0]"/>
+                                </th>
+                            </tr>
+                            <tr>
+
+                                <th>Date:</th>
+                                <th></th>
+                                <th>Exchange Rate:</th>
+                                <th>
+                                    <t t-esc="local_rate"/>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>QTY</th>
+                                <th>C/I Price($)</th>
+                                <th>C/I Price(BDT)</th>
+                                <th>Amount($)</th>
+                                <th>Amount(BDT)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total_qty" t-value="0"/>
+                            <t t-set="total_ci_usd" t-value="0"/>
+                            <t t-set="total_ci_bdt" t-value="0"/>
+                            <t t-set="total_amount_usd" t-value="0"/>
+                            <t t-set="total_amount_bdt" t-value="0"/>
+                            <tr t-foreach="get_commercial_invoice" t-as="invoice_local_payment">
+                                <t t-set="total_qty" t-value="total_qty+invoice_local_payment[3]"/>
+                                <t t-set="total_ci_usd" t-value="total_ci_usd+invoice_local_payment[6]"/>
+                                <t t-set="total_ci_bdt" t-value="total_ci_bdt+invoice_local_payment[10]"/>
+                                <t t-set="total_amount_usd" t-value="total_amount_usd+invoice_local_payment[7]"/>
+                                <t t-set="total_amount_bdt" t-value="total_amount_bdt+invoice_local_payment[11]"/>
+                                <td>
+                                    <t t-esc="invoice_local_payment[2]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_local_payment[3]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_local_payment[6]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_local_payment[10]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_local_payment[7]"/>
+                                </td>
+                                <td>
+                                    <t t-esc="invoice_local_payment[11]"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Total:</strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_qty"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_ci_usd"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_ci_bdt"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_amount_usd"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <t t-esc="total_amount_bdt"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!--                ##############################custom_duty_table#############################-->
+                    <t t-foreach="get_all_cost_line" t-as="table_separation">
+                        <t t-foreach="table_separation_value" t-as="cost_line">
+
+                            <table class="table table-condensed table-bordered mb-2" t-if="cost_line==True">
+                                <thead style="background-color:#cccccc">
+                                    <tr>
+                                        <th rowspan="2" colspan="2">
+                                            <h5>
+                                                <t t-esc="table_separation"/>
+                                            </h5>
+                                        </th>
+                                        <th>Local Currency</th>
+                                        <th>BDT</th>
+                                        <th>Invoice Currency</th>
+                                        <th>
+                                            <t t-esc="get_all_cost_line[table_separation][cost_line][0][4]"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+
+                                        <th>Date:</th>
+                                        <th></th>
+                                        <th>Exchange Rate:</th>
+                                        <th>
+                                            <t t-esc="bank_rate"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>QTY</th>
+                                        <th>C/I Price($)</th>
+                                        <th>C/I Price(BDT)</th>
+                                        <th>Amount($)</th>
+                                        <th>Amount(BDT)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <t t-set="percentage" t-value="0"/>
+                                    <tr t-foreach="cost_line_value" t-as="line">
+                                        <t t-set="unit_usd" t-value="0"/>
+                                        <t t-set="unit_bdt" t-value="0"/>
+                                        <t t-set="amount_usd" t-value="0"/>
+                                        <td>
+                                            <t t-esc="line[1]"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line[2]"/>
+                                        </td>
+                                        <td>
+                                            <t t-set="unit_usd" t-value="unit_usd+((line[3]/line[2])/bank_rate)"/>
+                                            <t t-esc="'%.2f'%unit_usd"/>
+                                        </td>
+                                        <td>
+                                            <t t-set="unit_bdt" t-value="unit_bdt+(line[3]/line[2])"/>
+                                            <t t-esc="'%.2f'%unit_bdt"/>
+                                        </td>
+                                        <td>
+                                            <t t-set="amount_usd" t-value="amount_usd+(unit_usd*line[2])"/>
+                                            <t t-esc="'%.2f'%amount_usd"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="'%.2f'%line[3]"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-condensed table-bordered mb-2" t-if="cost_line==False">
+                                <thead style="background-color:#cccccc">
+                                    <tr>
+                                        <th colspan="7">
+                                            <h5>
+                                                <t t-esc="table_separation"/>
+                                            </h5>
+                                        </th>
+
+                                        <th>Local Currency</th>
+                                        <th>BDT</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>QTY</th>
+                                        <th>Percentage</th>
+                                        <th>% of Head</th>
+                                        <th>Exch. Rate</th>
+                                        <th>Landing Cost($)</th>
+                                        <th>Landing Cost(BDT)</th>
+                                        <th>Provision Amount($)</th>
+                                        <th>Provision Amount(BDT)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="cost_line_value" t-as="line">
+                                        <!--                                        <t t-set="percentage" t-value="0"/>-->
+
+                                        <!--                            #############################total_landed_cost_multiply with_qty############################-->
+
+
+                                        <td>
+                                            <t t-esc="line[1]"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line[2]"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="'%.2f'%line[10]"/>%
+                                        </td>
+                                        <td>
+                                            Landing Cost
+                                        </td>
+                                        <td>
+                                            <t t-esc="'%.2f'%bank_rate"/>
+                                        </td>
+                                        <td>
+                                            <t t-set="total_landed_cost_usd"
+                                               t-value="(line[12]+line[7]+line[11])/bank_rate"/>
+                                            <t t-esc="'%.2f'%total_landed_cost_usd"/>
+                                        </td>
+                                        <td>
+                                            <t t-set="total_landed_cost" t-value="line[12]+line[7]+line[11]"/>
+                                            <t t-esc="'%.2f'%total_landed_cost"/>
+                                        </td>
+                                        <td>
+                                            <t t-set="provision_usd" t-value="line[3]/bank_rate"/>
+                                            <t t-esc="'%.2f'%provision_usd"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="'%.2f'%line[3]"/>
+                                        </td>
+
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </t>
+                    </t>
+
+                    <!--                ##############################Item Cost Summary#############################-->
+                    <table class="table table-condensed table-bordered mt-2">
+                        <thead style="background-color:#cccccc">
+                            <tr>
+                                <th colspan="9">
+                                    <h5>Item Cost Summary</h5>
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <th>Item Name</th>
+                                <!--                            <th>Item Average Cost/Unit</th>-->
+                                <th>Landing Cost/Unit(BDT)</th>
+                                <th>Provisional Cost/Unit(BDT)</th>
+                                <th>Costing Per Unit(BDT)</th>
+                                <th>QTY</th>
+                                <th>Landing Cost Total(BDT)</th>
+                                <th>Provisional Cost Total(BDT)</th>
+                                <th>Costing Total(BDT)</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--                        <t >-->
+                            <!--                            -->
+                            <!--                        </t>-->
+                            <tr t-foreach="product_wise_provision" t-as="cost_summary">
+                                <t t-set="landed_cost_total" t-value="0"/>
+                                <t t-set="provisional_cost_total" t-value="0"/>
+                                <t t-set="costing_total_bdt" t-value="0"/>
+                                <t t-set="landed_cost_per_unit_bdt" t-value="0"/>
+                                <t t-set="provision_per_unit_bdt" t-value="0"/>
+                                <t t-set="costing_per_unit_bdt" t-value="0"/>
+                                <t t-set="quantity" t-value="0"/>
+                                <t t-foreach="cost_summary_value" t-as="product_details">
+                                    <t t-set="quantity" t-value="product_details[2]"/>
+                                    <t t-set="landed_cost_total"
+                                       t-value="product_details[12]+product_details[7]+product_details[11]"/>
+                                    <t t-if="product_details[5]==True">
+                                        <t t-set="provisional_cost_total"
+                                           t-value="provisional_cost_total+product_details[3]"/>
+                                    </t>
+                                    <t t-set="landed_cost_per_unit_bdt" t-value="landed_cost_total/quantity"/>
+                                    <t t-set="provision_per_unit_bdt"
+                                       t-value="provisional_cost_total/quantity"/>
+
+                                </t>
+
+                                <t t-set="costing_per_unit_bdt"
+                                   t-value="landed_cost_per_unit_bdt+provision_per_unit_bdt"/>
+                                <t t-set="costing_total_bdt" t-value="landed_cost_total+provisional_cost_total"/>
+
+
+
+                                <td>
+                                    <t t-esc="cost_summary"/>
+                                </td>
+
+                                <td>
+
+                                    <t t-esc="'%.2f'%landed_cost_per_unit_bdt"/>
+
+                                </td>
+                                <td>
+                                    <t t-esc="'%.2f'%provision_per_unit_bdt"/>
+                                </td>
+                                <td>
+                                    <t t-esc="'%.2f'%costing_per_unit_bdt"/>
+                                </td>
+                                <td>
+                                    <t t-esc="quantity"/>
+                                </td>
+                                <td>
+                                    <t t-esc="'%.2f'%landed_cost_total"/>
+                                </td>
+                                <td>
+                                    <t t-esc="'%.2f'%provisional_cost_total"/>
+                                </td>
+                                <td>
+                                    <t t-esc="'%.2f'%costing_total_bdt"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+                <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                    <div class="row text-center">
+                        <div class="col col-12 text-center">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">Page:</li>
+                                <li class="list-inline-item">
+                                    <span class="page"/>
+                                </li>
+                                <li class="list-inline-item">/</li>
+                                <li class="list-inline-item">
+                                    <span class="topage"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--                </div>-->
+            </t>
+
+        </t>
+
+    </template>
+
+</odoo>

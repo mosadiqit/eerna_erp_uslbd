@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_journal_item_calculate_form" model="ir.ui.view">
+            <field name="name">journal Item Calculate Form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+               <xpath expr="//header" position="inside">
+                      <button name="action_journal_cal" string="Journal Calculate" class="oe_highlight"
+                                type="object" groups="account.group_account_invoice"/>
+               </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pc_value_added_item_form" model="ir.ui.view">
+        <field name="name">PC Value Added Item Form</field>
+        <field name="model">value.added.item</field>
+        <field name="arch" type="xml">
+            <form string="Value Added Item">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="item_code"/>
+                            <field name="sequence"/>
+                            <field name="status"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="name"/>
+                            <field name="percent"/>
+                            <field name="value_type"/>
+                        </group>
+                    </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_value_added_item_tree_with_onboarding" model="ir.ui.view">
+        <field name="name">PC Value Added Item Tree</field>
+        <field name="model">value.added.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="item_code"/>
+                <field name="name"/>
+                <field name="sequence"/>
+                <field name="percent"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_pc_value_added_item" model="ir.actions.act_window">
+        <field name="name">Value Added Item</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">value.added.item</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain" > []</field>
+        <field name="view_id" ref="view_value_added_item_tree_with_onboarding"/>
+    </record>
+
+</odoo>

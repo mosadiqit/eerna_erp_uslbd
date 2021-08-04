@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_serial_reserved_form" model="ir.ui.view">
+        <field name="name">Product Serial Reserve Check</field>
+        <field name="model">product.serial.reserved</field>
+        <field name="arch" type="xml">
+            <form string="Product Serial Reserved Check">
+                <sheet>
+                    <group>
+                        <field name="lot_id" options="{'no_create_edit':True}"/>
+                    </group>
+                    <h3 align="center">Reserved Serial Status</h3>
+                    <field name="serial_status">
+                        <tree class="tree_no_open" create="false" delete="false">
+                            <field name="location_id"/>
+                            <field name="product_id"/>
+                            <field name="lot_id"/>
+                            <field name="reserved_status"/>
+                            <field name="product_serial" invisible="1"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_serial_reserved_action" model="ir.actions.act_window">
+        <field name="name">Product Serial Reserved Status</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.serial.reserved</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            CHECK YOUR PRODUCT RESERVE STATUS WITH SERIAL
+          </p>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="product_serial_check_menu" name="Product Serial Reserved Status" parent="stock.menu_warehouse_report" action="product_serial_reserved_action"/>
+</odoo>

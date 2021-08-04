@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="add_picking_type" model="ir.ui.view">
+        <field name="name">stock.picking.inharit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='picking_type_id']" position="before">
+                <field name="is_nonsalealewarehouse_transfar"/>
+            </xpath>
+             <xpath expr="//button[@name='do_unreserve']" position="after">
+                <button name="_do_partial_func_unreserved" type="object" string="Partial Unreserved" attrs="{'invisible': ['|', '|', '|', '|', ('picking_type_code', '=', 'incoming'), ('immediate_transfer', '=', True), ('is_locked', '=', False), '&amp;', ('state', 'not in', ('assigned', 'partially_available')), ('move_type', '!=', 'one'), '&amp;', ('state', 'not in', ('assigned', 'partially_available', 'confirmed')), ('move_type', '=', 'one')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='picking_type_id']" position="before">
+                <field name="commercial_invoice" attrs="{'invisible':[('is_nonsalealewarehouse_transfar', '!=', True)]}"/>
+            </xpath>
+
+        </field>
+    </record>
+<!--    <record id="pickin_type_button_inharit" model="ir.ui.view">-->
+<!--        <field name="name">stock.picking.inharit1</field>-->
+<!--        <field name="model">stock.picking</field>-->
+<!--        <field name="inherit_id" ref="stock.view_picking_form"/>-->
+<!--        <field name="arch" type="xml">-->
+
+<!--            <xpath expr="//page/field[@name='move_ids_without_package']/tree/button[@name='action_show_details']" position="replace">-->
+<!--                <button name="action_show_details" string="Register lots, packs, location" type="object" icon="fa-list" width="0.1"-->
+<!--                                             options='{"warn": true}'/>-->
+<!--            </xpath>-->
+
+
+<!--        </field>-->
+<!--    </record>-->
+</odoo>
+<!--attrs="{'invisible': [('show_details_visible', '=', False)]}"-->

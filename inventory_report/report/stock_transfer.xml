@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="stock_transfer_report"
+            model="stock.transfer.report.wizard"
+            string="Stock Transfer Report"
+            report_type="qweb-pdf"
+            name="inventory_report.stock_transfer_report_view"
+            paperformat="inventory_report.paperformat_sale_summary_report"
+            menu="False"/>
+
+    <template id="stock_transfer_report_view">
+        <t t-call="web.html_container">
+
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Stock Transfer Report
+                    <br></br>
+                    <span style="font-size: 14px;"><strong>From</strong>:
+                        <t t-esc="date_start"/>
+                        <strong>To</strong>:
+                        <t t-esc="date_end"/>
+                    </span>
+                </h3>
+            </div>
+
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+
+                        <th class="text-center" style="width: 20%">Date and Reference</th>
+                        <th class="text-center" style="width: 25%">From</th>
+                        <th class="text-center" style="width: 25%">To</th>
+                        <th class="text-center" style="width: 25%">Status</th>
+
+                    </thead>
+                    <tbody>
+
+                        <t t-foreach="collection_statements" t-as="collection">
+                            <tr>
+
+                                <td class="text-left" colspan="7" style="background-color:gray">
+                                    <t t-esc="collection"/>
+                                </td>
+                            </tr>
+
+                            <t t-foreach="collection_value" t-as="doc">
+                                <tr style="background-color:lightgray">
+                                    <td class="text-left">
+                                        <span t-esc="doc[0]"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-esc="doc[1]"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-esc="doc[2]"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-esc="doc[5]"/>
+                                    </td>
+
+                                    <tr style="text-align:center">
+                                        <td style="width:5%">#SL</td>
+                                        <td colspan="2">Product</td>
+                                        <td>Quantity</td>
+                                    </tr>
+                                    <t t-set="count" t-value="1"/>
+                                    <t t-foreach="all_product_based_move_id" t-as="product">
+                                        <t t-if="doc[4]==product[2]">
+
+                                            <tr>
+                                                <td class="text-center">
+                                                    <t t-esc="count"/>
+                                                </td>
+                                                <td class="text-left" colspan="2">
+                                                    <span t-esc="product[1]"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-esc="product[3]"/>
+                                                </td>
+                                            </tr>
+                                             <t t-set="count" t-value="count + 1"/>
+                                        </t>
+
+                                    </t>
+
+                                </tr>
+
+                            </t>
+                            <!--                                 </tr>-->
+                        </t>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+
+    </template>
+</odoo>

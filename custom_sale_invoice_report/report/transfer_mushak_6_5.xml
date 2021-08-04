@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="nbr_report_mushak_6_5_view">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="doc">
+                <style type="text/css">
+                    @font-face {
+                    font-family: cool_font;
+                    font-style: normal;
+                    font-weight: lighter;
+                    src: url(/custom_sale_invoice_report/static/src/fonts/Nikosh.ttf) format("woff"),
+                    url(/custom_sale_invoice_report/static/src/fonts/Nikosh.ttf) format("truetype");
+                    }
+                    .bangla-font {
+                    font-family:cool_font;
+                    font-size: 19px;
+                    }
+                    table, td, th, tr {
+                    border: 1px solid black;
+                    }
+
+                    table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    }
+                </style>
+                <div class="page">
+                    <div class="row mt32 mb32">
+                        <div class="col-3">
+
+                        </div>
+                        <div class="col-7">
+                            <center>
+                                <p class="bangla-font">"গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
+                                <p class="bangla-font">জাতীয় রাজস্ব বোর্ড</p>
+                                <b class="bangla-font">কেন্দ্রীয় নিবন্ধিত প্রতিষ্ঠানের পণ্য স্থানান্তর চালানপত্র</b>
+                                <br/>
+                                <p class="bangla-font">[ বিধি ৪০ এর উপ-বিধি (১) এর দফা (ঙ) দ্রষ্টব্য ]</p>
+                            </center>
+                        </div>
+                        <div class="col-2">
+                            <center>
+                                <strong class="bangla-font" style="border: 1px solid black;">মূসক - ৬.৫</strong>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="bangla-font">নিবন্ধিত ব্যক্তির নাম:
+                                <t t-esc="doc.company_id.name"/>
+                            </div>
+                            <div class="bangla-font">নিবন্ধিত ব্যক্তির বিআইএন:
+                                <t t-esc="doc.company_id.partner_id.vat"/>
+                            </div>
+                            <div class="bangla-font">প্রেরণকারী শাখা / পণ্যাগারের নাম ও ঠিকানা:
+                                <t t-esc="doc.company_id.partner_id.street"/>
+                            </div>
+                            <div class="bangla-font">গ্রহীতা শাখা / পণ্যাগারের নাম ও ঠিকানা:
+                                <t t-esc="doc.location_dest_id.branch_id.address"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-6">
+                            <div class="bangla-font">চালানপত্র নম্বর:
+                                <t t-esc="doc.name"/>
+                            </div>
+                            <div class="bangla-font">ইস্যুর তারিখ:
+                                <t t-esc="doc.scheduled_date.strftime('%d-%M-%y')"/>
+                            </div>
+                            <div class="bangla-font">ইস্যুর সময়:
+                                <t t-esc="doc.scheduled_date.strftime('%H:%M:%S')"/>
+                            </div>
+                            <div class="bangla-font">যানবাহনের প্রকতি ও নম্বর:
+                                <t t-esc="doc.transport_nature_no"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <table>
+                    <thead class="text-center">
+                        <tr>
+                            <th class="bangla-font">ক্রমিক নং</th>
+                            <th class="bangla-font">পণ্যের ( প্রযোজ্য ক্ষেত্রে সুনির্দিষ্ট ব্র্যান্ড নামসহ ) বিবরণ</th>
+                            <th class="bangla-font">পরিমান</th>
+                            <th class="bangla-font">মূল্য</th>
+                            <th class="bangla-font">মন্তব্য</th>
+                        </tr>
+                        <tr>
+                            <th class="bangla-font">১</th>
+                            <th class="bangla-font">২</th>
+                            <th class="bangla-font">৩</th>
+                            <th class="bangla-font">৪</th>
+                            <th class="bangla-font">৫</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="count" t-value="1"/>
+                        <t t-set="total_quantity" t-value="0"/>
+                        <t t-set="total_amount" t-value="0"/>
+                        <tr t-foreach="doc.move_ids_without_package" t-as="move_id">
+                            <td class="text-center">
+                                <span t-esc="count"/>
+                            </td>
+                            <td class="text-left">
+                                <span t-esc="move_id.product_id.product_tmpl_id.name"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="move_id.quantity_done"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="move_id.product_id.product_tmpl_id.list_price * move_id.quantity_done"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-esc="doc.note"/>
+                            </td>
+
+                            <t t-set="count" t-value="count+1"/>
+                            <t t-set="total_quantity" t-value="total_quantity+move_id.quantity_done"/>
+                            <t t-set="total_amount"
+                               t-value="total_amount+move_id.product_id.product_tmpl_id.list_price * move_id.quantity_done"/>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-right bangla-font">মোট:</td>
+                            <td class="text-right">
+                                <span t-esc="total_quantity"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="total_amount"/>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="bangla-font">প্রতিষ্ঠান কর্তৃপক্ষের দায়িত্বপ্রাপ্ত ব্যক্তির নাম:</div>
+                        <div class="bangla-font">পদবি:</div>
+                        <div class="bangla-font">স্বাক্ষর:</div>
+                        <br/>
+                        <div class="bangla-font">সীল:</div>
+                        <p class="text-right">";</p>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

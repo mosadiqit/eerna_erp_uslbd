@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="restrict_group_user_menu" model="ir.rule">
+            <field name="name">Hide Menu</field>
+            <field name="model_id" ref="base.model_ir_ui_menu"/>
+            <field name="domain_force"># [('id', 'in', users_menu.ids)]</field>
+        </record>
+<!--        <record id="menu_permission_admin" model="ir.rule">-->
+<!--            <field name="name">Hide Menu Admin</field>-->
+<!--            <field name="model_id" ref="base.model_ir_ui_menu"/>-->
+<!--            <field name="domain_force">[]</field>-->
+<!--&lt;!&ndash;            write your own admin group here&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="groups" eval="[(4,ref())]"/>&ndash;&gt;-->
+<!--        </record>-->
+    </data>
+</odoo>

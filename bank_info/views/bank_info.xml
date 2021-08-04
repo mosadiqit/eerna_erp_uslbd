@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="AllBank_form_view" model="ir.ui.view">
+            <field name="name">bank_info.AllBank.form</field>
+            <field name="model">bank_info.all_bank</field>
+            <field name="arch" type="xml">
+                <form string="AllBank">
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="bank_name"/>
+<!--                                <field name="address"/>-->
+                            </group>
+
+                        </group>
+                        <group>
+                            <group>
+                                <field name="address"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="AllBank_tree_view" model="ir.ui.view">
+            <field name="name">bank_info.AllBank.tree</field>
+            <field name="model">bank_info.all_bank</field>
+            <field name="arch" type="xml">
+                <tree string="ALlBank">
+                    <field name="bank_name"/>
+                    <field name="address"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="all_bank_act_window" model="ir.actions.act_window">
+            <field name="name">All banks of Bangladesh</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bank_info.all_bank</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Bank.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="All Banks" action="all_bank_act_window" id="menu_all_bank_act_window"
+                  parent="account.menu_finance_configuration" sequence="58"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="whatsapp_model_form" model="ir.ui.view">
+        <field name="name">whatsapp.model.form</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form string="Message Page">
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="mobile"/>
+                        <field name="message"/>
+                    </group>
+                    <group>
+                        <button name="send_message" type="object" string="Send"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="whatsapp_model_tree" model="ir.ui.view">
+        <field name="name">whatsapp.model.tree</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <tree string="All Messages">
+                <field name="user_id"/>
+                <field name="mobile"/>
+                <field name="message"/>
+            </tree>
+        </field>
+    </record>
+    <record id="whatsapp_action" model="ir.actions.act_window">
+        <field name="name">Whatsapp Messages</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">whatsapp.message</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p>
+        </field>
+    </record>
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="whatsapp_message" name="Whatsapp Message" sequence="1"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="whatsapp_child" name="Messages" parent="whatsapp_message" action="whatsapp_action" sequence="2"/>
+</odoo>

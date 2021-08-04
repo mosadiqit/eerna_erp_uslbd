@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record model="res.groups" id="foreign_purchase_orders_disable_adding_lines">
+        <field
+            name="name"
+        >Disable adding more lines to SOs from Foreign Purchase Orders</field>
+    </record>
+    <!-- Multi - Company Rules -->
+    <record model="ir.rule" id="foreign_purchase_order_comp_rule">
+        <field name="name">Foreign Purchase Order multi-company</field>
+        <field name="model_id" ref="model_foreign_purchase_order" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+    <record model="ir.rule" id="foreign_purchase_order_line_comp_rule">
+        <field name="name">Foreign Purchase Order Line multi-company</field>
+        <field name="model_id" ref="model_foreign_purchase_order_line" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+<!--</odoo>-->
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+
+
+
+    <record model="ir.module.category" id="module_foreign_purchase_group">
+        <field name="name">Foreign Purchase Group</field>
+        <field name="sequence">30</field>
+    </record>
+
+     <record id="group_foreign_purchase_pre_shipment" model="res.groups">
+        <field name="name">User: Pre-Shipment </field>
+        <field name="category_id" ref="module_foreign_purchase_group"/>
+
+    </record>
+
+    <record id="group_foreign_purchase_shipment" model="res.groups">
+        <field name="name">User: Shipment </field>
+        <field name="category_id" ref="module_foreign_purchase_group"/>
+
+<!--        <field name="implied_ids" eval="[(4, ref('group_foreign_purchase_pre_shipment'))]" />-->
+    </record>
+    <record id="group_foreign_purchase_manager" model="res.groups">
+        <field name="name"> Foreign Purchase Manager </field>
+        <field name="category_id" ref="module_foreign_purchase_group"/>
+        <field name="implied_ids" eval="[(4, ref('group_foreign_purchase_pre_shipment')),(4, ref('group_foreign_purchase_shipment'))]" />
+    </record>
+
+
+<!--    <record model="ir.module.category" id="module_usl_foreign_purchase_smart">-->
+<!--        <field name="name">Foreign Purchase Group</field>-->
+<!--        <field name="sequence">30</field>-->
+<!--    </record>-->
+
+<!--     <record id="group_usl_foreign_purchase_smart_user" model="res.groups">-->
+<!--        <field name="name"> Foreign Purchase User </field>-->
+<!--        <field name="category_id" ref="module_usl_foreign_purchase_smart"/>-->
+<!--    </record>-->
+
+
+
+</odoo>
+

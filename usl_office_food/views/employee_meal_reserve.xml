@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="employee_meal_reserve_form" model="ir.ui.view">
+        <field name="name">employee.meal.reserve.form</field>
+        <field name="model">employee.meal.reserve</field>
+        <field name="arch" type="xml">
+            <form string="employee_meal_reserve_form">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Name" readonly="1"/>
+                        </h1>
+
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_id"
+                                   groups="usl_office_food_cataring_service_management.food_manager"/>
+                            <field name="has_guest"/>
+                        </group>
+                        <group>
+                            <field name="food_reserve_date"/>
+                        </group>
+
+                    </group>
+
+                    <notebook attrs="{'invisible': [('has_guest', '=', False)]}">
+                        <page string="Reserve Guest">
+                            <field name="reserve_guest">
+                                <tree editable="bottom">
+                                    <field name="guest_name"/>
+                                    <field name="guest_id"/>
+                                    <field name="whose_guest" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div>
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="employee_meal_reserve_tree" model="ir.ui.view">
+        <field name="name">Employee.meal.reserve.tree</field>
+        <field name="model">employee.meal.reserve</field>
+        <field name="arch" type="xml">
+            <tree string="Employee meal">
+                <field name="name"/>
+                <field name="employee_id"/>
+                 <field name="food_reserve_date" options='{"datepicker":{"daysOfWeekDisabled": [0,6]}
+                       }'/>
+<!--                <field name="food_reserve_date"/>-->
+                <field name="reserve_count"/>
+            </tree>
+        </field>
+    </record>
+    <record id="employee_meal_reserve_calendar" model="ir.ui.view">
+        <field name="name">employee.meal.reservation.calendar</field>
+        <field name="model">employee.meal.reserve</field>
+        <field name="arch" type="xml">
+            <calendar string="Meal Reserve Calender" date_start="food_reserve_date" color="employee_id" mode="month"
+                      quick_add="False">
+                <field name="employee_id"/>
+                <field name="reserve_count"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="employee_meal_reserve_action" model="ir.actions.act_window">
+        <field name="name">employee.meal.reserve.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.meal.reserve</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="usl_food_cat_root_menu" name="Food Order" sequence="1"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="order_food_menu" name="Food Reservation" parent="usl_food_cat_root_menu"
+              sequence="2"/>
+    <menuitem id="order_food" name="Reserve" parent="order_food_menu"
+              action="employee_meal_reserve_action" sequence="3"/>
+</odoo>

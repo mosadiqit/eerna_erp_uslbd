@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- sale order Inherit Form View to Modify it -->
+    <record id="sale_order_inherit_for_new_field" model="ir.ui.view">
+        <field name="name">New field for sale order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="order_made_from" widget="radio"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

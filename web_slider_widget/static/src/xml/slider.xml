@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim:fdl=1:
+-->
+<templates id="template" xml:space="preserve">
+	 <t t-name="RangeSlider" class="oe_web_example">
+	 	<div>
+	  		<span id="amount_value"></span>  
+	    	<div id="slider-range"></div>
+    	</div>
+	 </t>
+</templates>
+

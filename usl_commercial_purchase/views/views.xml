@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="usl_commercial_purchase.list">
+      <field name="name">usl_commercial_purchase list</field>
+      <field name="model">usl_commercial_purchase.usl_commercial_purchase</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="usl_commercial_purchase.action_window">
+      <field name="name">usl_commercial_purchase window</field>
+      <field name="res_model">usl_commercial_purchase.usl_commercial_purchase</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="usl_commercial_purchase.action_server">
+      <field name="name">usl_commercial_purchase server</field>
+      <field name="model_id" ref="model_usl_commercial_purchase_usl_commercial_purchase"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="usl_commercial_purchase" id="usl_commercial_purchase.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="usl_commercial_purchase.menu_1" parent="usl_commercial_purchase.menu_root"/>
+    <menuitem name="Menu 2" id="usl_commercial_purchase.menu_2" parent="usl_commercial_purchase.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="usl_commercial_purchase.menu_1_list" parent="usl_commercial_purchase.menu_1"
+              action="usl_commercial_purchase.action_window"/>
+    <menuitem name="Server to list" id="usl_commercial_purchase" parent="usl_commercial_purchase.menu_2"
+              action="usl_commercial_purchase.action_server"/>
+-->
+  </data>
+</odoo>

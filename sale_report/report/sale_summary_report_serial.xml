@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="sales_details_report_serial_no"
+            model="sales.summary.serial"
+            string="Daily Sales Details Report"
+            report_type="qweb-pdf"
+            name="sale_report.sales_details_serial_report_view"
+            menu="False"/>
+
+    <template id="sales_details_serial_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Sales Summary Report With Serial No
+                    <br></br>
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start.date()"/> <strong>
+                        To</strong>: <t t-esc="date_end.date()"/></span>
+                </h3>
+            </div>
+            <br/>
+            <div class="article mt0 o_report_layout_standard">
+                <t t-set="grand_total" t-value="0"/>
+                <t t-foreach="data.keys()" t-as="invoice_id">
+                    <t t-set="group_total" t-value="0"/>
+                    <h3 class="p-3 mb-2 bg-primary text-white">Invoice No:<t t-esc="invoice_id"/></h3>
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td class="text-center" style="width: 10%">
+                                Buyer
+                            </td>
+                            <td class="text-center" style="width: 30%">
+                                Product
+                            </td>
+                            <td class="text-center" style="width: 10%">
+                                Quantity
+                            </td>
+                            <td class="text-center" style="width: 10%">
+                                Price
+                            </td>
+                            <td class="text-center" style="width: 10%">
+                                Total
+                            </td>
+                            <td class="text-center" style="width: 15%">
+                                 Branch
+                            </td>
+                            <td class="text-center" style="width: 15%">
+                                 Group
+                            </td>
+                        </tr>
+                        <t t-foreach="data[invoice_id]" t-as="test">
+                            <tr>
+                                <td>
+                                    <t t-esc="test['buyer']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="test['product']"/>
+                                    <br/>
+                                    SL NO:- <t t-esc="test['serial']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="test['quantity']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="test['price']"/>
+                                </td>
+                                <td class="text-right">
+                                    <t t-esc="test['total']"/>
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="test['branch']"/>
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="test['group']"/>
+                                </td>
+                                <t t-set="group_total" t-value="group_total+test['total']"/>
+                                <t t-set="grand_total" t-value="grand_total+group_total"/>
+                            </tr>
+
+                        </t>
+
+                        <!--                            <t t-set="group_amount" t-value="0"/>-->
+
+                        <!--                            <t t-foreach="data[category_key]" t-as="brand">-->
+                        <!--                                <tr>-->
+                        <!--                                    <td class="text-center" colspan="7" style="background-color:#AEACAC">-->
+                        <!--                                        <t t-esc="brand"/>-->
+                        <!--                                    </td>-->
+                        <!--                                </tr>-->
+                        <!--                                <t t-set="count" t-value="1"/>-->
+                        <!--                                <t t-set="brand_amount" t-value="0"/>-->
+                        <!--                                <tr t-foreach="data[category_key][brand]" t-as="line">-->
+                        <!--                                    <td>-->
+                        <!--                                        <t t-esc="count"/>-->
+                        <!--                                    </td>-->
+                        <!--                                    <td class="text-left">-->
+                        <!--                                        <t t-esc="line[5]"/>-->
+                        <!--                                    </td>-->
+                        <!--                                    <td class="text-left">-->
+                        <!--                                        <t t-esc="line[6]"/>-->
+                        <!--                                    </td>-->
+                        <!--                                    <td class="text-left">-->
+                        <!--                                        <t t-esc="line[7]"/>-->
+                        <!--                                    </td>-->
+                        <!--                                    <t t-set="count" t-value="count + 1"/>-->
+                        <!--                                    <t t-set="brand_amount" t-value="brand_amount + line[7]"/>-->
+                        <!--                                </tr>-->
+                        <!--                                <tr>-->
+                        <!--                                    <td class="text-right" colspan="3">Total-->
+                        <!--                                        <t t-esc="brand"/>-->
+                        <!--                                        Amount-->
+                        <!--                                    </td>-->
+                        <!--                                    <td class="text-left">-->
+                        <!--                                        <t t-esc="brand_amount"/>-->
+                        <!--                                    </td>-->
+                        <!--                                    <t t-set="group_amount" t-value="group_amount + brand_amount"/>-->
+                        <!--                                </tr>-->
+
+                        <!--                            </t>-->
+
+
+                    </table>
+                    <p class="text-right">
+                        Subtotal :<t t-esc="group_total"/>
+                    </p>
+
+                </t>
+            </div>
+        </t>
+
+    </template>
+</odoo>

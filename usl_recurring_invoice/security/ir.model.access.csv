@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_automatic_invoice_generation,manage_automatic_invoice_generation,model_automatic_invoice_generation,,1,1,1,1
+access_product_invoice_recurring,manage_product_invoice_recurring,model_product_invoice_recurring,,1,1,1,1
+access_autoinvoice_line_ids,manage_autoinvoice_line_ids,model_autoinvoice_line_ids,,1,1,1,1

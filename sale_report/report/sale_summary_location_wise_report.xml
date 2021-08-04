@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="sale_summary_location_wise_report"
+        model="daily.sales.details.report.wizard"
+        string="Sale Summary Location Wise Report"
+        report_type="qweb-pdf"
+        name="sale_report.sale_summary_location_wise_report_view"
+        paperformat="sale_report.paperformat_sale_summary_report"
+        menu="False"/>
+
+        <template id="sale_summary_location_wise_report_view">
+            <t t-call="web.html_container">
+
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Sale Summary Location Wise Report
+                    <br></br>
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start.date()"/> <strong>To</strong>: <t t-esc="date_end.date()"/></span>
+                </h3>
+            </div>
+
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <thead class="text-center" style="background-color:#e6e1e1">
+                        <tr>
+                            <th>SL.</th>
+                            <th>Location</th>
+                            <th>Total Amount</th>
+                            <th>Percentage (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="count" t-value="1"/>
+                        <tr t-foreach="sale_summary_location_wise_final_result" t-as="value">
+                            <td class="text-center"><span t-esc="count"/></td>
+                            <td><span t-esc="value[1]"/></td>
+                            <td class="text-center"><span t-esc="value[2]"/></td>
+                            <td class="text-center"><span t-esc="value[3]"/> %</td>
+                            <t t-set="count" t-value="count+1"/>
+                        </tr>
+                         <tr>
+                            <td colspan="2" class="text-right">Grand Total:</td>
+                            <td class="text-center"><span t-esc="total"/></td>
+                            <td class="text-center"><span t-esc="percentage_sum"/> %</td>
+                        </tr>
+                    </tbody>
+                </table>
+<!--                <table class="table table-condensed table-bordered">-->
+<!--                    <tbody>-->
+<!--                        <tr>-->
+<!--                            <td colspan="2" class="text-right">Grand Total:</td>-->
+<!--                            <td class="text-center"><span t-esc="total"/></td>-->
+<!--                            <td class="text-center"><span t-esc="percentage_sum"/> %</td>-->
+<!--                        </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+
+
+
+    </template>
+
+</odoo>

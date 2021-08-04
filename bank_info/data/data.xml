@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--    State-owned commercial banks (SOCBs)-->
+        <record id="Sonali_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Sonali Bank</field>
+            <field name="address">44 Motijheel Commercial Dhaka, Bangladesh</field>
+        </record>
+
+
+        <record id="Janata_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Janata Bank</field>
+            <field name="address"> 110 Motijheel Commercial Area, Dhaka</field>
+        </record>
+
+
+        <record id="Agrani_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Agrani Bank</field>
+            <field name="address">9/D Dilkusha Commercial Area, Dhaka</field>
+        </record>
+
+
+        <record id="Rupali_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Rupali Bank</field>
+            <field name="address">Rupali Bhaban, 34 Dilkusha Commercial Area, Dhaka</field>
+        </record>
+
+
+        <record id="basic_bank" model="bank_info.all_bank">
+            <field name="bank_name">BASIC Bank</field>
+            <field name="address">Sena Kalyan Bhaban (5th Floor) 195 Motijheel C/A, Dhaka</field>
+        </record>
+
+
+        <record id="Bangladesh_Development _Bank" model="bank_info.all_bank">
+            <field name="bank_name">Bangladesh Development Bank</field>
+            <field name="address">BDBL Bhaban, 8 Rajuk Avenue, Dhaka</field>
+        </record>
+
+        <!--         Specialized banks (SDBs) -->
+        <record id="Krishi_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Bangladesh Krishi Bank</field>
+            <field name="address">83-85 Motijheel Commercial Area, Dhaka</field>
+        </record>
+
+
+        <record id="Krishi_Unnayan_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Rajshahi Krishi Unnayan Bank</field>
+            <field name="address">272 Banalata Commerical Area, Airport Road, Rajshahi </field>
+        </record>
+
+
+        <record id="Probashi_Kollyan_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Probashi Kollyan Bank</field>
+            <field name="address">Probashi Kallyan Bhaban, 71-72 Old Elephant Road, Eskaton, Dhaka</field>
+        </record>
+
+        <!--        Private commercial banks (PCBs)-->
+        <record id="AB_Bank" model="bank_info.all_bank">
+            <field name="bank_name">AB Bank</field>
+            <field name="address">The Skymark, 18 Gulshan Avenue, Gulshan-1, Dhaka</field>
+        </record>
+
+
+        <record id="Commerce_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Bangladesh Commerce Bank</field>
+            <field name="address">Eunoos Trade Centre, 52-53 Dilkusha C/A, Motijheel, Dhaka</field>
+        </record>
+
+
+        <record id="Bank_Asia" model="bank_info.all_bank">
+            <field name="bank_name">Bank Asia</field>
+            <field name="address">Rangs Tower, 68 Purana Paltan, Dhaka</field>
+        </record>
+
+        <record id="Brac_bank" model="bank_info.all_bank">
+            <field name="bank_name">BRAC Bank</field>
+            <field name="address">Anik Tower 220/B, Tejgaon Gulshan Link Road Tejgaon, Dhaka</field>
+        </record>
+
+        <record id="Citizens_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Citizens Bank</field>
+            <field name="address">8/C, FR Tower, Panthapath, Dhaka</field>
+        </record>
+
+
+        <record id="City_Bank" model="bank_info.all_bank">
+            <field name="bank_name">City Bank</field>
+            <field name="address">136, Gulshan Avenue, Gulshan-2, Dhaka</field>
+        </record>
+
+
+        <record id="Community_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Community Bank Bangladesh</field>
+            <field name="address">Police Plaza Concord, Gulshan 1, Dhaka</field>
+        </record>
+
+
+        <record id="Dhaka_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Dhaka Bank</field>
+            <field name="address">Bir Uttam A K Khandakar Road, Gulshan-01, Dhaka</field>
+        </record>
+
+
+        <record id="Dutch_Bangla_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Dutch-Bangla Bank Limited</field>
+            <field name="address">47 Motijheel Commercial Area, Dhaka</field>
+        </record>
+
+
+        <record id="Eastern_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Eastern Bank</field>
+            <field name="address">100 Gulshan Avenue Dhaka</field>
+        </record>
+
+
+        <record id="IFIC_Bank" model="bank_info.all_bank">
+            <field name="bank_name">IFIC Bank</field>
+            <field name="address">IFIC Tower, 61 Purana Paltan, Dhaka</field>
+        </record>
+
+
+        <record id="Jamuna_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Jamuna Bank</field>
+            <field name="address">Jamuna Bank Tower, Bir Uttam A. K. Khandaker Road, Gulshan-1, Dhaka</field>
+        </record>
+
+
+        <record id="Meghna_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Meghna Bank</field>
+            <field name="address">Suvastu Imam Square, 65 Gulshan Avenue, Gulshan 1, Dhaka</field>
+        </record>
+
+
+        <record id="Mercantile_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Mercantile Bank</field>
+            <field name="address">61, Dilkusha Commercial Area Dhaka</field>
+        </record>
+
+
+        <record id="Midland_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Midland Bank</field>
+            <field name="address">N.B. Tower, Gulshan North Avenue, Gulshan-2</field>
+        </record>
+
+
+        <record id="Modhumoti_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Modhumoti Bank</field>
+            <field name="address">Khandker Tower, Gulshan Avenue, Gulshan-1</field>
+        </record>
+
+
+        <record id="Mutual Trust Bank" model="bank_info.all_bank">
+            <field name="bank_name">Mutual Trust Bank</field>
+            <field name="address">MTB Centre, 26 Gulshan Avenue, Plot 5, Block SE(D), Gulshan 1, Dhaka</field>
+        </record>
+
+
+        <record id="National_Bank" model="bank_info.all_bank">
+            <field name="bank_name">National Bank Limited</field>
+            <field name="address">116/1, Kazi Nazrul Islam Avenue, Banglamotor, Dhaka</field>
+        </record>
+
+
+        <record id="National_Credit_Commerce_Bank" model="bank_info.all_bank">
+            <field name="bank_name">National Credit and Commerce Bank</field>
+            <field name="address">13/1-13/2 Toyenbee Circular Road, Motijheel Commercial Area, Dhaka</field>
+        </record>
+
+
+        <record id="NRB_Bank" model="bank_info.all_bank">
+            <field name="bank_name">NRB Bank</field>
+            <field name="address">Simple Tree - Anarkali, 89 Gulshan Avenue, Gulshan – 1, Dhaka</field>
+        </record>
+
+
+        <record id="NRB_Commercial_Bank" model="bank_info.all_bank">
+            <field name="bank_name">NRB Commercial Bank</field>
+            <field name="address">114 Motijheel C/A , Dhaka-1000</field>
+        </record>
+
+
+        <record id="One_Bank_Limited" model="bank_info.all_bank">
+            <field name="bank_name">One Bank Limited</field>
+            <field name="address">46, HRC Bhaban, C.A, Dhaka</field>
+        </record>
+
+
+        <record id="Padma_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Padma Bank</field>
+            <field name="address">Lotus Kamal Tower - 2, 59 Gulshan Ave, Dhaka</field>
+        </record>
+
+
+        <record id="Premier_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Premier Bank</field>
+            <field name="address">Iqbal Center, 42 Kemal Ataturk Ave, Dhaka</field>
+        </record>
+
+
+        <record id="Prime_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Prime Bank</field>
+            <field name="address">Building-2, Adamjee Court Annex-2, 119-120 Motijheel Rd, Dhaka</field>
+        </record>
+
+
+        <record id="Pubali_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Pubali Bank</field>
+            <field name="address">26 Dilkusha, Dhaka</field>
+        </record>
+
+
+        <record id="Shimanto_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Shimanto Bank Ltd.</field>
+            <field name="address">Shimanto Shamvar, Bir Uttam M. A. Rob Sarak, Shimanto Square, Dhanmondi</field>
+        </record>
+
+
+        <record id="Southeast_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Southeast Bank</field>
+            <field name="address">Eunoos Trade Centre (Ground Floor), Plot #52, 53 Dilkusha Rd, Dhaka</field>
+        </record>
+
+
+        <record id="South_Bangla_Agriculture_Commerce_Bank" model="bank_info.all_bank">
+            <field name="bank_name">South Bangla Agriculture and Commerce Bank</field>
+            <field name="address">Zaman Chamber, 47 Dilkusha Rd, Dhaka</field>
+        </record>
+
+
+        <record id="Trust_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Trust Bank Limited</field>
+            <field name="address">Shadhinata Tower, Bir Shrestha Shaheed Jahangir Gate, Dhaka Cantonment, Dhaka </field>
+        </record>
+
+
+        <record id="United_Commercial_Bank" model="bank_info.all_bank">
+            <field name="bank_name">United Commercial Bank Ltd</field>
+            <field name="address">Bulus Center, Plot - CWS- (A)-1, Road No - 34, Gulshan avenue, Dhaka</field>
+        </record>
+
+
+        <record id="Uttara_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Uttara Bank Limited</field>
+            <field name="address">47, Shahid Bir Uttom Asfaqus Samad Sarak, Motijheel, Dhaka</field>
+        </record>
+
+
+        <record id="Bengal_Commercial_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Bengal Commercial Bank Ltd</field>
+            <field name="address">Khandaker Tower, 94 Gulshan Avenue, Gulshan, Dhaka</field>
+        </record>
+
+
+        <!--    Islami Shariah Based PCBs-->
+
+
+        <record id="Al-Arafah_Islami_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Al-Arafah Islami Bank</field>
+            <field name="address">63 Purana Paltan, Dhaka </field>
+        </record>
+
+
+        <record id="EXIM Bank" model="bank_info.all_bank">
+            <field name="bank_name">EXIM Bank</field>
+            <field name="address">SE(H): 02, Road No. 142, Gulshan Avenue, Gulshan, Dhaka.</field>
+        </record>
+
+
+        <record id="First_Security_Islami_Bank" model="bank_info.all_bank">
+            <field name="bank_name">First Security Islami Bank</field>
+            <field name="address">Rangs RD Center, Block: SE (F), Plot:03, Gulshan Avenue, Gulshan-1, Dhaka</field>
+        </record>
+
+
+        <record id="ICB_Islamic_Bank" model="bank_info.all_bank">
+            <field name="bank_name">ICB Islamic Bank Limited</field>
+            <field name="address">T.K. Bhaban, 13 Kazi Nazrul Islam Avenue Kawran Bazar, Dhaka </field>
+        </record>
+
+
+        <record id="Islami_Bank_Bangladesh" model="bank_info.all_bank">
+            <field name="bank_name">Islami Bank Bangladesh Limited</field>
+            <field name="address"> Islami Bank Tower, 40 Dilkusha C/A, Dhaka </field>
+        </record>
+
+
+        <record id="Shahjalal_Islami_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Shahjalal Islami Bank Limited</field>
+            <field name="address"> Uday Sanz, Gulshan South Avenue, Gulshan 1, Dhaka</field>
+        </record>
+
+
+        <record id="Social_Islami_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Social Islami Bank Limited</field>
+            <field name="address">City Center, Motijheel Commercial Area, Dhaka</field>
+        </record>
+
+
+        <record id="Union_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Union Bank Ltd</field>
+            <field name="address">Bahela Tower. 72, Gulshan Avenue, Gulshan -1, Dhaka</field>
+        </record>
+
+
+        <record id="Standard_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Standard Bank Limited</field>
+            <field name="address">Metropolitan Chamber Building,Motijheel C/A, Dhaka</field>
+        </record>
+
+
+        <record id="Global_Islamic_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Global Islamic Bank Ltd</field>
+            <field name="address">Saiham Tower, Gulshan Model Town, Dhaka</field>
+        </record>
+
+        <!--Foreign commercial banks -->
+        <record id="Bank_Al-Falah" model="bank_info.all_bank">
+            <field name="bank_name">Bank Al-Falah Limited</field>
+            <field name="address">168, Gulshan Avenue, Dhaka</field>
+        </record>
+
+
+        <record id="Citi_bank_newYork" model="bank_info.all_bank">
+            <field name="bank_name">Citibank N.A</field>
+            <field name="address">109 Gulshan Avenue, Dhaka</field>
+        </record>
+
+
+        <record id="Commercial_Bank_Ceylon" model="bank_info.all_bank">
+            <field name="bank_name">Commercial Bank of Ceylon PLC</field>
+            <field name="address">Hadi Tower NW(K)-1 Road # 50, Kemal Ataturk Avenue, Dhaka</field>
+        </record>
+
+
+        <record id="Habib_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Habib Bank Limited</field>
+            <field name="address">9-B, Moyeen Centre, Road # 3, Gulshan -1, Dhaka</field>
+        </record>
+
+
+        <record id="HSBC" model="bank_info.all_bank">
+            <field name="bank_name">HSBC</field>
+            <field name="address">Concord IK Tower, North Avenue, Madani Ave, Dhaka</field>
+        </record>
+
+
+        <record id="National_Bank_Pakistan" model="bank_info.all_bank">
+            <field name="bank_name">National Bank of Pakistan</field>
+            <field name="address">80 Gulshan Avenue (1st Floor) Gulshan-1, Dhaka</field>
+        </record>
+
+
+        <record id="Standard_Chartered_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Standard Chartered Bank</field>
+            <field name="address">67 Gulshan Ave, Dhaka</field>
+        </record>
+
+
+        <record id="State_Bank_India" model="bank_info.all_bank">
+            <field name="bank_name">State Bank of India</field>
+            <field name="address">UDAY Tower, 57A Gulshan Avenue, Circle-1, Dhaka</field>
+        </record>
+
+
+        <record id="Woori_Bank" model="bank_info.all_bank">
+            <field name="bank_name">Woori Bank</field>
+            <field name="address">Suvastu Imam Square, 65 Gulshan Ave, Dhaka</field>
+        </record>
+
+    </data>
+</odoo>
+

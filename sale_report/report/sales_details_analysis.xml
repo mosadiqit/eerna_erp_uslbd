@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="sales_details_analysis_report"
+        model="sales.details.analysis.report.wizard"
+        string="Sales Details Analysis Report"
+        report_type="qweb-pdf"
+        name="sale_report.sales_details_analysis_report_view"
+        paperformat="sale_report.paperformat_sale_summary_report"
+        menu="False"/>
+
+    <template id="sales_details_analysis_report_view">
+        <t t-call="web.html_container">
+
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Sales Details Analysis Report
+                    <br></br>
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start.date()"/> <strong>To</strong>: <t t-esc="date_end.date()"/></span>
+                </h3>
+            </div>
+
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <tbody>
+
+                                  <tr>
+                                      <td class="text-center" style="auto"><b>Branch </b></td>
+                                      <td class="text-center" style="auto"><b>S.Person</b></td>
+                                      <td class="text-center" style="auto"><b>Sales Order No</b></td>
+                                      <td class="text-center" style="auto"><b>Invoice No</b></td>
+                                      <td class="text-center" style="auto"><b>Remarks</b></td>
+                                      <td class="text-center" style="auto"><b>Buyer Name</b></td>
+                                      <td class="text-center" style="auto"><b>Brand</b></td>
+                                      <td class="text-center" style="auto"><b>Group</b></td>
+                                      <td class="text-center" style="auto"><b>Product Name</b></td>
+                                      <td class="text-center" style="auto"><b>Qty</b></td>
+                                      <td class="text-center" style="auto"><b>Unit Price</b></td>
+                                      <td class="text-center" style="auto"><b>Total Valus</b></td>
+                                      <td class="text-center" style="auto"><b>Inv. Date</b></td>
+                                      <td class="text-center" style="auto"><b>S.O Date</b></td>
+                                    </tr>
+                        <t t-foreach="products" t-as="pro">
+                                    <tr>
+                                        <td><t t-esc="pro[0]"/></td>
+                                        <td><t t-esc="pro[1]"/></td>
+                                        <td><t t-esc="pro[2]"/></td>
+                                        <td><t t-esc="pro[3]"/></td>
+                                        <td><t t-esc="pro[4]"/></td>
+                                        <td><t t-esc="pro[5]"/></td>
+                                        <td><t t-esc="pro[6]"/></td>
+                                        <td><t t-esc="pro[7]"/></td>
+                                        <td><t t-esc="pro[8]"/></td>
+                                        <td><t t-esc="pro[9]"/></td>
+                                        <td><t t-esc="pro[10]"/></td>
+                                        <td><t t-esc="pro[11]"/></td>
+                                        <td><t t-esc="pro[12]"/></td>
+                                        <td><t t-esc="pro[13]"/></td>
+                                    </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+
+    </template>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    check-->
+    <record id="cheque_management_state_kanban" model="ir.ui.view">
+        <field name="name">cheque.management.dashboard</field>
+        <field name="model">cheque.model</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard o_salesteam_kanban" create="0">
+                <field name="state_name"/>
+                <field name="color"/>
+                <field name="state_count"/>
+                <field name="state_amount"/>
+                <field name="currency_id" options="{'no_create': True, 'no_open': True}"
+                       groups="base.group_multi_currency"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class = "border border-info "  style="background-color: #eee; ">
+
+                            <div t-attf-class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary">
+                                        <a type="object" name="title_action">
+                                            <field name="state_name"/>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="o_kanban_manage_button_section">
+                                    <a class="o_kanban_manage_toggle_button" href="#">
+                                        <i class="fa fa-ellipsis-v" aria-label="Selection" role="img"
+                                           title="Selection"/>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-7 o_kanban_primary_right" style="padding-bottom:0;">
+
+                                <div class="row">
+                                    <div class="col overflow-hidden text-left">
+                                        <a name="total_state_count" type="object">
+                                            <a type="object" name="title_action">
+                                                <field name="state_count"/>
+                                                Cheques Are In
+                                                <field name="state_name"/>
+                                                State
+                                            </a>
+                                        </a>
+                                    </div>
+                                    <div class="col-auto text-right">
+                                        <span>
+                                            <field name="state_amount"/>
+                                            <field name="currency_id"/>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="cheque_management_state_action" model="ir.actions.act_window">
+        <field name="name">Cheque management State</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cheque.model</field>
+        <field name="view_mode">kanban</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+
+<!--    <menuitem id="cheque_management_dashboard" name="Cheque Management Overview" action="cheque_management_state_action"-->
+<!--              parent="account.menu_finance" sequence="1"/>-->
+</odoo>

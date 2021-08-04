@@ -1,0 +1,270 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <template id="report_ticket_report">
+        <t t-call="web.external_layout">
+            <style>
+                    .table, .table td, .table th {
+                      border: 1px solid #ddd;
+                      text-align: left;
+                    }
+
+                    .table {
+                      border-collapse: collapse;
+                      width: 100%;
+                    }
+
+                    .table th, .table td {
+                      padding: 1px;
+                    }
+            </style>
+        <t t-call="web.html_container">
+            <center>
+                        <b>
+                            <h2>Service Record of Engineer</h2>
+                        </b>
+                    </center>
+             <t t-set= "doc" t-value="docs" > </t>
+<!--            <t t-foreach="docs" t-as="doc">-->
+                <table class="table table-sm" style="width:50%; float:left">
+                    <tr>
+                        <td style="font-weight:bold">Warranty Event No </td>
+                        <td>  <t t-esc = "doc.warranty_event_no"/></td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">OEM Case ID</td>
+                        <td>  <t t-esc = "doc.oem_case_id"/></td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Contract Type </td>
+                        <td>   <t t-esc = "doc.contract_type"/></td>
+                    </tr>
+                </table>
+
+                <table class="table table-sm" style="width:50%; float:left;padding-left:5px;" >
+                    <tr>
+                        <td style="font-weight:bold">Ticket No </td>
+                        <td>  <t t-esc = "doc.number"/></td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Call Log Date/Time</td>
+                        <td>  <t t-esc = "doc.call_log_date_time"/></td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Call Type </td>
+                        <td>   <t t-esc = "doc.call_type"/></td>
+                    </tr>
+                </table>
+
+
+                <table class="table table-sm" style="width:100%;" >
+                    <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td colspan="4">1. Customer Information </td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Customer Name</td>
+                        <td>  <t t-esc = "doc.partner_name"/></td>
+                         <td style="font-weight:bold">Contact Name</td>
+                        <td>  <t t-esc = "doc.partner_name"/></td>
+                    </tr>
+                     <tr>
+                        <td rowspan="2" style="font-weight:bold">Address </td>
+                        <td rowspan="2">   <t t-esc = "doc.partner_name"/></td>
+                         <td style="font-weight:bold">Contact Mobile No </td>
+                        <td>   <t t-esc = "doc.partner_phone"/></td>
+                    </tr>
+                      <tr>
+                         <td style="font-weight:bold">Contact E-mail  </td>
+                        <td>   <t t-esc = "doc.partner_email"/></td>
+                    </tr>
+                </table>
+
+
+                <table class="table table-sm" style="width:100%;" >
+                    <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td colspan="6">2. Product Information </td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Brand</td>
+                         <td style="font-weight:bold">Category</td>
+                         <td style="font-weight:bold">Model</td>
+                         <td style="font-weight:bold">Part No</td>
+                         <td style="font-weight:bold">Serial No</td>
+                         <td style="font-weight:bold">Warranty Status</td>
+
+                    </tr>
+                     <tr>
+                        <td>  <t t-esc = "doc.product_template_id.brand_id.name"/></td>
+                         <td>  <t t-esc = "doc.product_template_id.categ_id.name"/></td>
+                         <td>  <t t-esc = "doc.product_template_id.product_model_id.name"/></td>
+                         <td>  <t t-esc = "doc.product_template_id.part_number_id.name"/></td>
+                         <td>  <t t-esc = "doc.product_serial_no"/></td>
+                        <td>   <t t-esc = "doc.warranty_status"/></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Problem Informed</td>
+                        <td  colspan="6">  <t t-esc = "doc.description"/></td>
+                    </tr>
+                </table>
+
+                <table class="table table-sm" style="width:100%;" >
+                    <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td colspan="4">3.	Service Engineer’s details </td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Engineer’s Name</td>
+                        <td>  <t t-esc = "doc.user_id.name"/></td>
+                         <td style="font-weight:bold">Mobile No</td>
+                        <td>  <t t-esc = "doc.user_id.mobile"/></td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">E-mail </td>
+                        <td>   <t t-esc = "doc.user_id.email"/></td>
+                         <td style="font-weight:bold">Learner ID</td>
+                        <td>  <t t-esc = "doc.eng_learner_id"/></td>
+                    </tr>
+                </table>
+
+
+
+                <table class="table table-sm" style="width:100%;" >
+                    <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td colspan="5">4.	Defective Spare part Details</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">S/L</td>
+                         <td style="font-weight:bold">Part Number</td>
+                         <td style="font-weight:bold">Part Serial No </td>
+                         <td style="font-weight:bold">Part Description</td>
+
+
+                    </tr>
+                    <t t-set= "sl_Spare_parts" t-value="1" > </t>
+                <t t-foreach="docs.defective_spare_parts" t-as="ser">
+                     <tr>
+                         <td>  <t t-esc = "sl_Spare_parts"/></td>
+                         <td>   <t t-esc = "ser.part_number"/></td>
+                         <td>  <t t-esc = "ser.part_serial_no"/></td>
+                         <td>   <t t-esc = "ser.part_description"/></td>
+                    </tr>
+                    <t t-set= "sl_Spare_parts" t-value="sl_Spare_parts+1" > </t>
+                    </t>
+                </table>
+
+                <table class="table table-sm" style="width:100%;" >
+                     <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td colspan="6">5.	Replacement Spare part Details</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">S/L</td>
+                         <td style="font-weight:bold">Part Number</td>
+                         <td style="font-weight:bold">Part Serial No </td>
+                         <td style="font-weight:bold">Part Description</td>
+                         <td style="font-weight:bold">Warranty Event No </td>
+                         <td style="font-weight:bold">Air Way Bill (AWB) </td>
+
+                    </tr>
+                    <t t-set= "sl_Spare_parts" t-value="1" > </t>
+                <t t-foreach="docs.replacement_spare_parts" t-as="ser">
+                     <tr>
+                         <td>  <t t-esc = "sl_Spare_parts"/></td>
+                         <td>   <t t-esc = "ser.part_number"/></td>
+                         <td>  <t t-esc = "ser.part_serial_no"/></td>
+                         <td>   <t t-esc = "ser.part_description"/></td>
+                         <td>  <t t-esc = "ser.warranty_event_no"/></td>
+                         <td>  <t t-esc = "ser.air_way_bill"/></td>
+                    </tr>
+                    <t t-set= "sl_Spare_parts" t-value="sl_Spare_parts+1" > </t>
+                    </t>
+                </table>
+
+                <table class="table table-sm" style="width:100%;" >
+                    <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td colspan="3">6.	Customer Survey</td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Rating Criteria</td>
+                         <td style="font-weight:bold">Rating</td>
+                         <td style="font-weight:bold">Customer Remarks:</td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Unsatisfied (0-4)</td>
+                         <td rowspan="3">  <t t-esc = "doc.customer_rating"/></td>
+                         <td rowspan="3">  <t t-esc = "doc.customer_remarks"/></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Neuter Satisfied (5-8)</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Excellent Satisfied (9-10)</td>
+                    </tr>
+                </table>
+
+                <table class="table table-sm" style="width:100%;" >
+                     <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td colspan="3">7.	Closure</td>
+                    </tr>
+                     <tr>
+                         <td style="font-weight:bold">Customer Signature:<br></br><br></br>
+                         Name:<br></br>
+                         Designation:
+
+                         </td>
+                         <td style="font-weight:bold">Engineer Signature:<br></br><br></br>
+                         Name:<br></br>
+                         Designation:
+
+                         </td>
+                         <td style="font-weight:bold">Manager/TL Signature:<br></br><br></br>
+                         Name:<br></br>
+                         Designation:
+
+                         </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Comments by Service desk/Helpdesk after verification:</td>
+                    </tr>
+                </table>
+
+                <table class="table table-sm" style="width:100%;" >
+                     <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td>8.	Corrective Action for Unsatisfied or Neuter Satisfied</td>
+                    </tr>
+                     <tr>
+                        <td style="font-weight:bold">Manager/TL’s Action and Remarks:</td>
+                    </tr>
+
+                </table>
+                <table class="table table-sm" style="width:100%;" >
+
+                    <tr style="background-color:#E0E0E0;font-weight:bold">
+                        <td colspan="6">9.	Service Details</td>
+                    </tr>
+
+                     <tr>
+                        <td style="font-weight:bold">S/L</td>
+                         <td style="font-weight:bold">Start D / T from Office</td>
+                         <td style="font-weight:bold">Activity Start Time </td>
+                         <td style="font-weight:bold">Activity End Time</td>
+                         <td style="font-weight:bold">Return D / T at Office </td>
+                         <td style="font-weight:bold">Findings (For details please wright down back side of this form) </td>
+
+                    </tr>
+                <t t-set= "sl_Spare_parts" t-value="1" > </t>
+                <t t-foreach="docs.service_ids" t-as="s">
+                     <tr>
+                         <td>  <t t-esc = "sl_Spare_parts"/></td>
+                         <td>   <t t-esc = "s.start_date_time_from_office"/></td>
+                         <td>  <t t-esc = "s.activity_start_time"/></td>
+                         <td>   <t t-esc = "s.activity_end_time"/></td>
+                         <td>  <t t-esc = "s.return_date_time_from_office"/></td>
+                         <td>  <t t-esc = "s.findings"/></td>
+                    </tr>
+                    <t t-set= "sl_Spare_parts" t-value="sl_Spare_parts+1" > </t>
+                    </t>
+                </table>
+            </t>
+        </t>
+<!--        </t>-->
+    </template>
+</odoo>

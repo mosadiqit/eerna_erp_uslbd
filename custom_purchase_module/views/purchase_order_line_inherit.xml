@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="inherit_purchase_order_line" model="ir.ui.view">-->
+<!--            <field name="name">inherit.purchase.order.line</field>-->
+<!--            <field name="model">purchase.order</field>-->
+<!--            <field name="inherit_id" ref="purchase.purchase_order_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="after">-->
+<!--                    <field name="po_price"/>-->
+<!--                </xpath>-->
+<!--                  <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">-->
+<!--                    <field name="total_po" widget="monetary" invisible="1"/>-->
+<!--                    <field name="total_os" widget="monetary" invisible="1"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+         <record id="inherit_account_move_line" model="ir.ui.view">
+            <field name="name">inherit.account.move.line</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//field[@name='quantity']" position="after">-->
+<!--                       <field name="po_price"/>-->
+<!--                </xpath>-->
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="flag" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="replace">
+                    <field name="price_subtotal1"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="after">
+
+                    <field name="po_price" attrs="{'column_invisible':[('parent.flag','=',False)]}"/>
+                    <field name="total_po" invisible="1"/>
+                    <field name="total_os" invisible="1"/>
+<!--                    <field name="flag"/>-->
+                </xpath>
+<!--                <xpath expr="//field[@name='line_ids']/tree/field[@name='quantity']" position="after">-->
+<!--                    <field name="po_price" attrs="{'column_invisible':[('parent.flag','=',False)]}"/>-->
+<!--                    <field name="total_po" invisible="1"/>-->
+<!--                    <field name="total_os" invisible="1"/>-->
+<!--&lt;!&ndash;                    <field name="flag" />&ndash;&gt;-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='price_total']" position="after">-->
+<!--                    <field name="total_po" />-->
+<!--                     <field name="total_os" />-->
+<!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="add_title_references_to_bar" inherit_id="website.snippets" name="Place into building blocks bar">
+        <xpath expr="//div[@id='snippet_structure']" position="inside">
+            <div class="o_panel_body">
+                <t t-snippet="website_snippet_demo.s_title_references"
+                   t-thumbnail="/website_snippet_demo/static/src/image/cover.jpeg"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="add_large_image" inherit_id="website.snippets" name="Place into a Large image">
+        <xpath expr="//div[@id='snippet_structure']" position="inside">
+            <div class="o_panel_body">
+                <t t-snippet="website_snippet_demo.s_four_columns"
+                   t-thumbnail="/website_snippet_demo/static/src/image/multiple_boarders_cover.jpg"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template name="Place into building blocks bar" id="add_title_references_to_bar" inherit_id="website.snippets">
+        <xpath position="inside" expr="//div[@id='snippet_structure']">
+            <div class="o_panel_body">
+                <t t-thumbnail="/website_snippet_demo/static/src/image/blue-border.jpg"
+                   t-snippet="website_snippet_demo.s_test_profiles"/>
+            </div>
+        </xpath>
+
+    </template>
+
+    <!--    s_many_columns-->
+    <template id="Mulitple blocks bar" inherit_id="website.snippets" name="Place into multiple images">
+        <xpath position="inside" expr="//div[@id='snippet_structure']">
+            <div class="o_panel_body">
+                <t t-thumbnail="/website_snippet_demo/static/src/image/frame-floral-border.jpg"
+                   t-snippet="website_snippet_demo.s_many_columns"/>
+            </div>
+        </xpath>
+    </template>
+
+    <!--s_cover snippet -->
+    <template id="Front page blocks bar" inherit_id="website.snippets" name="Place into multiple images for front page">
+        <xpath position="inside" expr="//div[@id='snippet_structure']">
+            <div class="o_panel_body">
+                <t t-thumbnail="/website_snippet_demo/static/src/image/decorative_boarder.jpg"
+                   t-snippet="website_snippet_demo.s_front_page"/>
+            </div>
+        </xpath>
+    </template>
+
+    <!--three columns -->
+    <template id="Three columns blocks bar" inherit_id="website.snippets" name="Three columns images for front page">
+        <xpath position="inside" expr="//div[@id='snippet_structure']">
+            <div class="o_panel_body">
+                <t t-thumbnail="/website_snippet_demo/static/src/image/three_images_boarder.jpg"
+                   t-snippet="website_snippet_demo.three_columns"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
+

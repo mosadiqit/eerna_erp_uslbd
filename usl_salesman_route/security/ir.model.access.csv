@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+usl_shop_admin, usl_salesman_route,model_salesman_route,,1,1,1,1
+usl_dstrbution_admin, usl_salesman_distribution_route,model_salesman_route_distributions,,1,1,1,1
+usl_dstrbution_admin, usl_salesman_distribution_route,model_salesman_route_distributions,,1,1,1,1
+usl_dstrbution_line_admin, usl_salesman_distribution_route_line,model_salesman_route_distributions_line,,1,1,1,1
+usl_shop_visit_histry_admin, usl_salesman_usl_shop_visit_histry_admin,model_salesman_shop_visiting_history,,1,1,1,1

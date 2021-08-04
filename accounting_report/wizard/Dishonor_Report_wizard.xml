@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dishonor_report_wizard" model="ir.ui.view" >
+        <field name="name">Cheque Dishonor</field>
+        <field name="model">dishonor.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Cheque Dishonor Report">
+                <group>
+                    <group>
+                        <field name="date_start"/>
+                    </group>
+                    <group>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+                <group>
+                      <group>
+                        <field name="company_id" string="Company" options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                    </group>
+                    <group>
+                        <field name="branch_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                    </group>
+
+                </group>
+                <group>
+                    <group>
+                        <field name="customer_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}" />
+<!--                        <field name="customer_ids" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}" widget="res_partner_many2one" />-->
+                    </group>
+                    <group></group>
+                </group>
+                  <footer>
+                    <button name="get_report" string="PDF Report" type="object" class="oe_highlight"/>
+                    <button name="get_excel_report" string="Excel Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_dishonor_report_wizard"
+        name="Dishonored Cheque Details"
+        res_model="dishonor.report.wizard"
+        view_mode="form"
+        target="new"/>
+
+    <menuitem action="action_dishonor_report_wizard"
+        id="menu_dishonor_report_wizard"
+        parent="account.menu_finance_reports"/>
+</odoo>

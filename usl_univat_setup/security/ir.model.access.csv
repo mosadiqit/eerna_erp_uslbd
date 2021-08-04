@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_usl_univat_setup_other_tax_info,usl_univat_setup.other_tax_info,usl_univat_setup.model_other_tax_info,,1,1,1,1
+access_usl_univat_setup_product_hs_code,usl_univat_setup.product_hs_code,usl_univat_setup.model_product_hs_code,,1,1,1,1
+access_usl_univat_setup_value_added_item,usl_univat_setup.value_added_item,usl_univat_setup.model_value_added_item,,1,1,1,1
+access_usl_univat_setup_vat_deduction_services,usl_univat_setup.vat_deduction_services,usl_univat_setup.model_vat_deduction_services,,1,1,1,1
+access_usl_univat_setup_product_hs_code_line,usl_univat_setup.product_hs_code_line,usl_univat_setup.model_product_hs_code_line,,1,1,1,1

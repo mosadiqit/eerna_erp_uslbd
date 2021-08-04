@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <report
+            id="action_ticket_report"
+            string="Ticket Report"
+            model="helpdesk.ticket"
+            report_type="qweb-pdf"
+            file="de_helpdesk.report_ticket_report"
+            name="de_helpdesk.report_ticket_report"
+            paperformat="base.paperformat_euro"
+        />
+    </data>
+</odoo>

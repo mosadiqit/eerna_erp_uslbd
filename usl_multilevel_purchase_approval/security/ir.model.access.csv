@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_approval_settings,manage_purchase_approval_settings,model_purchase_approval_settings,,1,1,1,1
+access_purchase_approval_settings_line,manage_purchase_approval_settings_line,model_purchase_approval_settings_line,,1,1,1,1

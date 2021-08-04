@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="account_payment_inherit" model="ir.ui.view">
+            <field name="name">account.payment.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header/field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_for_approval,posted,reconciled,cancelled"/>
+                </xpath>
+
+                <xpath expr="//button[@name='post']" position="before">
+                    <field name="set_flag" invisible="1"/>
+                    <button name="submit_for_approval" class="oe_highlight"  string="Submit For Approval" type="object" states="draft,sent"/>
+
+                </xpath>
+                <xpath expr="//button[@name='post']" position="replace">
+                     <button name="approve_custom_payment" string="Approve" type="object" class='oe_highlight'
+                            attrs="{'invisible': ['|',('state', 'not in', ['waiting_for_approval']),('set_flag','=',False)]}"
+                            groups="custom_customer_payment_approval.group_customer_payment_approval"/>
+
+                </xpath>
+
+
+            </field>
+        </record>
+            <record id="account_check_printing_inherit" model="ir.ui.view">
+            <field name="name">account.check.printing.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account_check_printing.view_account_payment_form_inherited"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='unmark_sent']" position="replace">
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

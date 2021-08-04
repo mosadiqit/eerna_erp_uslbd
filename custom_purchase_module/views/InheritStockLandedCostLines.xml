@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_stock_landed_cost_lines" model="ir.ui.view">
+            <field name="name">inherit.stock.landed.cost.lines</field>
+            <field name="model">stock.landed.cost</field>
+            <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='cost_lines']" position="replace">
+                     <field name="cost_lines"  context="{'picking_ids': picking_ids, 'default_type': 'service'}">
+                     <form string="Cost Lines">
+                                        <group>
+                                            <group>
+                                                <field name="product_id"
+                                                    domain="[('landed_cost_ok', '=', True)]"
+                                                    context="{'default_landed_cost_ok': True}"/>
+                                                <field name="price_unit"/>
+                                            </group>
+                                            <group>
+                                                <field name="split_method"/>
+                                                <field name="account_id" options="{'no_create': True}"/>
+                                            </group>
+                                        </group>
+                                        <label for="name"/>
+                                        <field name="name"/>
+                                    </form>
+                     <tree string="Cost Lines" editable="bottom">
+                                        <field name="product_id"
+                                            domain="[('landed_cost_ok', '=', True)]"
+                                            context="{'default_landed_cost_ok': True, 'default_type': 'service'}"/>
+                                        <field name="name"/>
+                                        <field name="account_id" options="{'no_create': True}"/>
+                                        <field name="split_method"/>
+                                        <field name="price_unit"/>
+                                    </tree>
+                     </field>
+
+                    </xpath>
+                    <xpath expr="//field[@name='cost_lines']/tree/field[@name='product_id']" position="after">
+                        <field name="partner"/>
+<!--                        <field name="test_field"/>-->
+                    </xpath>
+                <xpath expr="//button[@name='compute_landed_cost']" position="replace">
+                    <div class="row">
+
+                       <div class="col-6"><button   name="apply_probational_cost" string="Apply Probational Cost" type="object" class="oe_right btn-secondary" states='draft'/></div>
+                        <div class="col-6"> <button  name="compute_landed_cost" string="Compute" type="object" class="oe_right btn-secondary" states='draft'/></div>
+
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

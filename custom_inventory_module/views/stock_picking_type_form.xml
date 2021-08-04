@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="custom_stock_picking_inherit" model="ir.ui.view">
+        <field name="name">custom.stock.picking.type.inherit</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='show_operations']" position="after">
+                <field name="is_warehouse_return"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

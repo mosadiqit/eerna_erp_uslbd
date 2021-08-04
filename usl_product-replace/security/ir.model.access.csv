@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_replace,product_replace,model_product_replace,,1,1,1,1
+access_product_replace_lines,product_replace_lines,model_product_replace_lines,,1,1,1,1

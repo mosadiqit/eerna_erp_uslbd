@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_usl_customer_area_usl_customer_area,access.customer_area_setup,model_customer_area_setup,sales_team.group_sale_manager,1,1,1,1

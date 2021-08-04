@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_usl_cheque_management_batch_payment,usl_cheque_management.batch_payment,model_batch_payment,base.group_user,1,1,1,1
+access_usl_cheque_management_cheque_treatment,usl_cheque_management.cheque_treatment,model_cheque_treatment,base.group_user,1,1,1,1
+access_usl_cheque_management_vendor_batch_payment,usl_cheque_management.vendor_batch_payment,model_vendor_batch_payment,base.group_user,1,1,1,1
+access_cheque_model,manage_cheque_model,model_cheque_model,,1,1,1,1

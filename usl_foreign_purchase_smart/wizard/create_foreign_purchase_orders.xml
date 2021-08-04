@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="action_create_purchase_order" model="ir.actions.act_window">
+        <field name="name">Create RFQ</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account.view_account_invoice_filter"/>
+        <field name="target">new</field>
+<!--        <field-->
+<!--            name="binding_model_id"-->
+<!--            ref="purchase_blanket_order.model_purchase_blanket_order_line"-->
+<!--        />-->
+    </record>
+</odoo>

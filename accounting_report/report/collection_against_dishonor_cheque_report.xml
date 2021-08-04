@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- QWeb Reports -->
+        <!-- NAME & FILE_NAME should be the same -->
+        <report
+                id="collection_against_dishonor_cheque"
+                model="accounting.collection_against_dishonor_cheque.wizard"
+                report_type="qweb-pdf"
+                string="Collection Against Dishonor Cheque"
+                name="accounting_report.collection_dishonor_cheque_template"
+        />
+
+        <template id="collection_dishonor_cheque_template">
+
+            <t t-call="web.html_container">
+
+                <div class="page">
+                    <div class="article mt1 o_report_layout_standard">
+                        <center>
+                            <b>
+                                <h3>Collection Against Dishonor Cheque </h3>
+                            </b>
+                        </center>
+                        <center>
+                            <b>
+                                <span t-esc="start_date"/>
+                                To
+                                <span t-esc="end_date"/>
+                            </b>
+                        </center>
+                        <br/>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <th class="text-center font-weight-bold">Bank Name</th>
+                                <th class="text-center font-weight-bold">Cheque No</th>
+                                <th class="text-center font-weight-bold">Receive Date</th>
+                                <th class="text-center font-weight-bold">Cheque Date</th>
+                                <th class="text-right font-weight-bold">Cheque Amount</th>
+                                <th class="text-right font-weight-bold">Collected Amount</th>
+                                <th class="text-right font-weight-bold">Balance</th>
+                            </thead>
+                            <t t-foreach="data.keys()" t-as="category_key">
+                                <tr>
+                                    <td class="text-left font-weight-bold" colspan="7" style="background-color:#e6e1e1">
+                                        <t t-esc="category_key"/>
+                                    </td>
+                                </tr>
+                                <t t-set="cheque_grand_total" t-value="0"/>
+                                <t t-set="collection_grand_total" t-value="0"/>
+                                <t t-set="balance_grand_total" t-value="0"/>
+
+                                <t t-foreach="data[category_key]" t-as="brand">
+                                    <tr>
+                                        <td class="text-left font-weight-bold" colspan="7" style="background-color:#AEACAC; font-size: 125%;">
+                                            <t t-esc="brand"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="count" t-value="1"/>
+                                    <t t-set="cheque_total" t-value="0"/>
+                                    <t t-set="collection_total" t-value="0"/>
+                                    <t t-set="balance_total" t-value="0"/>
+                                    <tr t-foreach="data[category_key][brand]" t-as="line">
+                                        <td>
+                                            <t t-esc="line[2]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[3]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[4]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[5]"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-esc="line[6]"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-esc="line[7]"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-esc="line[8]"/>
+                                        </td>
+                                        <t t-set="count" t-value="count + 1"/>
+                                        <t t-set="cheque_total" t-value="cheque_total + line[6]"/>
+                                        <t t-set="collection_total" t-value="collection_total + line[7]"/>
+                                        <t t-set="balance_total" t-value="balance_total + line[8]"/>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right font-weight-bold" colspan="4">Buyer Total</td>
+                                        <td class="text-right font-weight-bold">
+                                            <t t-esc="cheque_total"/>
+                                        </td>
+                                        <td class="text-right font-weight-bold">
+                                            <t t-esc="collection_total"/>
+                                        </td>
+                                        <td class="text-right font-weight-bold">
+                                            <t t-esc="balance_total"/>
+                                        </td>
+                                        <t t-set="cheque_grand_total" t-value="cheque_grand_total + cheque_total"/>
+                                        <t t-set="collection_grand_total" t-value="collection_grand_total + collection_total"/>
+                                        <t t-set="balance_grand_total" t-value="balance_grand_total + balance_total"/>
+                                    </tr>
+
+                                </t>
+                                <tr>
+                                    <td class="text-right font-weight-bold" colspan="4">Location Total</td>
+                                    <td class="text-right font-weight-bold">
+                                        <t t-esc="cheque_grand_total"/>
+                                    </td>
+                                    <td class="text-right font-weight-bold">
+                                        <t t-esc="collection_grand_total"/>
+                                    </td>
+                                    <td class="text-right font-weight-bold">
+                                        <t t-esc="balance_grand_total"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

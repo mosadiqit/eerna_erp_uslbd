@@ -1,0 +1,46 @@
+.test1 th{
+    min-width:230px !important;
+    width: 230px !important;
+    max-width:500px !important
+
+}
+
+
+
+.test2 th[data-name=cd_partner],th[data-name=at_partner],th[data-name=ait_partner],th[data-name=df_partner],th[data-name=cf_partner],
+th[data-name=cf_partner],th[data-name=transport_partner],th[data-name=freight_partner],th[data-name=insurance_partner],th[data-name=lc_commision_partner]
+,th[data-name=lc_vat_partner],th[data-name=vat_partner],th[data-name=sd_partner],th[data-name=rd_partner],th[data-name=atv_partner]
+,th[data-name=fbc_partner]{
+background-color: #D2D2FF;
+}
+
+ .test2 table th, table td {
+    width: 50px;
+    padding: 5px;
+ }
+ .test2 table th {
+   text-align: center !important;
+   position: sticky !important;
+   top: 0 !important;
+   tabindex: 2 !important;
+ }
+ .test2 table thead th:nth-child(1) {
+   left: 0 !important;
+   z-index: 100 !important;
+     background-color: white !important;
+ }
+.test2 table tbody tr td:nth-child(1){
+  position: sticky !important;
+  left: 0 !important;
+  z-index: 100 !important;
+    background-color: white !important;
+}
+
+
+// .tree_field_progress .o_list_view .o_column_sortable{
+//     text-align: left !important;
+// }
+// .tree_field_progress .o_list_view .o_list_number{
+//     text-align: left !important;
+// }
+

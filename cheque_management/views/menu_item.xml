@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+<!--    <record id="account.action_account_payments" model="ir.ui.menu">-->
+<!--        <field name="name">Collections</field>-->
+<!--    </record>-->
+
+<!--    <menuitem action="action_customer_collection" id="menu_action_customer_collection" parent="account.menu_finance_receivables" sequence="16"/>-->
+
+    <menuitem id="cheque_management_dashboard" name="Cheque Management" action="cheque_management_state_action" parent="account.menu_finance" sequence="1"/>
+    <menuitem action="cheque_management_state_action" id="menu_cheque_management_dashboard" parent="cheque_management_dashboard" sequence="2"/>
+    <menuitem action="action_batch_payments" id="menu_action_account_batch_payments" parent="cheque_management_dashboard" sequence="3"/>
+    <menuitem action="action_cheque_treatment_form" id="menu_action_cheque_treatment_form" parent="cheque_management_dashboard" sequence="4"/>
+<!--    <menuitem action="action_cheque_treatment_test_form" id="menu_action_cheque_treatment_test_form" parent="account.menu_finance_receivables" sequence="18"/>-->
+<!--    <menuitem action="action_batch_payments" id="menu_action_account_batch_payments_payable" parent="account.menu_finance_payables" sequence="25"/>-->
+</odoo>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <report id="branchwise_report"
+        model="cheque.branchwise.report.wizard"
+        string="Cheque Branch Wise Report"
+        report_type="qweb-pdf"
+        name="accounting_report.cheque_report_branch_wise"
+
+        menu="False"/>
+      <template id="cheque_report_branch_wise">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Cheque Sent Report
+                    <br></br>
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="start_date"/> <strong>To</strong>: <t t-esc="end_date"/></span>
+                </h3>
+            </div>
+
+            <div class="article mt0 o_report_layout_standard">
+                <t t-set="grand_total" t-value="0"/>
+
+                    <t t-foreach="data.keys()" t-as="branch"> <!--iterate over buyer groups -->
+
+                   <table class="table table-condensed table-bordered">
+
+                     <h5 class="p-3 mb-2 bg-primary text-white"> Branch(Bank): <t t-esc="branch"/></h5>
+                    <thead>
+<!--                        <th style="width: 15%">Date</th>-->
+                        <th class="text-left" style="width: 10%">Sl</th>
+                        <th class="text-left" style="width: 15%">Cheque NO.</th>
+                        <th class="text-center" style="width: 20%">Cheque Date</th>
+<!--                        <th class="text-center" style="width: 25%">Sales Person</th>-->
+                        <th class="text-center" style="width: 30%">Buyer Name</th>
+                        <th class="text-center" style="width: 20%">Bank Name</th>
+                        <th class="text-center" style="width: 10%">Status</th>
+                        <th class="text-center" style="width: 15%">Pending Date</th>
+                        <th class="text-center" style="width: 10%">Amount</th>
+
+<!--                        <th class="text-center" style="width: 15%">Branch Name</th>-->
+                    </thead>
+
+                    <tbody>
+                        <t t-set="count" t-value="1"/>
+                        <t t-set="sub_total" t-value="0"/>
+
+                        <t t-foreach="data[branch]" t-as="doc">
+                            <tr>
+<!--                                <td><span t-esc="count"/></td>-->
+                                 <td class="text-left"><span t-esc="count"/></td>
+                                <td class="text-left"><span t-esc="doc[1]"/></td>
+                                <td class="text-left"><span t-esc="doc[2]"/></td>
+                                <td class="text-left"><span t-esc="doc[3]"/></td>
+                                <td class="text-left"><span t-esc="doc[4]"/></td>
+                                <td class="text-left"><span t-esc="doc[5]"/></td>
+                                <td class="text-left"><span t-esc="doc[6]"/></td>
+                                <td class="text-left"><span t-esc="doc[7]"/></td>
+
+
+                                <t t-set="count" t-value="count + 1"/>
+                                <t t-set="sub_total" t-value="sub_total+doc[7]"/>
+                                <t t-set="grand_total" t-value="grand_total+doc[7]"/>
+                            </tr>
+
+                        </t>
+                            <tr>
+                                <td colspan="7" class="text-right"><b>Sub Total:</b></td>
+                                <td class="text-left"><b><span t-esc="sub_total"/></b></td>
+                            </tr>
+                    </tbody>
+                </table>
+              </t>
+                    <table class="table table-condensed table-bordered">
+                    <tr>
+                                <td colspan="7" class="text-right"><b>Grand Total:</b></td>
+                                <td class="text-left"><b><span t-esc="grand_total"/></b></td>
+                    </tr>
+                    </table>
+
+            </div>
+
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

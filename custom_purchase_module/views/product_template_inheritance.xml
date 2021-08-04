@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_probational_cost_form" model="ir.ui.view">
+            <field name="name">product.template.probational.cost.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock_landed_costs.view_product_landed_cost_form"/>
+            <field name="arch" type="xml">
+                <group name="bill" position="after">
+                    <div attrs="{'invisible':[('type', '!=', 'service')]}">
+                    <group name="probational_cost" string="Probational Costs">
+                    <field name="probational_cost_ok"/>
+                    <field name="probational_percentage_ok"/>
+                   <field name="percentage" string="% Amount" attrs="{'invisible':[('probational_percentage_ok','=',False)]}"/>
+                        </group>
+                    </div>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

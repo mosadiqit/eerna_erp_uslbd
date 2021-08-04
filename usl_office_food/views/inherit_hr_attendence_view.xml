@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="usl_hr_employees_view_kanban_n" model="ir.ui.view">
+        <field name="name">hr.employee.kanban</field>
+        <field name="model">hr.employee</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <kanban class="o_usl_attendance_kanban" create="false">
+<!--                <field name="attendance_state"/>-->
+<!--                <field name="hours_today"/>-->
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <div class="o_kanban_image">
+                            <img t-att-src="kanban_image('hr.employee', 'image_128', record.id.raw_value)" alt="Employee"/>
+                        </div>
+                        <div class="oe_kanban_details">
+                            <div id="textbox">
+                                <div class="float-right" t-if="record.attendance_state.raw_value == 'checked_in'">
+                                    <span id="oe_hr_attendance_status" class="fa fa-circle oe_hr_attendance_status_green" role="img" aria-label="Available" title="Available"></span>
+                                </div>
+                                <div class="float-right" t-if="record.attendance_state.raw_value == 'checked_out'">
+                                    <span id="oe_hr_attendance_status" class="fa fa-circle oe_hr_attendance_status_red" role="img" aria-label="Not available" title="Not available"></span>
+                                </div>
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+                            <ul>
+                                <li t-if="record.job_id.raw_value"><field name="job_id"/></li>
+                                <li t-if="record.work_location.raw_value"><field name="work_location"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="usl_hr_employee_attendance_action_kanban_n" model="ir.actions.act_window">
+        <field name="name">Usl Employees</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,tree</field>
+        <field name="view_id" ref="usl_hr_employees_view_kanban_n"/>
+        <field name="target">fullscreen</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new employee
+            </p><p>
+                Add a few employees to be able to select an employee here and perform his check in / check out.
+                To create employees go to the Employees menu.
+            </p>
+        </field>
+    </record>
+</odoo>

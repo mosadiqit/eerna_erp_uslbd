@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_usl_product_serial_check,usl_product_serial_check,model_product_serial_reserved,,1,1,1,1
+access_usl_product_serial_check_reserved,usl_product_serial_check,model_product_serial_reserved_line,,1,1,1,1

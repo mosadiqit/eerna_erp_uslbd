@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- for default data purpose when creates a patient -->
+    <data noupdate="1">
+        <record id="all_state_1" model="cheque.model">
+            <field name="state_name">Draft</field>
+        </record>
+        <record id="all_state_2" model="cheque.model">
+            <field name="state_name">sent</field>
+        </record>
+        <record id="all_state_3" model="cheque.model">
+            <field name="state_name">dishonored</field>
+        </record>
+        <record id="all_state_4" model="cheque.model">
+            <field name="state_name">posted</field>
+        </record>
+        <record id="all_state_5" model="cheque.model">
+            <field name="state_name">cancelled</field>
+        </record>
+        <record id="all_state_6" model="cheque.model">
+            <field name="state_name">reconciled</field>
+        </record>
+        <record id="all_state_7" model="cheque.model">
+            <field name="state_name">waiting_for_approval</field>
+        </record>
+        <record id="all_state_8" model="cheque.model">
+            <field name="state_name">honored</field>
+        </record>
+<!--        record end-->
+    </data>
+
+</odoo>

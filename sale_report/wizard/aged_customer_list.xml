@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="aged_customer_list_wizard" model="ir.ui.view" >
+        <field name="name">Problematic/Idle Customer List</field>
+        <field name="model">aged.customer.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Area Sale Summary Report">
+                <group>
+                    <group>
+                        <field name="date_start"/>
+                    </group>
+                    <group>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+                <group>
+                      <group>
+                        <field name="company_id" string="Company" options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                    </group>
+                    <group>
+                        <field name="branch_ids" string="Branch" options="{'no_create':True, 'no_create_edit':True}" />
+                    </group>
+
+                </group>
+
+                  <footer>
+                    <button name="get_report" string="Download PDF" type="object" class="oe_highlight"/>
+<!--                    <button name="print_excel_report" string="Download Excel" type="object" class="oe_highlight"/>-->
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_aged_customer_list_wizard"
+        name="Problematic/Idle Customer List"
+        res_model="aged.customer.report.wizard"
+        view_mode="form"
+        target="new"/>
+
+    <menuitem action="action_aged_customer_list_wizard"
+        id="menu_action_aged_customer_list"
+        parent="sale.menu_sale_report"/>
+</odoo>

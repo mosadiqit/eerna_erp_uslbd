@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="usl_product_serial_check.list">
+      <field name="name">usl_product_serial_check list</field>
+      <field name="model">usl_product_serial_check.usl_product_serial_check</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="usl_product_serial_check.action_window">
+      <field name="name">usl_product_serial_check window</field>
+      <field name="res_model">usl_product_serial_check.usl_product_serial_check</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="usl_product_serial_check.action_server">
+      <field name="name">usl_product_serial_check server</field>
+      <field name="model_id" ref="model_usl_product_serial_check_usl_product_serial_check"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="usl_product_serial_check" id="usl_product_serial_check.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="usl_product_serial_check.menu_1" parent="usl_product_serial_check.menu_root"/>
+    <menuitem name="Menu 2" id="usl_product_serial_check.menu_2" parent="usl_product_serial_check.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="usl_product_serial_check.menu_1_list" parent="usl_product_serial_check.menu_1"
+              action="usl_product_serial_check.action_window"/>
+    <menuitem name="Server to list" id="usl_product_serial_check" parent="usl_product_serial_check.menu_2"
+              action="usl_product_serial_check.action_server"/>
+-->
+  </data>
+</odoo>

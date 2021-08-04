@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="nbr_report"
+            model="account.move"
+            string="Mushak 6.3"
+            report_type="qweb-pdf"
+            name="custom_sale_invoice_report.nbr_report_view"
+            menu="False"
+    />
+    <template id="nbr_report_view">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="doc">
+                <style type="text/css">
+                    @font-face {
+                    font-family: cool_font;
+                    font-style: normal;
+                    font-weight: lighter;
+                    src: url(/custom_sale_invoice_report/static/src/fonts/Nikosh.ttf) format("woff"),
+                    url(/custom_sale_invoice_report/static/src/fonts/Nikosh.ttf) format("truetype");
+                    }
+                    .bangla-font {
+                    font-family:cool_font;
+                    font-size: 19px;
+                    }
+                    table, td, th, tr {
+                    border: 1px solid black;
+                    }
+
+                    table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    }
+                </style>
+
+                <!--            <div class="page">-->
+
+                <div class="header">
+                    <!--                    style="padding-top: 10px"-->
+                    <div class="row">
+                        <div class="col-md-2" style="height: 180px;width: 180px;padding-top:15px">
+
+                            <img src='/custom_sale_invoice_report/static/src/img/gb.png'
+                                 style="width:180px;height:150px"/>
+
+                        </div>
+                        <div class="col-md-6" style="width: 700px;">
+                            <div style="margin:auto;">
+                                <p style="font-size: 30px; text-align: center;" class="bangla-font">
+                                    "গণপ্রজাতন্ত্রী বাংলাদেশ সরকার
+                                    <br/>
+                                    জাতীয় রাজস্ব বোর্ড
+                                    <br/>
+                                    কর চালানপত্র
+                                    <br/>[বিধি ৪০ এর উপ-বিধি (১) এর দফা (গ) ও দফা (চ) দ্রষ্টব্য]
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2" style="height: 150px;width: 150px;">
+                            <div class="bangla-font"
+                                 style="margin: auto;font-size: 20px;width: 140px;border: 2px solid black;padding: 8px;">
+                                মূসক- ৬.৩
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2" style="width:290px">
+                        <div></div>
+                    </div>
+                    <div class="col-md-8">
+                        <div></div>
+                        <div class="margin:auto;">
+                            <p class="bangla-font" style="font-size: 25px;">নিবন্ধিত ব্যক্তির নাম:
+                                <span
+                                        t-esc="doc.company_id.name"/>
+                                <br></br>
+                                নিবন্ধিত
+                                ব্যক্তির বিআইএন:
+                                <span
+                                        t-esc="doc.company_id.partner_id.vat"/>
+                                <br></br>চালানপত্র ইস্যুর ঠিকানা:
+                                <span
+                                        t-esc="doc.branch_id.address"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6" style="width:780px">
+                        <p class="bangla-font" style="font-size: 25px;">ক্রেতার নাম:
+                            <t
+                                    t-esc="doc.partner_id.name"/>
+                            <br></br>ক্রেতার
+                            বিআইএন:
+                            <span t-esc="doc.partner_id.vat"/>
+                            <br></br>
+                            ক্রেতার ঠিকানা:
+                            <t t-esc="doc.partner_shipping_id.name"/>
+                        </p>
+                    </div>
+                    <div class="col-md-6" style="width:700px">
+                        <p class="bangla-font" style="margin-left: 150px;font-size: 25px;">চালানপত্র নম্বর:
+                            <t t-esc="doc.name"/>
+                            <br></br>ইস্যুর তারিখ:
+                            <t t-esc="doc.invoice_date"/>
+                            <br></br>ইস্যুর সময়:
+                            <t t-esc="doc.create_date.strftime('%H:%M:%S')"/>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="width:780px">
+                        <p class="bangla-font" style="font-size: 25px;">সরবরাহের গন্তব্যস্থল:
+                            <t
+                                    t-esc="doc.partner_shipping_id.name"/>
+                        </p>
+                    </div>
+                    <div class="col-md-6" style="width:700px">
+                        <p class="bangla-font" style="margin-left: 150px;font-size:25px;">ডেলিভারির তারিখ:
+                            <t t-esc="doc.invoice_date"/>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 bangla-font" style="font-size: 25px;">যানবাহনের প্রকৃতি ও নম্বর:
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <table class="table table-condensed table-bordered">
+                        <!--                    <t t-set="grand_total" t-value="0"/>-->
+                        <thead>
+                            <th class="text-left" style="font-size:25px;border:1px solid black;">ক্রমিক</th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">পণ্য বা
+                                সেবার বর্ণনা (প্রযোজ্য
+                                ক্ষেত্রে
+                                ব্র্যান্ড নামসমূহ)
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">সরবরাহের
+                                একক
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">
+                                পরিমান
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">একক
+                                মূল্য১ (টাকায়)
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">মোট মূল্য
+                                ১ (টাকায়)
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">সম্পূরক
+                                শুল্কের হার
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">সম্পূরক
+                                শুল্কের পরিমান
+                                (টাকায়)
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">মূল্য
+                                সংযোজন করের হার/
+                                সুনির্দিষ্ট
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">মূল্য
+                                সংযোজন কর/ সুনির্দিষ্ট করের
+                                পরিমান
+                                (টাকায়)
+                            </th>
+                            <th class="text-center bangla-font"
+                                style="font-size:25px;border:1px solid black;">সকল প্রকার
+                                শুল্ক ও করসহ মূল্য
+                            </th>
+                        </thead>
+                        <tbody>
+                            <t t-set="count" t-value="1"/>
+                            <t t-set="total_quantity" t-value="0"/>
+                            <!--                        <t t-set="sub_total" t-value="0"/>-->
+                            <t t-foreach="doc.invoice_line_ids" t-as="val">
+                                <tr>
+
+                                    <td class="text-left" style="font-size:22px;border:1px solid black;">
+                                        <span
+                                                t-esc="count"/>
+                                    </td>
+                                    <td class="text-left"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                        <span
+                                                t-esc="val.name"/>
+                                    </td>
+                                    <td class="text-left"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                        <span
+                                                t-esc="val.product_uom_id.name"/>
+                                    </td>
+                                    <td class="text-center"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                        <span
+                                                t-esc="val.quantity"/>
+                                    </td>
+                                    <td class="text-right"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                        <span
+                                                t-esc="val.price_unit"/>
+                                    </td>
+                                    <td class="text-right"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                        <span
+                                                t-esc="val.price_subtotal"/>
+                                    </td>
+                                    <td class="text-right"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+
+                                    </td>
+                                    <td class="text-right"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+
+                                    </td>
+                                    <td class="text-center"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                        <t t-if='val.tax_ids'>
+                                            <span
+                                                    t-esc="val.tax_ids[0].amount"/>
+                                        </t>
+                                    </td>
+                                    <td class="text-right"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                        <span
+                                                t-esc="val.price_total - val.price_subtotal"/>
+                                    </td>
+                                    <td class="text-right"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                        <span
+                                                t-esc="val.price_total"/>
+                                    </td>
+                                    <t t-set="count" t-value="count + 1"/>
+                                    <t t-set="total_quantity" t-value="total_quantity + val.quantity"/>
+                                    <!--                                    <t t-set="sub_total" t-value="sub_total+doc[1]"/>-->
+                                    <!--                                    <t t-set="grand_total" t-value="grand_total+doc[1]"/>-->
+                                </tr>
+
+                            </t>
+                            <tr>
+                                <td colspan="3" class="text-right bangla-font"
+                                        style="font-size:22px;border:1px solid black;">সর্বমোট:</td>
+                                <td class="text-right"
+                                        style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                    <span t-esc="total_quantity"/>
+                                </td >
+                                <td class="text-right" style="font-size:22px;border:1px solid black;border-left-color: transparent"></td>
+                                <td class="text-right" style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                    <span t-esc="doc.amount_untaxed"/>
+                                </td>
+                                <td class="text-right" style="font-size:22px;border:1px solid black;border-left-color: transparent"></td>
+                                <td class="text-right" style="font-size:22px;border:1px solid black;border-left-color: transparent"></td>
+                                <td class="text-right" style="font-size:22px;border:1px solid black;border-left-color: transparent"></td>
+                                <td class="text-right" style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                    <span t-esc="doc.amount_tax"/></td>
+                                <td class="text-right" style="font-size:22px;border:1px solid black;border-left-color: transparent">
+                                    <span t-esc="doc.amount_total"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="bangla-font" style="font-size:25px;">প্রতিষ্ঠান কর্তৃপক্ষের দায়িত্বপ্রাপ্ত ব্যক্তির
+                            নাম:
+                        </div>
+                        <div class="bangla-font" style="font-size:25px;">পদবি:</div>
+                        <div class="bangla-font" style="font-size:25px;">স্বাক্ষর:</div>
+                        <br/>
+                        <div class="bangla-font" style="font-size:25px;">সীল:</div>
+                        <p style="font-size:25px;">১ সকল প্রকার কর ব্যতীত মূল্য ";</p>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+

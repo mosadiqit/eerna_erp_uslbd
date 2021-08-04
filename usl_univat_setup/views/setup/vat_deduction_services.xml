@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="vat_deduction_services_item_form" model="ir.ui.view">
+        <field name="name">VAT Deduction Services Form</field>
+        <field name="model">vat.deduction.services</field>
+        <field name="arch" type="xml">
+            <form string="VAT Deduction Services">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="service_code"/>
+                        </group>
+                        <group>
+                            <field name="net_vat_rate"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_vat_deduction_services_tree_with_onboarding" model="ir.ui.view">
+        <field name="name">VAT Deduction Services Tree</field>
+        <field name="model">vat.deduction.services</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="service_code"/>
+                <field name="net_vat_rate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_vat_deduction_services_item" model="ir.actions.act_window">
+        <field name="name">VAT Deduction Services</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vat.deduction.services</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain" > []</field>
+        <field name="view_id" ref="view_vat_deduction_services_tree_with_onboarding"/>
+    </record>
+
+</odoo>

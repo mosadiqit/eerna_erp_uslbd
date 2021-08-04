@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<record id="account_payment_inherit_state" model="ir.ui.view">
+        <field name="name">account.payment.state.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" positon="inside">
+                 <button name="sent" class="oe_highlight"  string="Sent" type="object" states="draft"/>
+                <button name="dishonor" class="oe_highlight" string="Dishonor" type="object" states="sent,waiting_approval"/>
+            </xpath>
+
+            <field name="state" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,sent,dishonored,waiting_for_approval,posted,reconciled,cancelled"/>
+            </field>
+
+            <xpath expr="//sheet/div[@class='oe_button_box']" positon="inside">
+                <button class="oe_stat_button" name="action_open_attachments" type="object" icon="fa-file-text-o" attrs="{'readonly':[('state','in',('draft','sent','dishonored','waiting_for_approval','posted'))]}  ">
+                    <field string="Dishonored" name="dishonor_count" widget="statinfo" icons="fa-bar"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+    </odoo>

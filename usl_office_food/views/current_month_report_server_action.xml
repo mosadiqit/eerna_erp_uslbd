@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_current_month_meal_report" model="ir.actions.server">
+
+        <field name="name">Current Month Meal </field>
+
+        <field name="type">ir.actions.server</field>
+
+        <field name="model_id" ref="model_employee_meal_reserve"/>
+
+        <field name="state">code</field>
+
+        <field name="code">
+
+            action = model.meal_print_report()
+
+        </field>
+
+    </record>
+    <menuitem id="usl_food_report" name="Report"
+                  parent="usl_food_cat_root_menu"
+                  sequence="20"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="current_month_food_reserve" name="Current Month Meal" parent="usl_food_report" action="action_current_month_meal_report" sequence="10"/>
+</odoo>

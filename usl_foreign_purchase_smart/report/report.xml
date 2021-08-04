@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    <report-->
+<!--        id="report_landed_cost"-->
+<!--        string="Costing Report"-->
+<!--        model="stock.landed.cost"-->
+<!--        report_type="qweb-pdf"-->
+<!--        name="usl_foreign_purchase_smart.costing_report_view"-->
+<!--    />-->
+</odoo>

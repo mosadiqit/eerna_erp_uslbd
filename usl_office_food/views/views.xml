@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+
+        <record id="usl_office_food_cataring_service_management_action_kiosk_mode" model="ir.actions.client">
+            <field name="name">Attendances</field>
+            <field name="tag">test_kiosk_mode</field>
+            <field name="target">fullscreen</field>
+        </record>
+
+        <record id="usl_office_food_cataring_service_management_action_my_attendances" model="ir.actions.client">
+            <field name="name">Attendance</field>
+            <field name="tag">usl_meal_eat</field>
+            <field name="target">main</field>
+        </record>
+         <record id="usl_office_food_cataring_service_management_action_usl_employee_widget" model="ir.actions.client">
+            <field name="name">usl employee widget </field>
+            <field name="tag">usl_employee_widget</field>
+            <field name="target">main</field>
+        </record>
+
+        <!--        <record id="food_action_greeting_message" model="ir.actions.client">-->
+        <!--            <field name="name">Message</field>-->
+        <!--            <field name="tag">food_greeting_message</field>-->
+        <!--        </record>-->
+
+        <record id="usl_office_food_cataring_service_management_already_receive_meal" model="ir.actions.client">
+            <field name="name">Already Receive Meal</field>
+            <field name="tag">already_receive_meal</field>
+            <field name="target">main</field>
+        </record>
+
+
+        <!-- Menus -->
+
+        <!--        <menuitem id="usl_office_food_cataring_service_management_root" name="Attendances" sequence="90"/>-->
+        <!--                  web_icon="hr_attendance,static/description/icon.png"/>-->
+
+        <!--        <menuitem id="usl_office_food_cataring_service_management_root_attendances" name="Check In / Check Out" parent="usl_office_food_cataring_service_management_root"-->
+        <!--                  sequence="10"-->
+        <!--                  action="usl_office_food_cataring_service_management_action_my_attendances"/>-->
+
+        <menuitem id="usl_office_food_cataring_service_management_root_manage_attendances" name="Manager"
+                  parent="usl_food_cat_root_menu"
+                  sequence="20"/>
+
+        <!--        <menuitem id="menu_hr_attendance_view_attendances" name="Attendances"-->
+        <!--                  parent="menu_hr_attendance_manage_attendances" sequence="10"-->
+        <!--                  groups="hr_attendance.group_hr_attendance_user" action="hr_attendance_action"/>-->
+
+        <!--        <menuitem id="menu_hr_attendance_view_employees_kanban" name="Employees"-->
+        <!--                  parent="menu_hr_attendance_manage_attendances" sequence="15"-->
+        <!--                   action="hr.open_view_employee_list_my"/>-->
+
+        <menuitem id="usl_office_food_cataring_service_management_kiosk_mode" name="Kiosk Mode"
+                  parent="usl_office_food_cataring_service_management_root_manage_attendances"
+                  sequence="20"
+                  action="usl_office_food_cataring_service_management_action_kiosk_mode"/>
+
+        <!--        <menuitem id="menu_hr_attendance_report" name="Reporting" parent="menu_hr_attendance_root" sequence="30"-->
+        <!--                  action="hr_attendance_action_graph"/>-->
+    </data>
+</odoo>

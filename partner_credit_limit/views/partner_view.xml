@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_category_property_form" model="ir.ui.view">
+        <field name="name">partner.over.credit.limit.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+<!--            <field name="property_account_position_id" position="after">-->
+<!--                <field name="credit_limit" groups="partner_credit_limit.group_partner_credit_limit_manager"/>-->
+<!--                <field name="over_credit" groups="partner_credit_limit.group_partner_credit_limit_manager"/>-->
+<!--            </field>-->
+            <xpath expr="//notebook" position="inside">
+                  <page name="credit_limit" string="Credit Limit Information">
+                      <group>
+                          <group>
+                          <field name="credit_limit" groups="partner_credit_limit.group_partner_credit_limit_manager"/>
+                              </group>
+                           <group>
+                          <field name="additional_credit_limit" groups="partner_credit_limit.group_partner_credit_limit_manager" force_save="1"/>
+                              </group>
+                      </group>
+
+                      <group>
+                           <group>
+                               <field name="security_money" groups="partner_credit_limit.group_partner_credit_limit_manager"/>
+                          </group>
+                          <group>
+                          <field name="over_credit" groups="partner_credit_limit.group_partner_credit_limit_manager"/>
+                              </group>
+                      </group>
+
+                          <field name="additional_credit_limit_line" groups="partner_credit_limit.group_partner_credit_limit_manager">
+                              <tree editable="bottom">
+                                  <field name="from_date" required="1"/>
+                                  <field name="to_date" required="1"/>
+                                  <field name="ammount"/>
+                              </tree>
+                          </field>
+
+                        </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

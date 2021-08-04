@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cheque_history_report_wizard" model="ir.ui.view" >
+        <field name="name">Cheque History Report</field>
+        <field name="model">cheque.history.report</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Cheque History Report">
+                <group>
+                    <group>
+                        <field name="date_start"/>
+                    </group>
+                    <group>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+                <group>
+                      <group>
+                        <field name="location_ids" widget="many2many_tags" options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                    </group>
+
+                </group>
+
+                  <footer>
+                    <button name="get_report" string="Print Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="cheque_history_report_action"
+        name="Cheque History Report"
+        res_model="cheque.history.report"
+        view_mode="form"
+        target="new"/>
+
+    <menuitem action="cheque_history_report_action"
+        id="cheque_history_report_menu"
+        parent="account.menu_finance_reports"
+        sequence="55"/>
+</odoo>
+
+
+
+
+
+

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_menu_permission_dashboard,manage_menu_permission_dashboard,model,menu_permission_dashboard,,1,1,1,1

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_move_inherit" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+
+            <!--                <xpath expr="//header/button[@name='approve_invoice_order']" position="replace">-->
+
+            <!--                    <button name="approve_foreign_invoice_order" string="Approve" type="object" class='oe_highlight'-->
+            <!--                            attrs="{'invisible': [('state', 'not in', ['waiting_for_approval'])]}"-->
+            <!--                            groups="sales_approval_management.group_sale_order_approval"/>-->
+
+            <!--                </xpath>-->
+<!--            <xpath expr="//field[@name='template_id']" position="attributes">-->
+<!--                <attribute name="attrs">{'readonly': [('notification_type', '!=', 'mail')], 'required': [('notification_type', '=', 'mail')]}</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//div[@name='button_box']/button[@name='action_view_landed_costs']" position="attributes">
+                  <attribute name="attrs">{'invisible': [('flag', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="flag" invisible="1"/>
+
+                <button type="object" name="action_view_relavent_costing"
+                        class="oe_stat_button"
+                        icon="fa-pencil-square-o"
+                        string="Costing"
+                        attrs="{'invisible':['|',('state', '!=', 'posted'),('flag','=',False)]}"
+                >
+                    <field name="landed_cost_count"/>
+                    <!--                            attrs="{'invisible':['|', ('invoice_count', '=', 0), ('state', 'in', ('draft','sent','to approve'))]}"-->
+                    <!--                            <field name="invoice_count" widget="statinfo" string="Vendor Bills"/>-->
+                    <!--                            <field name='invoice_ids' invisible="1"/>-->
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='price_total']" position="after">
+                 <field name="bank_payment" attrs="{'column_invisible':[('parent.flag','=',False)]}"/>
+                <field name="local_payment" attrs="{'column_invisible':[('parent.flag','=',False)]}"/>
+                <field name="original_uom_qty" invisible="1"/>
+                <field name="invoiced_uom_qty" invisible="1"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="cal_landed_cost" string="Costing" type="object" class="oe_highlight"
+                attrs="{'invisible':['|',('state', '!=', 'posted'),('flag','=',False)]}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

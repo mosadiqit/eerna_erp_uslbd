@@ -1,0 +1,32 @@
+
+{
+    'name': 'Product Attribute in Inventory',
+    'version': '13.0.1.0.1',
+    'category': 'Warehouse',
+    'summary': 'Product Attribute in Inventory',
+    'author': 'Unisoft System Ltd.',
+    'company': 'Unisoft System Ltd.',
+    'maintainer': 'Unisoft System Ltd.',
+    'images': ['static/description/banner.png'],
+    'website': 'http://www.uslbd.com/',
+    'depends': ['stock', 'sale', 'purchase'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/brand_views.xml',
+        'views/part_number.xml',
+        'views/group_views.xml',
+        'views/model_views.xml',
+        'views/warranty.xml',
+        'views/product_manager.xml',
+        'views/search_view_product.xml',
+        'views/product_no_create.xml',
+        'views/stock_on_hand_quantity.xml',
+        'report/search_inventory_report.xml',
+        'report/invoice_report_for_warranty.xml',
+    ],
+    'license': 'AGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+
+}

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="current_stock_serial_report"
+            model="current.stock.serial"
+            string="Current Stock With Serial"
+            report_type="qweb-pdf"
+            name="inventory_report.current_stock_serial_report_view"
+            menu="False"
+            paperformat="inventory_report.paperformat_sale_summary_report"/>
+
+    <template id="current_stock_serial_report_view">
+        <t t-call="web.html_container">
+            <!--            <div class="page">-->
+            <!--            <center>-->
+            <!--                <b>-->
+            <!--                    <h3>Current Stock With Serial</h3>-->
+            <!--                </b>-->
+            <!--            </center>-->
+            <div class="page">
+                <div class="header" align="center">
+                    <strong>Current Stock With Serial</strong>
+                </div>
+                <div class="article mt0 o_report_layout_standard">
+                    <table class="table table-condensed table-bordered" style="font-size: 14px; font-family:FreeSerif;">
+                        <thead>
+                            <th class="text-center" style="width: 70%">Product Name</th>
+                            <th class="text-center" style="width: 15%">Serial Y/N</th>
+                            <th class="text-center" style="width: 15%">Quantity</th>
+<!--                            <th class="text-center" style="width: 10%">Reserve S/L</th>-->
+                        </thead>
+                        <t t-foreach="value.keys()" t-as="stock">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" colspan="7" style="background-color:#AEACAC">
+                                        <t t-esc="stock"/>
+                                    </td>
+                                </tr>
+                                <!--                            <tr>-->
+                                <t t-foreach="value[stock]" t-as="group">
+                                    <tr>
+                                        <td class="text-center" colspan="7" style="background-color:#AEACAC">
+                                            <t t-esc="group"/>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="value[stock][group]" t-as="val1">
+                                        <tr>
+                                            <td class="text-center" colspan="7" style="background-color:#AEACAC">
+                                                <t t-esc="val1"/>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="value[stock][group][val1]" t-as="val2" colspan="7"
+                                           style="background-color:#AEACAC">
+                                            <tr>
+                                                <td class="text-center" colspan="7" style="background-color:#AEACAC">
+                                                    <t t-esc="val2"/>
+                                                </td>
+                                            </tr>
+                                            <t t-foreach="value[stock][group][val1][val2]" t-as="val3">
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <t t-esc="val3[0]"/>
+                                                        <t t-if="val3[6] is not None">
+                                                            <br>S/L:<t t-esc="val3[6]"/></br>
+                                                        </t>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <t t-if="val3[6] is not None">
+                                                            <strong>Yes</strong>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <strong>No</strong>
+                                                        </t>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <t t-esc="val3[5]"/>
+                                                    </td>
+<!--                                                    <td class="text-center">-->
+
+<!--                                                            <t t-esc="val3[7]"/>-->
+<!--&lt;!&ndash;                                                        <t t-else="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <p>No Reserved</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </t>&ndash;&gt;-->
+<!--                                                    </td>-->
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </t>
+                                <!--                            </tr>-->
+                            </tbody>
+                            <!--                                    <br/>-->
+                            <!--                                    &lt;!&ndash;                            <t t-esc="val['serial']"/>&ndash;&gt;-->
+                            <!--                                    <t t-foreach="value[val]" t-as="val1">-->
+                            <!--                                        <tr>-->
+                            <!--                                            <td class="text-left" colspan="7" style="background-color:#AEACAC">-->
+                            <!--                                                <t t-esc="val1"/>-->
+                            <!--                                                <br/>-->
+                            <!--                                            </td>-->
+                            <!--                                        </tr>-->
+                            <!--                                        <t t-foreach="value[val][val1]" t-as="val2">-->
+                            <!--                                            <tr>-->
+                            <!--                                                <td class="text-left" colspan="7" style="background-color:#AEACAC">-->
+                            <!--                                                    <t t-esc="val2"/>-->
+                            <!--                                                    <br/>-->
+                            <!--                                                </td>-->
+                            <!--                                            </tr>-->
+                            <!--                                            <t t-foreach="value[val][val1][val2]" t-as="val3">-->
+                            <!--                                                <tr>-->
+                            <!--                                                    <td class="text-left" colspan="7" style="background-color:#AEACAC">-->
+                            <!--                                                        <t t-esc="val3"/>-->
+                            <!--                                                        <br/>-->
+                            <!--                                                    </td>-->
+                            <!--                                                </tr>-->
+                            <!--                                                <tr t-foreach="value[val][val1][val2][val3]" t-as="val4">-->
+                            <!--                                                    &lt;!&ndash;                                                <td>&ndash;&gt;-->
+                            <!--                                                    &lt;!&ndash;                                                    <t t-esc="count"/>&ndash;&gt;-->
+                            <!--                                                    &lt;!&ndash;                                                </td>&ndash;&gt;-->
+                            <!--                                                    <td class="text-left">-->
+                            <!--                                                        <t t-esc="val4[0]"/>-->
+                            <!--                                                        <br/>-->
+                            <!--                                                        <t t-esc="val4[6]"/>-->
+                            <!--                                                    </td>-->
+                            <!--                                                    <br/>-->
+                            <!--                                                    <td class="text-left">-->
+                            <!--                                                        <t t-if="val4[6] is not None">-->
+                            <!--                                                            <strong>Yes</strong>-->
+                            <!--                                                        </t>-->
+                            <!--                                                        <t t-else="">-->
+                            <!--                                                            <strong>No</strong>-->
+                            <!--                                                        </t>-->
+                            <!--                                                    </td>-->
+                            <!--                                                    <td class="text-left">-->
+                            <!--                                                        <t t-esc="val4[5]"/>-->
+                            <!--                                                    </td>-->
+                            <!--                                                    &lt;!&ndash;                                                <t t-set="count" t-value="count + 1"/>&ndash;&gt;-->
+                            <!--                                                    &lt;!&ndash;                                                <t t-set="brand_amount" t-value="brand_amount + line[7]"/>&ndash;&gt;-->
+                            <!--                                                </tr>-->
+                            <!--                                                &lt;!&ndash;                                            <t t-foreach="value[val][val1][val2][val3]" t-as="val4">&ndash;&gt;-->
+                            <!--                                                &lt;!&ndash;                                                <tr>&ndash;&gt;-->
+                            <!--                                                &lt;!&ndash;                                                    <td class="text-left" colspan="7" style="background-color:#AEACAC">&ndash;&gt;-->
+                            <!--                                                &lt;!&ndash;                                                        <t t-esc="val4"/>&ndash;&gt;-->
+                            <!--                                                &lt;!&ndash;                                                    </td>&ndash;&gt;-->
+                            <!--                                                &lt;!&ndash;                                                </tr>&ndash;&gt;-->
+                            <!--                                                &lt;!&ndash;                                            </t>&ndash;&gt;-->
+                            <!--                                            </t>-->
+                            <!--                                        </t>-->
+
+
+                            <!--                                    </t>-->
+
+
+                            <!--                                </tr>-->
+                            <!--                            <td>-->
+                            <!--                                -->
+                            <!--                            </td>-->
+                            <!--                        <td>-->
+                            <!--                            <t t-if="val['serial'] is not None">-->
+                            <!--                                <p>Yes</p>-->
+                            <!--                            </t>-->
+                            <!--                            <t t-else="">-->
+                            <!--                                <p>No</p>-->
+                            <!--                            </t>-->
+                            <!--                        </td>-->
+                            <!--                        <td>-->
+                            <!--                            <t t-esc="val['quantity']"/>-->
+                            <!--                        </td>-->
+                            <!--                            </tbody>-->
+                        </t>
+                    </table>
+                </div>
+                <!--            </div>-->
+                <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                    <div class="row text-center">
+                        <div class="col col-12 text-center">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">Page:</li>
+                                <li class="list-inline-item">
+                                    <span class="page"/>
+                                </li>
+                                <li class="list-inline-item">/</li>
+                                <li class="list-inline-item">
+                                    <span class="topage"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

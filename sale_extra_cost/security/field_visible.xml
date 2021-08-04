@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_extra_cost_to_sale">
+        <field name="name">Invoice Extra Cost Show</field>
+        <field name="sequence">30</field>
+    </record>
+
+     <record id="group_extra_cost_to_sale" model="res.groups">
+        <field name="name"> Invoice Extra Cost Show </field>
+        <field name="category_id" ref="module_extra_cost_to_sale"/>
+<!--         <field name="implied_ids" eval="[(4, ref('group_extra_cost_to_sale'))]" />-->
+    </record>
+
+<!--    <record id="group_partner_credit_limit_manager" model="res.groups">-->
+<!--        <field name="name"> Invoice Extra Cost Show </field>-->
+<!--        <field name="category_id" ref="module_partner_credit_limit"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('group_partner_credit_limit_user'))]" />-->
+<!--    </record>-->
+
+</odoo>

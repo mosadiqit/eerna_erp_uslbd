@@ -1,0 +1,7 @@
+<odoo>
+    <template id="assets_backend" name="stack_overflow assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/usl_office_food_cataring_service_management/static/src/js/script.js"></script>
+        </xpath>
+    </template>
+</odoo>

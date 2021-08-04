@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="salesman_route_destribution_tree" model="ir.ui.view">
+            <field name="name">Sales Man Distribution</field>
+            <field name="model">salesman.route_distributions</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="route_distribution_date"/>
+                     <field name="route_distribution_line"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="salesman_route_destribution" model="ir.ui.view">
+            <field name="name">Sales Man Distribution</field>
+            <field name="model">salesman.route_distributions</field>
+            <field name="arch" type="xml">
+                <form string="Route Distribution">
+                    <sheet>
+                        <group>
+                           <group>
+                               <field name="route_distribution_date"/>
+                           </group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Route Distribution">
+                                <field name="route_distribution_line">
+                                    <tree editable="bottom">
+                                        <field name="salesman"/>
+                                        <field name="routes" widget="many2many_tags"/>
+                                        <field name="shops" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="salesman_route_distribution" model="ir.actions.act_window">
+            <field name="name">Sales Route Distribution</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">salesman.route_distributions</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="usl_salesman_route_distributions" name="Distributions" parent="route_parent" action="usl_salesman_route.salesman_route_distribution" sequence="4"/>
+    
+    </data>
+</odoo>

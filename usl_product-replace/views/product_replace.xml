@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    Tree view of product replace-->
+    <record id="product_replace_tree_view" model="ir.ui.view">
+        <field name="name">product replace tree view</field>
+        <field name="model">product.replace</field>
+        <field name="arch" type="xml">
+            <tree string="Product replace tree" decoration-warning="state == 'draft'"
+                  decoration-success="state == 'done'"
+                  decoration-danger="state == 'cancel'" decoration-info="state == 'return'">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!--        Form view of product replace-->
+    <record id="product_replace_form_view" model="ir.ui.view">
+        <field name="name">product replace form view</field>
+        <field name="model">product.replace</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="check_availability" type="object" string="Check Availability" class="oe_highlight"
+                            states="draft"/>
+                    <button name="replace_done_action" type="object" string="Done" class="oe_highlight" states="ready"/>
+                    <button name="replace_cancel_action" string="Cancel" type="object" class="oe_highlight"
+                            states="draft"/>
+                    <button name="replace_return_action" string="Return" type="object" class="oe_highlight"
+                            states="done"/>
+                    <button name="replace_reset_draft_action" string="Reset to default" type="object"
+                            class="oe_highlight" states="cancel"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="alamin" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+<!--                            <field name="invoice_count" widget="statinfo" string="Invoices"/>-->
+                        </button>
+                        <button name="alamin" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+<!--                            <field name="invoice_count" widget="statinfo" string="Invoices"/>-->
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="partner_id"/>
+                            <field name="recieved_wh"/>
+                            <field name="delivered_wh"/>
+                            <field name="reason"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Replacement Products">
+                            <field name="replace_lines">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id"/>
+                                    <field name="qty_replace"/>
+                                    <field name="qty_done"/>
+                                    <field name="replace_id" invisible="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="product_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="qty_replace"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_replace_action" model="ir.actions.act_window">
+        <field name="name">Product Replace</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.replace</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create New Replace Request...!
+            </p>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="product_replace_child_1" name="Replace" parent="usl_salesman_route.route_parent"
+              action="product_replace_action"/>
+</odoo>

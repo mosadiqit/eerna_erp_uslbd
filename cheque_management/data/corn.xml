@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Expired Soon -->
+        <record id="ir_cron_data_cheque_dishonor_scheduling" model="ir.cron">
+            <field name="name">Cheque Dishonor Scheduling</field>
+            <field name="model_id" ref="model_account_payment"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.dishonor_scheduling()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+</odoo>

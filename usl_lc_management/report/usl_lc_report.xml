@@ -1,0 +1,542 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <report id="ucb_test_report"
+                model="usl.lc.management"
+                string="UCB Details Report"
+                report_type="qweb-pdf"
+                name="usl_lc_management.ucb_report_view"
+                menu="False"/>
+        <template id="ucb_report_view">
+            <t t-call="web.html_container">
+                <div class="page">
+
+                    <t t-foreach="docs" t-as="doc">
+
+                        <div class="header"
+                             style="border-bottom: 1px solid black;font-size: 13px;border:1px;border-style:solid">
+
+                            <table class="table table-condensed table-bordered"
+                                   style="border: 0;table-layout: fixed; height: 15px;"
+                                   table-layout="fixed">
+                                <tr>
+                                    <tr>
+                                        <td style="border: 0;">
+
+                                        </td>
+                                    </tr>
+                                    <td colspan="4" style="border: 0;">
+                                        <h5 class="text-left"><b><t t-esc="doc.bank_names.bank_name"/></b>
+                                            <!--                                          <input class="text-right" type="image" src="/purchase_report/static/src/img/jerin.jpeg" alt="Submit"-->
+                                            <!--                                           width="48" height="48"/>-->
+                                            <br></br>
+                                            <span style="font-size: 14px;"><t t-esc="doc.bank_names.bank_name"/></span>
+                                            <br></br>
+
+                                            <span style="font-size: 14px;"><t t-esc="doc.bank_addresses"/>
+                                                   </span>
+<!--                                                <t t-esc="doc.bank_state2"/> <t t-if="doc.bank_state2">, </t> <t-->
+<!--                                                        t-esc="doc.bank_city"/> <t t-if="doc.bank_city">,</t>-->
+<!--                                                <t t-esc="doc.bank_country"/></span>-->
+                                        </h5>
+
+
+                                    </td>
+                                    <td style="border: 0">
+                                        <!--                                    <input type="image" src="/purchase_report/static/src/img/jerin.jpeg" alt="Submit"-->
+                                        <!--                                           width="125" height="125"/>-->
+                                        <img t-attf-src="data:image/jpg;base64,{{ doc.stamp }}" height="70" width="70"
+                                             style='margin:0px;padding-top:0px;border: 1px solid black;'/>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="border: 0">
+
+                                    </td>
+                                    <td style="border: 0">
+
+                                        <p type="text" class="border border-dark">L/C No. <t t-esc="doc.lc_no"/></p>
+                                        Date:  <![CDATA[&nbsp;]]><t t-esc="doc.date"/>
+                                    </td>
+                                </tr>
+                                <!--                                <tr>-->
+                                <!--                                    <td colspan="4" style="border: 0">-->
+                                <!--                                        -->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+                            </table>
+
+                            <!--                        <h2 class="text-right" style="font-size: 14px">Date:.........</h2>-->
+                            <h6 class="text-center"><b>APPLICATION AND AGREEMENT FOR CONFIRMED IRREVOCABLE WITHOUT
+                                RECOURSE TO DRAWERS </b></h6>
+                            <h6 class="text-center"><b>LETTER OF CREDIT</b></h6>
+                            <p style="font-size: 14.5px" class="text-center">Please open confirmed irrevocable letter of
+                                credit through your
+                                correspondent by
+                                <!--                            <t t-if="p.code == 'BASIC'">-->
+                                <!--                            <t t-if="doc.YOUR_BOLLEAN_FIELD">-->
+                                <!--                              <input type="checkbox" id="checkbox104_anything_you_give" checked="checked"/>-->
+                                <!--                            </t>-->
+                                <![CDATA[&nbsp;]]>
+                                <![CDATA[&nbsp;]]>
+                                <t t-if="doc.is_mail">
+                                    <input type="checkbox" id="is_mail" name="is_mail" checked="checked">
+                                        Mail/Airmail </input>
+                                </t>
+                                <t t-else="">
+                                    <input type="checkbox" id="is_mail" name="is_mail">
+                                        Mail/Airmail </input>
+                                </t>
+                                <![CDATA[&nbsp;]]>
+                                <!--                            <t t-if="not doc.is_mail">-->
+                                <!--                                <t t-esc="doc.is_mail"/>-->
+                                <!--                                <input type="checkbox" id="is_mail" name="vehicle1" checked="false">-->
+                                <!--                                Mail/Airmail </input>-->
+                                <!--                            </t>-->
+
+                                <t t-if="doc.is_teletransmission_in_full">
+                                    <input type="checkbox" id="vehicle1" name="is_teletransmission_in_full"
+                                           checked="checked"> Teletransmission in
+                                        full/ </input>
+                                </t>
+                                <t t-else="">
+                                    <!--                            <t t-if !="doc.is_teletransmission_in_full">-->
+                                    <input type="checkbox" id="is_teletransmission_in_full"
+                                           name="is_teletransmission_in_full"> Teletransmission in
+                                        full/ </input>
+                                </t>
+                                <![CDATA[&nbsp;]]>
+
+
+                                <!--                            <input type="checkbox" id="vehicle1" name="vehicle1" checked="true"> Teletransmission in-->
+                                <!--                                full/ </input>-->
+                                <t t-if="doc.is_swift">
+                                    <input class="text-center" type="checkbox" id="is_swift" name="is_swift"
+                                           checked="checked">
+                                        Swift</input>
+                                </t>
+                                <t t-else="">
+                                    <input class="text-center" type="checkbox" id="is_swift" name="is_swift">
+                                        Swift</input>
+                                </t>
+                                <![CDATA[&nbsp;]]>
+                                <t t-if="doc.is_teletransmission_in">
+                                    <input class="text-center" type="checkbox" id="is_teletransmission_in"
+                                           name="is_teletransmission_in"
+                                           checked="checked">
+                                        Teletransmission </input>
+                                </t>
+
+                                <t t-else="">
+                                    <input class="text-center" type="checkbox" id="is_teletransmission_in"
+                                           name="is_teletransmission_in">
+                                        Teletransmission </input>
+                                </t>
+
+
+                                in brief details of which are as follows:</p>
+                            <table class="table table-condensed table-bordered">
+                                <tr>
+                                    <td style="border: 1px solid black; border-left: 0; border-right: 0;"> Beneficiary's
+                                        Name and Adress: <t t-esc="doc.beneficiary_name.name"/> <t
+                                                t-if="doc.beneficiary_name">,</t><t
+                                                t-esc="doc.beneficiary_state"/> <t t-if="doc.beneficiary_state">,</t>
+                                        <t t-esc="doc.beneficiary_state2"/> <t t-if="doc.beneficiary_state2">,</t><t
+                                                t-esc="doc.beneficiary_city"/><t t-if="doc.beneficiary_city">,</t>
+                                        <t t-esc="doc.beneficiary_country"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black; border-left: 0; border-right: 0;">Opener's Name
+                                        and Address: <t t-esc="doc.openers_name.name"/> <t
+                                                t-if="doc.openers_name">,</t><t
+                                                t-esc="doc.openers_state"/><t t-if="doc.openers_state">,</t><t
+                                                t-esc="doc.openers_state2"/><t t-if="doc.openers_state2">,</t>
+                                        <t t-esc="doc.openers_city"/><t t-if="doc.openers_city">,</t><t
+                                                t-esc="doc.openers_country"/></td>
+                                </tr>
+                            </table>
+                            <table class="table table-condensed table-bordered">
+                                <tr>
+                                    <td style="border: 1px solid black; border-left: 0; border-right: 0;">
+                                        Draft amount: <t t-esc="doc.draft_amount"  t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        In words: <t t-esc="doc.draft_amount_in_word"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <t t-if="doc.is_at_sight">
+                                            <input type="checkbox" id="is_at_sight" name="is_at_sight"
+                                                   checked="checked"> At
+                                                Sight </input>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_at_sight" name="is_at_sight"> At
+                                                Sight </input>
+                                        </t>
+
+                                        <br/>
+                                        <br/>
+                                        <span class="border border-dark"><t t-esc="doc.days_da_or_dp"/></span> <![CDATA[&nbsp;]]>days DA/DP
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <t t-if="doc.is_cif">
+                                            <input type="checkbox" id="is_cif" name="is_cif" checked="checked"
+                                                   space="preserved">
+                                                CIF </input>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_cif" name="is_cif"> CIF </input>
+                                        </t>
+                                        <![CDATA[&nbsp;]]>
+                                        <![CDATA[&nbsp;]]>
+                                        <t t-if="doc.is_fob">
+                                            <input type="checkbox" id="is_fob" name="is_fob" checked="checked">
+                                                FOB </input>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_fob" name="is_fob"> FOB </input>
+                                        </t>
+                                        <br/>
+                                        <br/>
+                                        <t t-if="doc.is_cfr">
+                                            <input type="checkbox" id="is_cfr" name="is_cfr" checked="checked">C F
+                                                R </input>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_cfr" name="is_cfr">C F R </input>
+                                        </t>
+                                    </td>
+                                    <td style="border: 1px solid black;border-left: 0; border-right: 0;">
+                                        Drawn on
+                                        <br/>
+                                        <t t-if="doc.is_us">
+                                            <input type="checkbox" id="is_us" name="is_us" checked="checked">
+                                                Us </input>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_us" name="is_us"> Us </input>
+                                        </t>
+                                        <br/>
+
+                                        <t t-if="doc.is_them">
+                                            <input type="checkbox" id="is_them" name="is_them" checked="checked">
+                                                Them </input>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_them" name="is_them"> Them </input>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-condensed table-bordered"
+                                   style="border: 1px solid black;border-left: 0; border-right: 0;">
+                                <tr>
+                                    <td style="border: 1px solid black;border-left: 0;">Please specify commodities,
+                                        price, quantity, indent no. etc. <t
+                                                t-esc="doc.utilities"/></td>
+                                    <td style="border: 1px solid black;border-right: 0;">Country of origin:
+                                          <t t-foreach="doc.country_of_origin" t-as="country">
+
+                                                        <t t-esc="country.name"/>
+                                                        <br/>
+                                                    </t>
+                                       </td>
+                                </tr>
+                            </table>
+                            <table class="table table-condensed table-bordered"
+                                   style="border: 1px solid black;border-left: 0; border-right: 0;">
+                                <tr>
+                                    <td style="border: 1px solid black;border-left: 0;">DOCUMENTS REQUIRED SA INDICATED
+                                        BY CHECK(X)
+                                        <br/>
+                                        <t t-if="doc.is_commercial_invoice_in_sixtuplicate">
+                                            <input type="checkbox" id="is_commercial_invoice_in_sixtuplicate"
+                                                   name="is_commercial_invoice_in_sixtuplicate" checked="checked">
+                                                Commercial
+                                                invoice in sixtuplicate </input>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_commercial_invoice_in_sixtuplicate"
+                                                   name="is_commercial_invoice_in_sixtuplicate"> Commercial
+                                                invoice in sixtuplicate </input>
+                                        </t>
+                                        <br/>
+                                        <br/>
+                                        <t t-if="doc.is_custom_invoice_in_duplicate">
+                                            <input type="checkbox" id="is_custom_invoice_in_duplicate"
+                                                   name="is_custom_invoice_in_duplicate" checked="checked"> Special
+                                                customs
+                                                invoice in duplicate </input>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_custom_invoice_in_duplicate"
+                                                   name="is_custom_invoice_in_duplicate"> Special customs
+                                                invoice in duplicate </input>
+                                        </t>
+                                        <br/>
+                                        <br/>
+
+                                        <t t-if="doc.is_others_doc">
+                                            <input type="checkbox" id="is_others_doc" name="is_others_doc"
+                                                   checked="checked"> Other
+                                                documents: </input>
+                                        </t>
+
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_others_doc" name="is_others_doc"> Other
+                                                documents: </input>
+                                        </t>
+                                        <br/>
+                                        <br/>
+
+                                        <p>
+                                            <t t-if="doc.is_clean_bill_landing">
+                                                <input type="checkbox" id="is_clean_bill_landing"
+                                                       name="is_clean_bill_landing" checked="checked"> Full set of
+                                                    clean on board bills of lading </input>
+                                            </t>
+
+                                            <t t-else="">
+                                                <input type="checkbox" id="is_clean_bill_landing"
+                                                       name="is_clean_bill_landing"> Full set of
+                                                    clean on board bills of lading </input>
+                                            </t>
+                                            <![CDATA[&nbsp;]]>
+                                            <t t-if="doc.is_airway_bill">
+                                                <input type="checkbox" id="is_airway_bill" name="is_airway_bill"
+                                                       checked="checked"> Airway
+                                                    Bill </input>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox" id="is_airway_bill" name="is_airway_bill"> Airway
+                                                    Bill </input>
+                                            </t>
+                                            <![CDATA[&nbsp;]]>
+                                            <t t-if="doc.is_post_parcel">
+                                                <input type="checkbox" id="is_post_parcel" name="is_post_parcel"
+                                                       checked="checked">Post
+                                                    Parcel </input>
+                                            </t>
+
+                                            <t t-else="">
+                                                <input type="checkbox" id="is_post_parcel" name="is_post_parcel">Post
+                                                    Parcel </input>
+                                            </t>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <![CDATA[&nbsp;]]>
+                                            <t t-if="doc.is_rel_to_shipment">
+                                                <input type="checkbox" id="is_rel_to_shipment" name="is_rel_to_shipment"
+                                                       checked="checked"> Relating to
+                                                    shipment </input>
+                                            </t>
+
+                                            <t t-else="">
+                                                <input type="checkbox" id="is_rel_to_shipment"
+                                                       name="is_rel_to_shipment"> Relating to
+                                                    shipment </input>
+                                            </t>
+                                            <![CDATA[&nbsp;]]>
+                                            <t t-if="doc.is_tr">
+                                                <input type="checkbox" id="is_tr" name="is_tr" checked="checked">
+                                                    T/R </input>
+                                            </t>
+
+                                            <t t-else="">
+                                                <input type="checkbox" id="is_tr" name="is_tr">
+                                                    T/R </input>
+                                            </t>
+                                            <![CDATA[&nbsp;]]>
+
+
+                                            <t t-if="doc.is_rr">
+                                                <input type="checkbox" id="is_rr" name="is_rr" checked="checked">
+                                                    R/R </input>
+                                            </t>
+
+                                            <t t-else="">
+                                                <input type="checkbox" id="is_rr" name="is_rr">
+                                                    R/R </input>
+                                            </t>
+                                            <br/>
+                                            from <t t-esc="doc.shipping_address"/> to <t
+                                                t-esc="doc.destination_address"/> drawn to the order of<b><t
+                                                t-esc="doc.bank_names.bank_name"/></b>
+                                        </p>
+                                    </td>
+                                    <td style="border: 1px solid black;border-right: 0;">
+                                        <table>
+                                            <tr>
+                                                <td style="border: 1px solid black;">Bangladesh Bank Registration
+                                                    No.: <t
+                                                            t-esc="doc.bangladesh_bank_reg_no"/></td>
+                                                <td style="border: 1px solid black;">Import Licence/LCAF No.: <t
+                                                        t-esc="doc.import_licence"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: 1px solid black;">H.S.code:
+                                                    <t t-foreach="doc.hs_code" t-as="data">
+
+                                                        <t t-esc="data.name"/>
+                                                        <br/>
+                                                    </t>
+                                                </td>
+                                                <td style="border: 1px solid black;">IRC. No.:<t
+                                                        t-esc="doc.irc_no"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="border: 1px solid black;">Account PI:</td>
+                                            </tr>
+                                        </table>
+
+                                    </td>
+
+
+                                </tr>
+                            </table>
+                            <p class="text-center"> Marked notify above account party.</p>
+                            <table class="table table-condensed table-bordered">
+
+                                <tr>
+                                    <td style="border: 1px solid black;border-left: 0; border-right: 0;">
+                                        Insurance cover note/policy no.: <t t-esc="doc.insurance_cover_note_policy"/>
+                                        <br/>
+                                        Date:  <![CDATA[&nbsp;]]>  <t t-esc="doc.insurance_date"/><br/>
+                                        Amount Tk. :  <![CDATA[&nbsp;]]><t t-esc="doc.insurance_amount"  t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                    </td>
+                                    <td style="border: 1px solid black;border-left: 0; border-right: 0;">
+                                        (Name and address of Insurance Company):
+                                        <t t-esc="doc.name_of_insurance_company.name"/>
+                                            <t t-if="doc.insurance_company_state">,</t>
+                                        <t t-esc="doc.insurance_company_state"/>
+                                        <t t-if="doc.insurance_company_state2">,</t>
+                                        <t t-esc="doc.insurance_company_state2"/>
+                                        <t t-if="doc.insurance_company_city">,</t>
+                                        <t t-esc="doc.insurance_company_city"/>
+                                        <t t-if="doc.insurance_company_country">,</t>
+                                        <t t-esc="doc.insurance_company_country"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;border-left: 0; border-right: 0;">
+                                        <t t-if="doc.is_part_shipment">
+                                            <input type="checkbox" id="is_part_shipment" name="is_part_shipment"
+                                                   checked="checked"> Part
+                                                shipment </input>
+                                        </t>
+
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_part_shipment" name="is_part_shipment"> Part
+                                                shipment </input>
+                                        </t>
+                                        <![CDATA[&nbsp;]]>
+
+                                        <t t-if="doc.is_part_allowed">
+                                            <input type="checkbox" id="is_part_allowed" name="is_part_allowed"
+                                                   checked="checked">
+                                                Allowed </input>
+                                        </t>
+
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_part_allowed" name="is_part_allowed">
+                                                Allowed </input>
+                                        </t>
+                                        <![CDATA[&nbsp;]]>
+
+
+                                        <t t-if="doc.is_part_prohibited">
+                                            <input type="checkbox" id="is_part_prohibited" name="is_part_prohibited"
+                                                   checked="true">
+                                                Prohibited </input>
+                                        </t>
+
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_part_prohibited" name="is_part_prohibited">
+                                                Prohibited </input>
+                                        </t>
+
+                                    </td>
+                                    <td style="border: 1px solid black;border-left: 0; border-right: 0;">
+                                        <t t-if="doc.is_tran_shipment">
+                                            <input type="checkbox" id="is_tran_shipment" name="is_tran_shipment"
+                                                   checked="checked">
+                                                Transhipment </input>
+                                        </t>
+
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_tran_shipment" name="is_tran_shipment">
+                                                Transhipment </input>
+                                        </t>
+                                        <![CDATA[&nbsp;]]>
+
+
+                                        <t t-if="doc.is_tran_allowed">
+                                            <input type="checkbox" id="is_tran_allowed" name="is_tran_allowed"
+                                                   checked="checked">
+                                                Allowed </input>
+                                        </t>
+
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_tran_allowed" name="is_tran_allowed">
+                                                Allowed </input>
+                                        </t>
+                                        <![CDATA[&nbsp;]]>
+
+
+                                        <t t-if="doc.is_tran_prohibited">
+                                            <input type="checkbox" id="is_tran_prohibited" name="is_tran_prohibited"
+                                                   checked="checked">
+                                                Prohibited </input>
+                                        </t>
+
+                                        <t t-else="">
+                                            <input type="checkbox" id="is_tran_prohibited" name="is_tran_prohibited">
+                                                Prohibited </input>
+                                        </t>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;border-left: 0; border-right: 0;"> Last date of
+                                        shipment: <t t-esc="doc.last_date_of_shipment"/></td>
+                                    <td style="border: 1px solid black;border-left: 0; border-right: 0;"> Last date of
+                                        negotiation: <t t-esc="doc.last_date_of_negotiation"/></td>
+                                </tr>
+                            </table>
+                            <table class="table table-condensed table-bordered"
+                                   style="border: 1px solid black;border-left: 0; border-right: 0;">
+                                <tr>
+                                    <td style="border: 1px solid black;border-left: 0; border-right: 0;"> Other terms
+                                        and conditions if any:i)Foreign Bank's Charges on
+                                        opener's/beneficiary's A/C
+                                        <br/>
+                                        <t t-esc="doc.terms_and_conditions"/>
+                                        <br/>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+
+
+                </div>
+
+
+            </t>
+
+        </template>
+    </data>
+
+
+</odoo>

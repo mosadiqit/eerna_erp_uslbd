@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="other_tax_form" model="ir.ui.view">
+        <field name="name">Other Tax Form</field>
+        <field name="model">other.tax.info</field>
+        <field name="arch" type="xml">
+            <form string="Other Tax">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="rebate_percent"/>
+                            <field name="tax_type"/>
+                            <field name="is_fixed"/>
+                        </group>
+                        <group>
+                            <field name="short_name"/>
+                            <field name="status"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_other_tax_tree_with_onboarding" model="ir.ui.view">
+        <field name="name">Other Tax Form</field>
+        <field name="model">other.tax.info</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="short_name"/>
+                <field name="tax_type"/>
+                <field name="rebate_percent"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_other_tax_info" model="ir.actions.act_window">
+        <field name="name">Other Tax Information</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">other.tax.info</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain" > []</field>
+        <field name="view_id" ref="view_other_tax_tree_with_onboarding"/>
+    </record>
+
+</odoo>

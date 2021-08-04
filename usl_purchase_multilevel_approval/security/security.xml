@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="group_purchase_approval_settings" model="res.groups">
+        <field name="name">Group Purchase Approval Settings</field>
+        <field name="comment">Only Those Users will be responsible for approve or reject Purchase Order.</field>
+    </record>
+</odoo>

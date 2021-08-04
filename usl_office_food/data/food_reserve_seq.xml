@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Sequences for sale.order -->
+        <record id="seq_food_cata_man_reservation" model="ir.sequence">
+            <field name="name">Food.Reservation</field>
+            <field name="code">employee.meal.reserve</field>
+            <field name="prefix">FR</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+            <record id="seq_food_cata_man_eat" model="ir.sequence">
+            <field name="name">Food.Reservation</field>
+            <field name="code">employee.meal.eat</field>
+            <field name="prefix">FE</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

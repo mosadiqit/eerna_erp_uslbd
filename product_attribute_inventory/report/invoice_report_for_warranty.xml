@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document_inherit_for_warranty" inherit_id="account.report_invoice_document">
+        <xpath expr="//th[@name='th_quantity']" position="before">
+            <th name="th_warranty" class="text-right">
+                <span>Warranty</span>
+            </th>
+        </xpath>
+        <xpath expr="//td[@name='account_invoice_line_name']" position="after">
+            <td class="text-right" name="warranty">
+                <t t-if="line.product_id.product_tmpl_id.is_lifetime_warranty">
+                    Lifetime
+                </t>
+                <t t-else="">
+                    <span t-field="line.product_id.product_tmpl_id.warranty"/> months
+                </t>
+            </td>
+        </xpath>
+    </template>
+</odoo>

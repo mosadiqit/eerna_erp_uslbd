@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_sales_accounting_setup" model="ir.ui.view">
+            <!-- Access and edit price rules from a given product/product variant -->
+            <field name="name">product.sales.accounting.setup.tree</field>
+            <field name="model">product.sale.accounting</field>
+            <field name="priority">100</field>
+            <field name="arch" type="xml">
+                <tree string="Sales Accounting Setup" editable="bottom">
+                    <!-- Scope = coming from a product/product template -->
+                    <field name="company_id"  options="{'no_create_edit':1, 'no_open': 1}"/>
+                    <field name="property_cost_method"  options="{'no_create_edit':1, 'no_open': 1}"  required="1"/>
+                    <field name="property_valuation"  options="{'no_create_edit':1, 'no_open': 1}"/>
+                    <field name="income_account"  options="{'no_create_edit':1, 'no_open': 1}" required="1"/>
+                    <field name="expense_account"  options="{'no_create_edit':1, 'no_open': 1}" required="1"/>
+                    <field name="stock_input_account"  options="{'no_create_edit':1, 'no_open': 1}" required="1"/>
+                    <field name="stock_output_account"  options="{'no_create_edit':1, 'no_open': 1}" required="1"/>
+                    <field name="stock_valuation_account"  options="{'no_create_edit':1, 'no_open': 1}" required="1"/>
+<!--                    <field name="name"/>                  -->
+
+                </tree>
+            </field>
+        </record>
+         <record id="product_sales_accounting_setup_action" model="ir.actions.act_window">
+            <field name="name">Company Wise Sales Purchase Accounting Setup</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.sale.accounting</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <record id="product_sales_accounting_setup_server" model="ir.actions.server">-->
+<!--            <field name="name">sales accounting</field>-->
+<!--            <field name="model_id" ref="product.sale.accounting"/>-->
+<!--            <field name="binding_model_id" ref="product.sale.accounting"/>-->
+<!--            <field name="binding_view_types">form</field>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">action = records.action_share()</field>-->
+<!--        </record>-->
+
+        <menuitem
+        id="menu_sales_accounting_setup"
+        parent="account.menu_finance_configuration"
+        groups="purchase.group_purchase_manager"
+        sequence="30"
+        action="product_sales_accounting_setup_action"
+        name="Sales Purchase Accounting Setup"
+    />
+
+    </data>
+
+</odoo>

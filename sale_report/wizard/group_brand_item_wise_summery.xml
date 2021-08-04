@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_brand_report" model="ir.ui.view">
+            <field name="name"> Group Brand  Wise Report</field>
+            <field name="model">sale.report.group_item_wise</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="product_ids" widget="many2many_tags"/>
+                                <field name="categ_ids" widget="many2many_tags"/>
+                                <field name="model_ids" widget="many2many_tags"/>
+                                <field name="company_id"
+                                       options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                            </group>
+                            <group>
+                                <field name="end_date"/>
+                                <field name="group_ids" widget="many2many_tags"/>
+                                <field name="brand_ids" widget="many2many_tags"/>
+                                <field name="location_ids" widget="many2many_tags" options="{'no_create':True, 'no_create_edit':True}"/>
+
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="group_item_wise_print_pdf_report" string="Get Report" type="object"
+                                    class="oe_highlight"/> or
+                            <button name="print_excel_report" string="Excel Report" type="object"
+                                    class="oe_highlight"/>
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="group_brand_item_report" model="ir.actions.act_window">
+            <field name="name"> Group Brand report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.report.group_item_wise</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="group_brand_report"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="sale_menu_report_by_group_brand" action="group_brand_item_report" parent="sale.menu_sale_report"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="menu_permission_form" model="ir.ui.view">
+        <field name="name">user.menu.form</field>
+        <field name="model">menu.permission</field>
+        <field name="arch" type="xml">
+            <form string="Menu Dashboard">
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <record id="menu_permission_action" model="ir.actions.act_window">
+        <field name="name">Menu Permission Dashboard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">menu.permission</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p>
+        </field>
+    </record>
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="menu_permission" name="User Menu Dashboard" sequence="1"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="child_menu_dashboard" name="" parent="menu_permission" action="menu_permission_action" sequence="1"/>
+</odoo>
+
+

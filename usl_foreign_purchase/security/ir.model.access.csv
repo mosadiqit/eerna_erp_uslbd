@@ -1,0 +1,20 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_foreign_purchase_order,purchase.order,model_foreign_purchase_order,purchase.group_purchase_manager,1,1,1,0
+access_foreign_purchase_order_line,purchase.order.line,model_foreign_purchase_order_line,purchase.group_purchase_manager,1,1,1,1
+access_foreign_purchase_order_manager,purchase.order.manager,model_foreign_purchase_order,purchase.group_purchase_manager,1,1,1,1
+access_foreign_purchase_order_line_manager,purchase.order.line.manager,model_foreign_purchase_order_line,purchase.group_purchase_manager,1,1,1,1
+access_foreign_purchase_order_accountant,purchase.order.accountant,model_foreign_purchase_order,account.group_account_user,1,1,0,0
+access_foreign_purchase_order_line_accountant,purchase.order.line.accountant,model_foreign_purchase_order_line,account.group_account_user,1,1,0,0
+access_foreign_purchase_order_user,purchase.order.user,model_foreign_purchase_order,base.group_user,1,0,0,0
+access_foreign_purchase_order_line_user,purchase.order.line user,model_foreign_purchase_order_line,base.group_user,1,0,0,0
+access_foreign_purchase_order_serial,purchase.order.line.serial user,model_foreign_stock_quant_without_serial,,1,1,1,1
+access_stock_landed_cost,manage_stock_landed_cost,model_stock_landed_cost,,1,0,0,0
+access_stock_landed_cost_inherit,manage_stock_landed_cost_inherit,model_stock_landed_cost_inherit,,1,1,1,1
+access_usl_port,manage_usl_port,model_usl_port,,1,1,1,1
+access_preview_costing,manage_preview_costing,model_stock_preview_costing,,1,1,1,1
+access_foreign_purchase_state,manage_foreign_purchase_state,model_foreign_purchase_state,base.group_user,1,1,1,1
+access_purchase_wise_lc_history,manage_purchase_wise_lc_history,model_purchase_wise_lc_history,base.group_user,1,1,1,1
+access_usl_lc_management,manage_usl_lc_management,model_usl_lc_management,base.group_user,1,1,1,1
+
+
+

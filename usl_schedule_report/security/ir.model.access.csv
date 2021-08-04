@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_auto_report,manage_auto_report,model_auto_report,,1,1,1,1
+access_auto_report_line,manage_auto_report_line,model_auto_report_line,,1,1,1,1

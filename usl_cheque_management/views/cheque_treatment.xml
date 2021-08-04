@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cheque_treatment_form" model="ir.ui.view">
+        <field name="name">Cheque Treatment</field>
+        <field name="model">cheque.treatment</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Customer Cheque Treatment">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="cheque_type" invisible="1"/>
+                            <field name="partner_id" widget="many2many_tags"/>
+                            <field name="cheque_no"/>
+                        </group>
+                        <group>
+                            <field name="date_end"/>
+                            <field name="company_id"/>
+                            <field name="branch_id" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Draft">
+                            <field name="id" invisible="1"/>
+                            <field name="draft_payment_line_ids" widget="many2many">
+                                <tree create="false" editable="bottom" options="{'no_open': True, }" delete="false" class="tree_no_open">
+                                    <field name="id" invisible="1"/>
+                                    <field name="in_treatment_state"/>
+                                    <field name="payment_date" readonly="1"/>
+                                    <field name="effective_date" readonly="1"/>
+                                    <field name="payment_type" readonly="1"/>
+                                    <field name="name"/>
+                                    <field name="cheque_reference" readonly="1"/>
+                                    <field name="payment_method_id" readonly="1"/>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="amount" readonly="1"/>
+                                    <field name="state"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                            <sheet>
+                                <group>
+                                    <field name="journal_id"/>
+                                    <field name="sent_date"/>
+                                    <field name="temp_payment_id" invisible="1"/>
+                                </group>
+                                <footer>
+                                    <field name="sent_btn_trigger" invisible="1"/>
+                                    <input type="button" value="Sent" onclick="sent_btn_click()"
+                                           style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                    <script type="text/javascript">
+                                        function getRandomInt(max) {
+                                        return Math.floor(Math.random() * Math.floor(max));
+                                        }
+                                        function sent_btn_click() {
+                                        var element = document.getElementsByName('sent_btn_trigger');
+                                        element[0].value = getRandomInt(1000)
+                                        var event = new Event('change');
+                                        element[0].dispatchEvent(event);
+                                        }
+                                    </script>
+                                </footer>
+                            </sheet>
+                        </page>
+                        <page string="Sent">
+                            <field name="id" invisible="1"/>
+                            <field name="sent_payment_line_ids" widget="many2many">
+                                <tree create="false" editable="bottom" options="{'no_open': True}" delete="false" class="tree_no_open">
+                                    <field name="id" invisible="1"/>
+                                    <field name="in_treatment_state"/>
+                                    <field name="payment_date" readonly="1"/>
+                                    <field name="effective_date" readonly="1"/>
+                                    <field name="payment_type" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="cheque_reference" readonly="1"/>
+                                    <field name="payment_method_id"/>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                            <sheet>
+                                <group>
+                                    <field name="dishonor_honor_date"/>
+                                </group>
+                                <footer>
+
+                                    <field name="dishonored_btn_trigger" invisible="1"/>
+                                    <div class="modal" id="dishonorModal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-danger text-white">
+                                                    <h5 class="modal-title ">Dishonor Confirmation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are You Sure to Dishonor Selective Cheques?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="button" onclick="yes_dis_click()" value="Yes"
+                                                           class="btn btn-success btn-lg"/>
+                                                    <input type="button" onclick="no_dis_click()" value="No"
+                                                           class="btn btn-danger btn-lg"/>
+                                                    <script type="text/javascript">
+                                                        function no_dis_click(){
+                                                        $('#dishonorModal').modal('toggle');
+                                                        }
+
+                                                        function yes_dis_click(){
+                                                        debugger;
+                                                        var element =
+                                                        document.getElementsByName('dishonored_btn_trigger');
+                                                        element[0].value = getRandomInt(1000)
+                                                        var event = new Event('change');
+                                                        element[0].dispatchEvent(event);
+                                                        $('#dishonorModal').modal('toggle');
+
+                                                        }
+
+                                                        function getRandomInt(max) {
+                                                        return Math.floor(Math.random() * Math.floor(max));
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" value="Dishonor" onclick="dishonored_btn_click()"
+                                           style="background-color: #f44336; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                    <script type="text/javascript">
+                                        <!--                                        function getRandomInt(max) {-->
+                                        <!--                                        return Math.floor(Math.random() * Math.floor(max));-->
+                                        <!--                                        }-->
+                                        function dishonored_btn_click() {
+                                        $('#dishonorModal').modal({
+                                        show: true
+                                        });
+                                        <!--                                        var confrm = confirm("Confirm **Dishonor**");-->
+                                        <!--                                        if(confrm){-->
+                                        <!--                                        var element = document.getElementsByName('dishonored_btn_trigger');-->
+                                        <!--                                        element[0].value = getRandomInt(1000)-->
+                                        <!--                                        var event = new Event('change');-->
+                                        <!--                                        element[0].dispatchEvent(event);-->
+                                        <!--                                        }-->
+                                        }
+                                    </script>
+
+                                    <field name="approved_btn_trigger" invisible="1"/>
+                                    <div class="modal" id="honorModal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-success text-white">
+                                                    <h5 class="modal-title ">Honor Confirmation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <!--                                                        <span aria-hidden="true">&times;</span>-->
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are You Sure to Honor Selective Cheques?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="button" onclick="yes_click()" value="Yes"
+                                                           class="btn btn-success btn-lg"/>
+                                                    <input type="button" onclick="no_click()" value="No"
+                                                           class="btn btn-danger btn-lg"/>
+                                                    <script type="text/javascript">
+                                                        function no_click(){
+                                                        $('#honorModal').modal('toggle');
+                                                        }
+
+                                                        function yes_click(){
+                                                        var element =
+                                                        document.getElementsByName('approved_btn_trigger');
+                                                        element[0].value = getRandomInt(1000)
+                                                        var event = new Event('change');
+                                                        element[0].dispatchEvent(event);
+                                                        $('#honorModal').modal('toggle');
+
+                                                        }
+
+                                                        function getRandomInt(max) {
+                                                        return Math.floor(Math.random() * Math.floor(max));
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" value="Honor" onclick="approved_btn_click()"
+                                           style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; margin-left: 50px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                    <script type="text/javascript">
+                                        function getRandomInt(max) {
+                                        return Math.floor(Math.random() * Math.floor(max));
+                                        }
+                                        <!--                                        function approved_btn_click() {-->
+                                        <!--                                        var confrm = confirm("Confirm __Honor__");-->
+                                        <!--                                        if(confrm){-->
+                                        <!--                                        var element = document.getElementsByName('approved_btn_trigger');-->
+                                        <!--                                        element[0].value = getRandomInt(1000)-->
+                                        <!--                                        var event = new Event('change');-->
+                                        <!--                                        element[0].dispatchEvent(event);-->
+                                        <!--                                        }-->
+                                        <!--                                        }-->
+                                        function approved_btn_click() {
+                                        $('#honorModal').modal({
+                                        show: true
+                                        });
+                                        }
+
+
+                                    </script>
+                                </footer>
+                            </sheet>
+                        </page>
+                        <page string="Honored">
+                            <field name="id" invisible="1"/>
+                            <field name="approve_payment_line_ids" icon="fa-check-square-o" class="tree_no_open">
+                                <tree create="false" editable="bottom" options="{'no_open': True}" delete="false">
+                                    <field name="id" invisible="1"/>
+                                    <field name="payment_date" readonly="1"/>
+                                    <field name="effective_date" readonly="1"/>
+                                    <field name="payment_type" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="cheque_reference" readonly="1"/>
+                                    <field name="payment_method_id"/>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Dishonored">
+                            <field name="id" invisible="1"/>
+                            <field name="dishonored_payment_line_ids">
+                                <tree create="false" editable="bottom" options="{'no_open': True}" delete="false" class="tree_no_open">
+                                    <field name="id" invisible="1"/>
+                                    <field name="in_treatment_state"/>
+                                    <field name="payment_date" readonly="1"/>
+                                    <field name="effective_date" readonly="1"/>
+                                    <field name="payment_type" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="cheque_reference" readonly="1"/>
+                                    <field name="payment_method_id"/>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                            <sheet>
+                                <footer>
+                                    <field name="reset_to_draft_btn_trigger" invisible="1"/>
+                                    <input type="button" value="Reset To Draft" onclick="reset_to_draft_btn_click()"
+                                           style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                    <script type="text/javascript">
+                                        function getRandomInt(max) {
+                                        return Math.floor(Math.random() * Math.floor(max));
+                                        }
+                                        function reset_to_draft_btn_click() {
+                                        var element = document.getElementsByName('reset_to_draft_btn_trigger');
+                                        element[0].value = getRandomInt(1000)
+                                        var event = new Event('change');
+                                        element[0].dispatchEvent(event);
+                                        }
+                                    </script>
+                                </footer>
+                            </sheet>
+                        </page>
+                        <page string="Paid On Dishonored Cheque">
+                            <field name="id" invisible="1"/>
+                            <field name="partial_dishonor_collection_line_ids">
+                                <tree create="false" editable="bottom" options="{'no_open': True}" delete="false" class="tree_no_open">
+                                    <field name="id" invisible="1"/>
+                                    <field name="payment_date" readonly="1"/>
+                                    <field name="effective_date" readonly="1"/>
+                                    <field name="payment_type" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="cheque_reference" readonly="1"/>
+                                    <field name="payment_method_id"/>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="dishonor_balance_adjust_amt" readonly="1"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Not response">
+                            <field name="id" invisible="1"/>
+                            <field name="dishonor_by_not_responding_line_ids">
+                                <tree create="false" editable="bottom" options="{'no_open': True}" delete="false" class="tree_no_open">
+                                    <field name="id" invisible="1"/>
+                                    <field name="in_treatment_state"/>
+                                    <field name="payment_date" readonly="1"/>
+                                    <field name="effective_date" readonly="1"/>
+                                    <field name="payment_type" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="cheque_reference" readonly="1"/>
+                                    <field name="payment_method_id"/>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                            <sheet>
+                                <footer>
+                                    <field name="reset_to_draft_not_response_btn_trigger" invisible="1"/>
+                                    <input type="button" value="Reset To Draft"
+                                           onclick="reset_to_draft_not_response_btn_click()"
+                                           style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                    <script type="text/javascript">
+                                        function getRandomInt(max) {
+                                        return Math.floor(Math.random() * Math.floor(max));
+                                        }
+                                        function reset_to_draft_not_response_btn_click() {
+                                        var element =
+                                        document.getElementsByName('reset_to_draft_not_response_btn_trigger');
+                                        element[0].value = getRandomInt(1000)
+                                        var event = new Event('change');
+                                        element[0].dispatchEvent(event);
+                                        }
+                                    </script>
+                                </footer>
+                            </sheet>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_cheque_treatment_form"
+                name="Cheque Treatment"
+                res_model="cheque.treatment"
+                view_mode="form"
+                target="inline"/>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <data>
+        <template id ="delvery_slip_report_inherit" inherit_id="stock.report_delivery_document">
+
+            <xpath expr="//div[1]" position="replace">
+                        <div class="row">
+                          <div>
+                              <strong>Contact: </strong>
+                          </div>
+                            <![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]>
+                          <div t-esc="partner"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                        </div>
+            </xpath>
+
+            <xpath expr="//div[hasclass('page')]/div" position="before">
+                    <div class="row">
+                        <div>
+                            <strong>Source Loction</strong>
+                            <p t-field="o.location_id"/>
+                        </div>
+                         <![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]>  <![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]>
+                        <div>
+                           <strong>Destination Location</strong>
+                            <p t-field="o.location_dest_id"/>
+                        </div>
+                    </div>
+            </xpath>
+        </template>
+    </data>
+
+    <!--    <xpath expr="//div[@id='wrapwrap']/header[1]/nav" position="attributes">-->
+    <!--        <xpath expr="//div[@id='wrapwrap']/header[1]/nav/div/div/ul/li[2]" position="before">-->
+
+</odoo>

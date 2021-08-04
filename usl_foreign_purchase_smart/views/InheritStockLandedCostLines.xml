@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_stock_landed_cost_lines" model="ir.ui.view">
+            <field name="name">inherit.stock.landed.cost.lines</field>
+            <field name="model">stock.landed.cost</field>
+            <field name="inherit_id" ref="usl_foreign_purchase_smart.ic_invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='cost_lines']" position="replace">
+                    <field name="cost_lines" context="{'picking_ids': picking_ids, 'default_type': 'service'}">
+                        <form string="Cost Lines">
+                            <group>
+                                <group>
+                                    <!--                                    <field name="product_id"-->
+                                    <!--                                           domain="[('landed_cost_ok', '=', True)]"-->
+                                    <!--                                           context="{'default_landed_cost_ok': True}"/> -->
+                                    <field name="product_id"/>
+
+                                    <field name="price_unit"/>
+                                    <field name="price_unit_foreign" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="split_method"/>
+                                    <field name="account_id" options="{'no_create': True}"/>
+                                </group>
+                            </group>
+                            <label for="name"/>
+                            <field name="name"/>
+                        </form>
+                        <tree string="Cost Lines" editable="bottom" class="test1 test2">
+                            <!--                            <field name="product_id"-->
+                            <!--                                   domain="[('landed_cost_ok', '=', True)]"-->
+                            <!--                                   context="{'default_landed_cost_ok': True, 'default_type': 'service'}"/>-->
+                            <field name="product_id"/>
+                            <field name="invoice_line_product_name" invisible="1"/>
+                            <field name="name" invisible="1"/>
+                            <field name="account_id" options="{'no_create': True}" invisible="1"/>
+                            <field name="split_method" invisible="1"/>
+                            <field name="invoice_line_product_id" invisible="1"/>
+
+                            <field name="cd"/>
+                            <field  name="cd_partner"/>
+
+                            <field name="at"/>
+                             <field name="at_partner"/>
+                            <field name="ait"/>
+                             <field name="ait_partner"/>
+
+                            <field name="vat"/>
+                             <field name="vat_partner"/>
+                            <field name="sd"/>
+                             <field name="sd_partner"/>
+                            <field name="rd"/>
+                             <field name="rd_partner"/>
+                            <field name="atv"/>
+                             <field name="atv_partner"/>
+                            <field name="fbc"/>
+                             <field name="fbc_partner"/>
+
+                            <field name="df"/>
+                             <field name="df_partner"/>
+                            <field name="cf"/>
+                            <field name="cf_partner"/>
+                            <field name="transport"/>
+                            <field name="transport_partner"/>
+                            <field name="freight"/>
+                            <field name="freight_partner"/>
+                            <field name="insurance"/>
+                            <field name="insurance_partner"/>
+                            <field name="lc_commision"/>
+                            <field name="lc_commision_partner"/>
+                            <field name="lc_vat"/>
+                            <field name="lc_vat_partner"/>
+                            <field name="port_demarrage"/>
+                            <field name="other"/>
+
+                            <field name="provision_for_warranty_cost"/>
+                            <field name="provision_for_marketting_expenses"/>
+                            <field name="provision_for_salary"/>
+                            <field name="provision_for_bank_interest"/>
+                            <field name="provision_for_product_insurance"/>
+                            <field name="provision_for_income_tax"/>
+                            <field name="provision_for_trade_promotion"/>
+                            <field name="provision_for_dollar_risk"/>
+                            <field name="provision_for_sadaqua"/>
+                            <field name="provision_for_sales_courier"/>
+                            <field name="provision_for_house_rent"/>
+                            <field name="provision_for_opex"/>
+                            <field name="provision_for_damage_goods"/>
+                            <field name="provision_for_ta_da"/>
+                            <field name="provision_for_bad_debt"/>
+                            <field name="provision_for_emp_incentive"/>
+                            <field name="provision_for_vat"/>
+
+                            <field name="price_unit"/>
+                            <field name="price_unit_foreign" invisible="1"/>
+
+                        </tree>
+                    </field>
+
+                </xpath>
+                <xpath expr="//field[@name='cost_lines']/tree/field[@name='product_id']" position="after">
+                    <field name="partner" invisible="1"/>
+                    <!--                        <field name="test_field"/>-->
+                </xpath>
+                <xpath expr="//field[@name='valuation_adjustment_lines']/tree/field[@name='former_cost']"
+                       position="before">
+                    <!--                    <field name="cd_new" readonly="1"/>-->
+                    <field name="cd" readonly="1"/>
+                    <!--                    <field name="at_new" readonly="1"/>-->
+                    <field name="at" readonly="1"/>
+                    <!--                    <field name="ait_new" readonly="1"/>-->
+                    <field name="ait" readonly="1"/>
+
+                    <field name="vat" readonly="1"/>
+                    <field name="sd" readonly="1"/>
+                    <field name="rd" readonly="1"/>
+                    <field name="atv" readonly="1"/>
+                    <field name="fbc" readonly="1"/>
+                    <!--                    <field name="df_new" readonly="1"/>-->
+                    <field name="df" readonly="1"/>
+                    <!--                    <field name="cf_new" readonly="1"/>-->
+                    <field name="cf" readonly="1"/>
+                    <!--                    <field name="freight_new" readonly="1"/>-->
+                     <field name="transport" readonly="1"/>
+                    <field name="freight" readonly="1"/>
+                    <!--                    <field name="insurance_new" readonly="1"/>-->
+                    <field name="insurance" readonly="1"/>
+                    <!--                    <field name="lc_commision_new" readonly="1"/>-->
+                    <field name="lc_commision" readonly="1"/>
+                    <!--                    <field name="lc_vat_new" readonly="1"/>-->
+                    <field name="lc_vat" readonly="1"/>
+                    <!--                    <field name="port_demarrage_new" readonly="1"/>-->
+                    <field name="port_demarrage" readonly="1"/>
+                    <!--                    <field name="other_new" readonly="1"/>-->
+                    <field name="other" readonly="1"/>
+                    <!--                    <field name="provision_1_new" readonly="1"/>-->
+                    <field name="provision_for_warranty_cost" readonly="1"/>
+                    <field name="provision_for_marketting_expenses" readonly="1"/>
+                    <field name="provision_for_salary" readonly="1"/>
+                    <field name="provision_for_bank_interest" readonly="1"/>
+                    <field name="provision_for_product_insurance" readonly="1"/>
+                    <field name="provision_for_income_tax" readonly="1"/>
+                    <field name="provision_for_trade_promotion" readonly="1"/>
+                    <field name="provision_for_dollar_risk" readonly="1"/>
+                    <field name="provision_for_sadaqua" readonly="1"/>
+                    <field name="provision_for_sales_courier" readonly="1"/>
+                    <field name="provision_for_house_rent" readonly="1"/>
+                    <field name="provision_for_opex" readonly="1"/>
+                    <field name="provision_for_damage_goods" readonly="1"/>
+                    <field name="provision_for_ta_da" readonly="1"/>
+                    <field name="provision_for_bad_debt" readonly="1"/>
+
+                    <field name="provision_for_emp_incentive" readonly="1"/>
+                    <field name="provision_for_vat" readonly="1"/>
+
+                </xpath>
+                <xpath expr="//button[@name='compute_landed_cost']" position="replace">
+                    <div class="row" options="{'vertical': true}">
+                        <!--                        <div>-->
+                        <!--                            <button name="apply_cd_cost" string="Apply CD" type="object" class="oe_highlight"-->
+                        <!--                                    attrs="{'invisible': [('button_state', '!=', 'cd')]}"/>-->
+                        <!--                        </div>-->
+                        <!--                        <div>-->
+                        <!--                            <button name="apply_probational_cost" string="Apply Probational Cost" type="object"-->
+                        <!--                                    attrs="{'invisible': [('button_state', '!=', 'probation')]}" class="oe_highlight"/>-->
+                        <!--                        </div>-->
+                        <!--                        <div>-->
+                        <!--                            <button name="compute_landed_cost_foreign" string="Compute" type="object"-->
+                        <!--                                    attrs="{'invisible': [('button_state', '!=', 'compute')]}" class="oe_highlight"/>-->
+                        <!--                        </div>-->
+
+                        <div>
+                            <button name="apply_cd_cost" string="Apply CD" type="object" class="oe_highlight" attrs="{'invisible': [('state','in',('done','cancel'))]}"/>
+
+                        </div>
+
+                        <div>
+                            <button name="apply_probational_cost" style="margin-top:5px" string="Apply Probational Cost"
+                                    type="object"
+                                    class="oe_highlight" attrs="{'invisible':[('state','in',('done','cancel'))]}"/>
+                        </div>
+                        <div>
+                            <button name="compute_landed_cost_foreign" style="margin-top:5px" string="Compute"
+                                    type="object"
+                                    class="oe_highlight" attrs="{'invisible':[('state','in',('done','cancel'))]}"/>
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Preview Costing">
+                        <field name="preview_costing">
+                            <!--                                    <form string="Preview Costing">-->
+                            <!--                                        <group>-->
+                            <!--                                            <group>-->
+                            <!--                                                <field name="product_id"/>-->
+
+                            <!--                                            </group>-->
+
+                            <!--                                        </group>-->
+                            <!--                                    </form>-->
+                            <tree string="Preview Costing" editable="bottom" create="0" class="test1 tree_no_open">
+                                <field name="product_id" readonly="1"/>
+                                <field name="cd" readonly="1" invisible="1"/>
+                                <field name="at" readonly="1" invisible="1"/>
+                                <field name="ait" readonly="1" invisible="1"/>
+                                 <field name="df" readonly="1" invisible="1"/>
+                                <field name="cf" readonly="1" invisible="1"/>
+                                <field name="transport" readonly="1" invisible="1"/>
+                                <field name="freight" readonly="1" invisible="1"/>
+                                <field name="insurance" readonly="1" invisible="1" />
+                                <field name="lc_commision" readonly="1" invisible="1"/>
+                                <field name="lc_vat" readonly="1" invisible="1"/>
+                                <field name="port_demarrage" readonly="1" invisible="1"/>
+                                <field name="other" readonly="1" invisible="1"/>
+
+                                <field name="provision_for_warranty_cost" readonly="1" invisible="1"/>
+                                <field name="provision_for_marketting_expenses" readonly="1" invisible="1"/>
+                                <field name="provision_for_salary" readonly="1" invisible="1"/>
+                                <field name="provision_for_bank_interest" readonly="1" invisible="1"/>
+                                <field name="provision_for_product_insurance" readonly="1" invisible="1"/>
+                                <field name="provision_for_income_tax" readonly="1" invisible="1"/>
+                                <field name="provision_for_trade_promotion" readonly="1" invisible="1"/>
+                                <field name="provision_for_dollar_risk" readonly="1" invisible="1"/>
+                                <field name="provision_for_sadaqua" readonly="1" invisible="1"/>
+                                <field name="provision_for_sales_courier" readonly="1" invisible="1"/>
+                                <field name="provision_for_house_rent" readonly="1" invisible="1"/>
+                                <field name="provision_for_opex" readonly="1" invisible="1"/>
+                                <field name="provision_for_damage_goods" readonly="1" invisible="1"/>
+                                <field name="provision_for_ta_da" readonly="1" invisible="1"/>
+                                <field name="provision_for_bad_debt" readonly="1" invisible="1"/>
+
+                                <field name="product_average_price" invisible="1" />
+
+                                <field name="bank_rate" readonly="1" />
+                                <field name="bank_payment" readonly="1" />
+                                <field name="local_rate" readonly="1" />
+                                <field name="local_payment" readonly="1" />
+                                <field name="landed_cost" readonly="1" />
+                                <field name="provision" readonly="1" />
+                                <field name="cost_price" readonly="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

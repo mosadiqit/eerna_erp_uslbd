@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="res_user_create_config"
+        name="Restriction Settings"
+        parent="contacts.menu_contacts"
+        groups="base.group_system"
+        sequence="3"/>
+
+    <menuitem id="menu_company_wise_user_creation_restriction"
+        action="act_company_wise_user_creation_restriction"
+        name="User create restriction"
+        sequence="1" parent="res_user_create_config"/>
+
+    <menuitem id="menu_company_wise_back_order_restriction"
+        action="act_company_wise_back_order_restriction"
+        name="Back order restriction"
+        sequence="2" parent="res_user_create_config"/>
+</odoo>

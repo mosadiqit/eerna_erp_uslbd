@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="usl_customer_area.list">
+      <field name="name">usl_customer_area list</field>
+      <field name="model">customer.area.map</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="area"/>
+          <field name="customer_name"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="usl_customer_area.action_window">
+      <field name="name">Customer Area Mapping</field>
+      <field name="res_model">customer.area.map</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="usl_customer_area.action_server">
+      <field name="name">usl_customer_area server</field>
+      <field name="model_id" ref="model_customer_area_map"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+
+
+    <menuitem id="customer_area_map_menu" name="Customer Area Mapping" parent="customer_area_setup_main_menu"
+                  action="usl_customer_area.action_window" sequence="2"/>
+
+
+
+  </data>
+</odoo>

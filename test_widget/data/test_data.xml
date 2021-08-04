@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="test_widget.test_carousel_demo_image_1" model="ir.attachment">
+            <field name="public" eval="True"/>
+            <field name="name">test_carousel_demo_image_1.jpg</field>
+            <field name="type">url</field>
+            <field name="url">\test_widget\static\src\imge\1.jpg</field>
+        </record>
+        <record id="test_widget.test_carousel_demo_image_2" model="ir.attachment">
+            <field name="public" eval="True"/>
+            <field name="name">test_carousel_demo_image_2.jpg</field>
+            <field name="type">url</field>
+            <field name="url">\test_widget\static\src\imge\2.jpg</field>
+        </record>
+         <record id="test_widget.test_carousel_demo_image_3" model="ir.attachment">
+            <field name="public" eval="True"/>
+            <field name="name">test_carousel_demo_image_3.jpg</field>
+            <field name="type">url</field>
+            <field name="url">\test_widget\static\src\imge\3.jpg</field>
+        </record>
+    </data>
+</odoo>

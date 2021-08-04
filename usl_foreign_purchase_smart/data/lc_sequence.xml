@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Sequences for purchase.blanket.order -->
+    <data>
+        <record id="seq_lc_management_foreign" model="ir.sequence">
+            <field name="name">LC sequence</field>
+            <field name="code">usl.lc.sequence</field>
+            <field name="prefix">LC</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

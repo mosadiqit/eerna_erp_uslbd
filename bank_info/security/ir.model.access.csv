@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_allbank_bankinfo,access.bank_info.all_bank,model_bank_info_all_bank,,1,1,1,1

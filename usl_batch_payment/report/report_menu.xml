@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+
+        <report
+            id="action_report_aged_partner_balance"
+            model="res.partner"
+            string="Aged Cheque In Hand Balance"
+            menu="False"
+            report_type="qweb-pdf"
+            name="usl_batch_payment.report_agedchequeinhandbalance"
+            file="usl_batch_payment.report_agedchequeinhandbalance"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="sale_detail_report"
+        model="sale.report.detail"
+        string="Sale Detail Report"
+        report_type="qweb-pdf"
+        name="sale_report.sale_detail_report_view"
+        paperformat="sale_report.paperformat_sale_summary_report"
+        menu="False"/>
+
+    <template id="sale_detail_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Sales Detail Report
+                    <br></br>
+                    <span style="font-size: 14px;"><strong>From</strong>: <t t-esc="date_start"/> <strong>To</strong>: <t t-esc="date_end"/></span>
+                </h3>
+            </div>
+
+            <div class="article mt0 o_report_layout_standard">
+                <span style="font-size: 17px;">Branch Name: <t t-esc="branch_name"/></span>
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <th style="width: 15%">Date</th>
+                        <th class="text-center" style="width: 20%">Invoice No</th>
+                        <th class="text-center" style="width: 25%">Customer</th>
+                        <th class="text-center" style="width: 25%">Sales Person</th>
+                        <th class="text-center" style="width: 15%">Total Amount</th>
+                    </thead>
+                    <tbody>
+<!--                        <tr>-->
+<!--                            <td><t t-esc="allsale"/> amount:</td>-->
+<!--                        </tr>-->
+                        <t t-foreach="allsale" t-as="doc">
+                            <tr>
+                                <td><span t-esc="doc.invoice_date"/></td>
+                                <td class="text-left"><span t-esc="doc.name"/></td>
+                                <td class="text-left"><span t-esc="doc.partner_id.name"/></td>
+                                <td class="text-left"><span t-esc="doc.invoice_user_id.name"/></td>
+                                <td class="text-center">
+<!--                                    <span t-esc="doc.amount_total" t-options='{"widget": "monetary", "display_currency": doc["company"].currency_id}'/>-->
+                                    <span t-esc="doc.amount_total"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td class="text-center" ><span t-esc="grand_amount_total"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

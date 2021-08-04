@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_sales_approval_management">
+            <field name="name">Sales Approval Access Rights</field>
+            <field name="description">Set sales approver</field>
+            <field name="sequence">33</field>
+        </record>
+
+
+        <record id="group_sale_order_approval" model="res.groups">
+            <field name="name">Sale Order Approver</field>
+            <field name="comment">The user can be approved the sale order.</field>
+
+        </record>
+
+        <record id="group_sale_order_approval_superuser" model="res.groups">
+            <field name="name">Sales Approve Super User</field>
+            <!--            <field name="comment">The user can be approved the sale order.</field>-->
+
+        </record>
+
+
+        <record model="ir.module.category" id="module_usl_sale_approval_category">
+            <field name="name">OrderApproval</field>
+            <field name="sequence">34</field>
+        </record>
+
+        <record id="group_order_approver_sales" model="res.groups">
+            <field name="name">Order Approver</field>
+            <field name="comment">The user can be approved the order.</field>
+
+        </record>
+
+
+    </data>
+</odoo>

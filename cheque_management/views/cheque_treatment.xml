@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cheque_treatment_form" model="ir.ui.view" >
+        <field name="name">Cheque Treatment</field>
+        <field name="model">cheque.treatment</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Customer Cheque Treatment">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="cheque_type" />
+                            <field name="cheque_no"/>
+                        </group>
+                        <group>
+                            <field name="date_end"/>
+<!--                            <field name="state"/>-->
+                            <field name="branch_id" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                            <page string="Draft" >
+                                <field name="id" invisible="1"/>
+<!--                                <field name="draft_payment_line_ids" widget="many2many" domain="[('effective_date', '=', date_start)]">-->
+                                <field name="draft_payment_line_ids" widget="many2many">
+                                    <tree create="false" editable="bottom" options="{'no_open': True}">
+                                        <field name="id" invisible="1"/>
+                                        <field name="in_treatment_state" />
+                                        <field name="payment_date"/>
+                                        <field name="effective_date" readonly="1"/>
+                                        <field name="payment_type" readonly="1"/>
+                                        <field name="name"/>
+                                        <field name="cheque_reference" readonly="1"/>
+                                        <field name="payment_method_id" readonly="1"/>
+                                        <field name="partner_id" readonly="1"/>
+                                        <field name="journal_id" invisible="1"/>
+                                        <field name="amount" readonly="1"/>
+                                        <field name="state"/>
+                                        <field name="company_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                                <sheet>
+                                    <group>
+                                        <field name="journal_id" />
+                                        <field name="sent_date"/>
+                                        <field name="temp_payment_id" invisible="1"/>
+                                    </group>
+                                    <footer>
+                                        <field name="sent_btn_trigger" invisible="1"/>
+                                        <input type="button" value="Sent" onclick="sent_btn_click()" style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                        <script type="text/javascript">
+                                                function getRandomInt(max) {
+                                                    return Math.floor(Math.random() * Math.floor(max));
+                                                }
+                                                function sent_btn_click() {
+                                                    var element = document.getElementsByName('sent_btn_trigger');
+                                                    element[0].value = getRandomInt(1000)
+                                                    var event = new Event('change');
+                                                    element[0].dispatchEvent(event);
+    <!--                                                $("#onchange_triger_id").value = "123";-->
+    <!--                                                $("#onchange_triger_id").change();-->
+    <!--                                                var el = document.getElementsByID('onchange_triger_id');-->
+    <!--                                                el.value='New Value'-->
+    <!--                                                el.fireEvent("onchange");-->
+    <!--                                              alert("Hello world!");-->
+                                                }
+                                        </script>
+<!--                                        <button name="btn_sent" string="Sent" custom="click" type="object" class="oe_highlight" confirm="Are you sure to do this for all checked item?"/>-->
+                                    </footer>
+                                </sheet>
+                            </page>
+                            <page string="Sent" >
+                                <field name="id" invisible="1"/>
+                                <field name="sent_payment_line_ids" widget="many2many">
+                                    <tree create="false" editable="bottom" options="{'no_open': True}">
+                                        <field name="id" invisible="1"/>
+                                        <field name="in_treatment_state" />
+                                        <field name="payment_date"/>
+                                        <field name="effective_date" readonly="1"/>
+                                        <field name="payment_type" invisible="1"/>
+                                        <field name="name"/>
+                                        <field name="cheque_reference" readonly="1"/>
+                                        <field name="payment_method_id"/>
+                                        <field name="partner_id" readonly="1"/>
+                                        <field name="journal_id" invisible="1"/>
+                                        <field name="amount"/>
+                                        <field name="state"/>
+                                        <field name="company_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                                <sheet>
+                                    <group>
+                                        <field name="dishonor_honor_date"/>
+                                    </group>
+                                    <footer>
+                                        <field name="dishonored_btn_trigger" invisible="1"/>
+                                        <input type="button" value="Dishonor" onclick="dishonored_btn_click()" style="background-color: #f44336; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                        <script type="text/javascript">
+                                                function getRandomInt(max) {
+                                                    return Math.floor(Math.random() * Math.floor(max));
+                                                }
+                                                function dishonored_btn_click() {
+                                                    var element = document.getElementsByName('dishonored_btn_trigger');
+                                                    element[0].value = getRandomInt(1000)
+                                                    var event = new Event('change');
+                                                    element[0].dispatchEvent(event);
+                                                }
+                                        </script>
+
+                                        <field name="approved_btn_trigger" invisible="1"/>
+                                        <input type="button" value="Honor" onclick="approved_btn_click()" style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                        <script type="text/javascript">
+                                                function getRandomInt(max) {
+                                                    return Math.floor(Math.random() * Math.floor(max));
+                                                }
+                                                function approved_btn_click() {
+                                                    var element = document.getElementsByName('approved_btn_trigger');
+                                                    element[0].value = getRandomInt(1000)
+                                                    var event = new Event('change');
+                                                    element[0].dispatchEvent(event);
+                                                }
+                                        </script>
+<!--                                        <button name="btn_dishonor_all" string="Dishonor" type="object" class="oe_highlight" groups="custom_customer_payment_approval.group_customer_payment_approval" confirm="Are you sure to do this for all checked item?"/>-->
+<!--                                        <button name="btn_approve" string="Approve" type="object" class="oe_highlight" groups="custom_customer_payment_approval.group_customer_payment_approval" confirm="Are you sure to do this for all checked item?"/>-->
+                                    </footer>
+                                </sheet>
+<!--                                <sheet>-->
+<!--                                    <footer>-->
+<!--                                        <field name="submit_for_approval_btn_trigger" invisible="1"/>-->
+<!--                                        <input type="button" value="Submit For Approval" onclick="btn_submit_for_approval_click()" style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>-->
+<!--                                        <script type="text/javascript">-->
+<!--                                                function getRandomInt(max) {-->
+<!--                                                    return Math.floor(Math.random() * Math.floor(max));-->
+<!--                                                }-->
+<!--                                                function btn_submit_for_approval_click() {-->
+<!--                                                    var element = document.getElementsByName('submit_for_approval_btn_trigger');-->
+<!--                                                    element[0].value = getRandomInt(1000)-->
+<!--                                                    var event = new Event('change');-->
+<!--                                                    element[0].dispatchEvent(event);-->
+<!--                                                }-->
+<!--                                        </script>-->
+<!--&lt;!&ndash;                                        <button name="btn_submit_for_approval" string="Submit For Approval" type="object" class="oe_highlight" confirm="Are you sure to do this for all checked item?"/>&ndash;&gt;-->
+<!--                                    </footer>-->
+<!--                                </sheet>-->
+                            </page>
+<!--                            <page string="Submit for Approval" >-->
+<!--                                <field name="id" invisible="1"/>-->
+<!--                                <field name="submit_for_approval_payment_line_ids">-->
+<!--                                    <tree create="false" editable="bottom" options="{'no_open': True}">-->
+<!--                                        <field name="id" invisible="1"/>-->
+<!--                                        <field name="in_treatment_state" />-->
+<!--                                        <field name="payment_date"/>-->
+<!--                                        <field name="payment_type" invisible="1"/>-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="cheque_reference" readonly="1"/>-->
+<!--                                        <field name="payment_method_id"/>-->
+<!--                                        <field name="partner_id"/>-->
+<!--                                        <field name="journal_id" invisible="1"/>-->
+<!--                                        <field name="amount"/>-->
+<!--                                        <field name="state"/>-->
+<!--                                        <field name="company_id" invisible="1"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                                <sheet>-->
+<!--                                    <group>-->
+<!--                                        <field name="dishonor_honor_date"/>-->
+<!--                                    </group>-->
+<!--                                    <footer>-->
+<!--                                        <field name="dishonored_btn_trigger" invisible="1"/>-->
+<!--                                        <input type="button" value="Dishonor" onclick="dishonored_btn_click()" style="background-color: #f44336; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>-->
+<!--                                        <script type="text/javascript">-->
+<!--                                                function getRandomInt(max) {-->
+<!--                                                    return Math.floor(Math.random() * Math.floor(max));-->
+<!--                                                }-->
+<!--                                                function dishonored_btn_click() {-->
+<!--                                                    var element = document.getElementsByName('dishonored_btn_trigger');-->
+<!--                                                    element[0].value = getRandomInt(1000)-->
+<!--                                                    var event = new Event('change');-->
+<!--                                                    element[0].dispatchEvent(event);-->
+<!--                                                }-->
+<!--                                        </script>-->
+
+<!--                                        <field name="approved_btn_trigger" invisible="1"/>-->
+<!--                                        <input type="button" value="Honor" onclick="approved_btn_click()" style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>-->
+<!--                                        <script type="text/javascript">-->
+<!--                                                function getRandomInt(max) {-->
+<!--                                                    return Math.floor(Math.random() * Math.floor(max));-->
+<!--                                                }-->
+<!--                                                function approved_btn_click() {-->
+<!--                                                    var element = document.getElementsByName('approved_btn_trigger');-->
+<!--                                                    element[0].value = getRandomInt(1000)-->
+<!--                                                    var event = new Event('change');-->
+<!--                                                    element[0].dispatchEvent(event);-->
+<!--                                                }-->
+<!--                                        </script>-->
+<!--&lt;!&ndash;                                        <button name="btn_dishonor_all" string="Dishonor" type="object" class="oe_highlight" groups="custom_customer_payment_approval.group_customer_payment_approval" confirm="Are you sure to do this for all checked item?"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <button name="btn_approve" string="Approve" type="object" class="oe_highlight" groups="custom_customer_payment_approval.group_customer_payment_approval" confirm="Are you sure to do this for all checked item?"/>&ndash;&gt;-->
+<!--                                    </footer>-->
+<!--                                </sheet>-->
+<!--                            </page>-->
+                            <page string="Honored" >
+                                <field name="id" invisible="1"/>
+                                <field name="approve_payment_line_ids" icon="fa-check-square-o">
+                                    <tree create="false" options="{'no_open': True}">
+                                        <field name="id" invisible="1"/>
+<!--                                        <field name="in_treatment_state" />-->
+                                        <field name="payment_date"/>
+                                        <field name="effective_date" readonly="1"/>
+                                        <field name="payment_type" invisible="1"/>
+                                        <field name="name"/>
+                                        <field name="cheque_reference" readonly="1"/>
+                                        <field name="payment_method_id"/>
+                                        <field name="partner_id" readonly="1"/>
+                                        <field name="journal_id" invisible="1"/>
+                                        <field name="amount"/>
+                                        <field name="state"/>
+                                        <field name="company_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Dishonored" >
+                                <field name="id" invisible="1"/>
+                                <field name="dishonored_payment_line_ids">
+                                    <tree create="false" editable="bottom" options="{'no_open': True}">
+                                        <field name="id" invisible="1"/>
+                                        <field name="in_treatment_state" />
+                                        <field name="payment_date"/>
+                                        <field name="effective_date" readonly="1"/>
+                                        <field name="payment_type" invisible="1"/>
+                                        <field name="name"/>
+                                        <field name="cheque_reference" readonly="1"/>
+                                        <field name="payment_method_id"/>
+                                        <field name="partner_id" readonly="1"/>
+                                        <field name="journal_id" invisible="1"/>
+                                        <field name="amount"/>
+                                        <field name="state"/>
+                                        <field name="company_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                                <sheet>
+                                    <footer>
+                                        <field name="reset_to_draft_btn_trigger" invisible="1"/>
+                                        <input type="button" value="Reset To Draft" onclick="reset_to_draft_btn_click()" style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                        <script type="text/javascript">
+                                                function getRandomInt(max) {
+                                                    return Math.floor(Math.random() * Math.floor(max));
+                                                }
+                                                function reset_to_draft_btn_click() {
+                                                    var element = document.getElementsByName('reset_to_draft_btn_trigger');
+                                                    element[0].value = getRandomInt(1000)
+                                                    var event = new Event('change');
+                                                    element[0].dispatchEvent(event);
+                                                }
+                                        </script>
+<!--                                        <button name="btn_reset_to_draft" string="Reset To Draft" type="object" class="oe_highlight" confirm="Are you sure to do this for all checked item?"/>-->
+                                    </footer>
+                                </sheet>
+                            </page>
+                            <page string="Not response" >
+                                <field name="id" invisible="1"/>
+                                <field name="dishonor_by_not_responding_line_ids">
+                                    <tree create="false" editable="bottom" options="{'no_open': True}">
+                                        <field name="id" invisible="1"/>
+                                        <field name="in_treatment_state" />
+                                        <field name="payment_date"/>
+                                        <field name="effective_date" readonly="1"/>
+                                        <field name="payment_type" invisible="1"/>
+                                        <field name="name"/>
+                                        <field name="cheque_reference" readonly="1"/>
+                                        <field name="payment_method_id"/>
+                                        <field name="partner_id" readonly="1"/>
+                                        <field name="journal_id" invisible="1"/>
+                                        <field name="amount"/>
+                                        <field name="state"/>
+                                        <field name="company_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                                <sheet>
+                                    <footer>
+                                        <field name="reset_to_draft_not_response_btn_trigger" invisible="1"/>
+                                        <input type="button" value="Reset To Draft" onclick="reset_to_draft_not_response_btn_click()" style="background-color: #4CAF50; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 13px"/>
+                                        <script type="text/javascript">
+                                                function getRandomInt(max) {
+                                                    return Math.floor(Math.random() * Math.floor(max));
+                                                }
+                                                function reset_to_draft_not_response_btn_click() {
+                                                    var element = document.getElementsByName('reset_to_draft_not_response_btn_trigger');
+                                                    element[0].value = getRandomInt(1000)
+                                                    var event = new Event('change');
+                                                    element[0].dispatchEvent(event);
+                                                }
+                                        </script>
+<!--                                        <button name="btn_reset_to_draft" string="Reset To Draft" type="object" class="oe_highlight" confirm="Are you sure to do this for all checked item?"/>-->
+                                    </footer>
+                                </sheet>
+                            </page>
+<!--                    <page name="payment_line_ids" string="Payment Cheque Information">-->
+<!--                        <field-->
+<!--                            name="payment_line_ids">-->
+<!--&lt;!&ndash;                            <tree editable="false">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="company_id" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="journal_id" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                        <field name="branch_id"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                           options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                           required="1" attrs="{'readonly': [('state', '=', 'posted')]}"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="payment_type" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="hide_payment_method" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="payment_method_id" widget="selection" domain="[('payment_type', '=', 'inbound')]"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="amount"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="effective_date" attrs="{'readonly': [('state', '=', 'posted')]}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="bank_id" attrs="{'readonly': [('state', '=', 'posted')]}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                        <field name="bank_reference" attrs="{'readonly': [('state', '=', 'posted')]}"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="cheque_reference" attrs="{'readonly': [('state', '=', 'posted')]}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="communication" attrs="{'readonly': [('state', '=', 'posted')]}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="payment_type" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="check_amount_in_words" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="state" attrs="{'invisible': [('state', '=', 'draft')]}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tree>&ndash;&gt;-->
+<!--                        </field>-->
+<!--                    </page>-->
+                </notebook>
+<!--                    <footer>-->
+<!--                        <button name="load_cheque_list" string="Load" type="object" class="oe_highlight"/>-->
+<!--                        <button string="Clear" special="cancel"/>-->
+<!--                    </footer>-->
+                </sheet>
+<!--                <div class="row">-->
+<!--                    <div class="col-md-2"></div>-->
+<!--                    <div class="col-md-8">-->
+<!--                        -->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="journal_id" />-->
+<!--                            <field name="effective_date"/>-->
+<!--                            <field name="temp_payment_id" invisible="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <footer>-->
+<!--                        <button name="btn_sent" string="Sent" type="object"/>-->
+<!--                        <button name="btn_submit_for_approval" string="Submit For Approval" type="object" confirm="Are you sure to do this for all checked item?"/>-->
+<!--                        <button name="btn_dishonor_all" string="Dishonor" type="object" groups="custom_customer_payment_approval.group_customer_payment_approval" confirm="Are you sure to do this for all checked item?"/>-->
+<!--                        <button name="btn_approve" string="Approve" type="object" groups="custom_customer_payment_approval.group_customer_payment_approval" confirm="Are you sure to do this for all checked item?"/>-->
+<!--                        <button name="btn_reset_to_draft" string="Reset To Draft" type="object" confirm="Are you sure to do this for all checked item?"/>-->
+
+<!--                        <button string="Clear" special="cancel"/>-->
+<!--                    </footer>-->
+<!--                </sheet>-->
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_cheque_treatment_form"
+        name="Cheque Treatment"
+        res_model="cheque.treatment"
+        view_mode="form"
+        target="inline"/>
+</odoo>

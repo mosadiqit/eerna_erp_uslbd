@@ -1,0 +1,58 @@
+<odoo>
+	<data>
+	
+	    <record id="sale_report_detail_form_view" model="ir.ui.view">
+			<field name="name">sale.report.detail.form</field>
+			<field name="model">sale.report.detail</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				
+		        <form string="Stock Report">
+					 <group>
+                    <group>
+                        <field name="date_start"/>
+                    </group>
+                    <group>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+	                <group>
+		        		<group>
+<!--		                    <field name="categ_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>-->
+							<field name="group_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+							<field name="brand_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+							<field name="model_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+							 <field name="product_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+		                </group>
+		                <group>
+
+                        	<field name="company_id" string="Company" options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+
+		                	<field name="location_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+
+		                </group>
+		        	</group>
+
+	                <footer>
+<!--						<button name="get_report" string="Export PDF" type="object" class="oe_highlight"/> or-->
+	                    <button name="print_excel_report" string="Export Excel" type="object" class="oe_highlight"/> or
+	                    <button string="Cancel" class="oe_link" special="cancel"/>
+	                </footer>
+		          	
+		        </form>
+	    	</field>
+	    </record>
+		
+	    <record id="sale_action_report_detail_xlsx" model="ir.actions.act_window">
+			<field name="name">Sales Analysis Report</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">sale.report.detail</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="sale_report_detail_form_view"/>
+			<field name="target">new</field>
+	    </record>
+		
+		<menuitem id="sale_menu_report_detail_xlsx" action="sale_action_report_detail_xlsx" parent="sale.menu_sale_report"/>
+	
+	</data>
+</odoo>

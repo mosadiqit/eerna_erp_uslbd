@@ -1,0 +1,25 @@
+<odoo>
+
+    <data>
+        <record id="stock_quant_search_inherit" model="ir.ui.view">
+            <field name="name">stock.quant.search.inherit</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.quant_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter string="Brand" name="Brand" context="{'group_by':'brand_id'}"/>
+                    <filter string="Model" name="Model" context="{'group_by':'product_model_id'}"/>
+                    <filter string="Group" name="Group" context="{'group_by':'product_group_id'}"/>
+                    <filter string="Part Number" name="Part Number" context="{'group_by':'part_number_id'}"/>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field string="Brand" name="brand_id" domain="[]"/>
+                    <field string="Model" name="product_model_id" domain="[]"/>
+                    <field string="Group" name="product_group_id" domain="[]"/>
+                    <field string="Part Number" name="part_number_id" domain="[]"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

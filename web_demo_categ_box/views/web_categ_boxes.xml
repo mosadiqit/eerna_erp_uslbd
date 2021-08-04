@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <template id="s_category_boxes" name="Category Box">
+        <div id="myCarousel" class="s_carousel s_carousel_default carousel slide" data-interval="10000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"/>
+                <li data-target="#myCarousel" data-slide-to="1"/>
+                <li data-target="#myCarousel" data-slide-to="2"/>
+
+            </ol>
+            <!-- Content -->
+            <div class="carousel-inner">
+                <!-- #01 -->
+                <div class="carousel-item active oe_custom_bg oe_img_bg pt152 pb152" data-name="Slide">
+                    <div class="s_animated_boxes row">
+                        <div class="col-md-4 col-lg-4 item bg-alpha img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/phone.jpg')" data-name="Box item">
+                            <div class="v-align">
+<!--                                <h3>Title</h3>-->
+<!--                                <p>Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/phone.jpg')" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3><b>Phone</b></h3>
+                                    <p>Description</p>
+                                    <i class="bi bi-cart"> </i>
+                                    <i class="bi bi-hand-thumbs-up"> </i>
+<!--                                    <a class="btn btn-primary">-->
+<!--                                        <strong>button</strong>-->
+<!--                                    </a>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4 item bg-beta img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/lptp.jpg')" data-name="Box item">
+                            <div class="v-align">
+<!--                                <h3>Box title</h3>-->
+<!--                                <p>Box Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/lptp.jpg')" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3>Laptop</h3>
+                                    <p>Slide Description</p>
+                                    <a class="btn btn-primary">
+                                        <strong>button</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4 item bg-gamma img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/tv.jpg')" data-name="Box item">
+                            <div class="v-align">
+<!--                                <h3>title</h3>-->
+<!--                                <p>Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/tv.jpg')" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3>Television</h3>
+                                    <p>Description</p>
+                                    <a class="btn btn-primary">
+                                        <strong>button</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- #02 -->
+                <div class="carousel-item active oe_custom_bg oe_img_bg pt152 pb152" data-name="Slide">
+                    <div class="s_animated_boxes row">
+                        <div class="col-md-4 col-lg-4 item bg-alpha img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/gmecntrl.jpg')" data-name="Box item">
+                            <div class="v-align">
+<!--                                <h3>Title</h3>-->
+<!--                                <p>Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3>product name</h3>
+                                    <p>Description</p>
+                                    <a class="btn btn-primary">
+                                        <strong>button</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4 item bg-beta img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/earphn.jpg')" data-name="Box item">
+
+                            <div class="v-align">
+<!--                                <h3>Box title</h3>-->
+<!--                                <p>Box Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3>Slide title</h3>
+                                    <p>Slide Description</p>
+                                    <a class="btn btn-primary">
+                                        <strong>button</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4 item bg-gamma img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/desktop.jpg')" data-name="Box item">
+                            <div class="v-align">
+<!--                                <h3>title</h3>-->
+<!--                                <p>Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3>product</h3>
+                                    <p>Description</p>
+                                    <a class="btn btn-primary">
+                                        <strong>button</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- #03 -->
+                <div class="carousel-item active oe_custom_bg oe_img_bg pt152 pb152" data-name="Slide">
+                    <div class="s_animated_boxes row">
+                        <div class="col-md-4 col-lg-4 item bg-alpha img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/desktop.jpg')" data-name="Box item">
+                            <div class="v-align">
+<!--                                <h3>Title</h3>-->
+<!--                                <p>Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3>product name</h3>
+                                    <p>Description</p>
+                                    <a class="btn btn-primary">
+                                        <strong>button</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4 item bg-beta img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/desktop.jpg')" data-name="Box item">
+
+                            <div class="v-align">
+<!--                                <h3>Box title</h3>-->
+<!--                                <p>Box Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3>Slide title</h3>
+                                    <p>Slide Description</p>
+                                    <a class="btn btn-primary">
+                                        <strong>button</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4 item bg-gamma img img-responsive" style="background-image: url('/web_demo_categ_box/static/src/image/desktop.jpg')" data-name="Box item">
+                            <div class="v-align">
+<!--                                <h3>title</h3>-->
+<!--                                <p>Description</p>-->
+                                <div class="oe_structure"/>
+                            </div>
+                            <div class="slide bg-delta" data-name="Inner Slide">
+                                <div class="v-align">
+                                    <h3>product</h3>
+                                    <p>Description</p>
+                                    <a class="btn btn-primary">
+                                        <strong>button</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Controls -->
+            <div class="carousel-control-prev" data-target="#myCarousel" data-slide="prev" role="img"
+                 aria-label="Previous" title="Previous">
+                <span class="carousel-control-prev-icon"/>
+                <span class="sr-only">Previous</span>
+            </div>
+            <div class="carousel-control-next" data-target="#myCarousel" data-slide="next" role="img" aria-label="Next"
+                 title="Next">
+                <span class="carousel-control-next-icon"/>
+                <span class="sr-only">Next</span>
+            </div>
+        </div>
+    </template>
+    <!-- This record will create a preview of the building block in the left menu from where you choose the blocks -->
+    <template name="Place into building blocks bar" id="add_title_references_to_bar" inherit_id="website.snippets">
+
+
+        <xpath position="inside" expr="//div[@id='snippet_structure']">
+
+
+            -
+            <div class="o_panel_body">
+
+                <t t-snippet="web_demo_categ_box.s_category_boxes"/>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>

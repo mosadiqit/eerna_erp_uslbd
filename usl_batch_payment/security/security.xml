@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_sales_approval_management">
+            <field name="name">Customer Payment TT Collector Rights</field>
+            <field name="description">Set TT Collector</field>
+            <field name="sequence">34</field>
+        </record>
+
+        <record id="group_customer_payment_tt_collector" model="res.groups">
+            <field name="name">TT Collector</field>
+            <field name="comment">The user can collect tt in customer payment.</field>
+        </record>
+
+<!--        <record model="ir.rule" id="no_edit_after_submit_for_approval">-->
+<!--            <field name="name">No Edit After Submitting for Approval</field>-->
+<!--            <field name="model_id" ref="model_batch_payment"/>-->
+<!--            <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--            <field eval="0" name="perm_unlink"/>-->
+<!--            <field eval="0" name="perm_write"/>-->
+<!--            <field eval="1" name="perm_read"/>-->
+<!--            <field eval="0" name="perm_create"/>-->
+<!--&lt;!&ndash;            <field name="domain_force">[('state', 'in', ['processing', 'dishonor', 'approve', 'finished'])]</field>&ndash;&gt;-->
+<!--            <field name="domain_force">[('state', '=', 'processing')]</field>-->
+<!--        </record>-->
+    </data>
+</odoo>

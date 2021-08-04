@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+<t t-extend="WebClient.DebugManager.Global">
+    <t t-jquery="a[data-action='split_assets']" t-operation="replace">
+        <t t-if="manager._is_admin">
+            <a role="menuitem" href="#" data-action="split_assets" class="dropdown-item o_debug_split_assets">Activate Assets Debugging</a>
+        </t>
+    </t>
+    <t t-jquery="a[data-action='tests_assets']" t-operation="replace">
+        <t t-if="manager._is_admin">
+            <a role="menuitem" href="#" data-action="tests_assets"
+               class="dropdown-item">Activate Tests Assets Debugging</a>
+        </t>
+    </t>
+    <t t-jquery="a[data-action='regenerateAssets']" t-operation="replace">
+        <t t-if="manager._is_admin">
+            <a role="menuitem" href="#" data-action="regenerateAssets"
+               class="dropdown-item">Regenerate Assets Bundles</a>
+        </t>
+    </t>
+    <t t-jquery="a[data-action='leave_debug_mode']" t-operation="replace">
+        <t t-if="manager._is_admin">
+            <a role="menuitem" href="#" data-action="leave_debug_mode"
+               class="dropdown-item">Leave the Developer Tools</a>
+        </t>
+    </t>
+</t>
+</templates>
+

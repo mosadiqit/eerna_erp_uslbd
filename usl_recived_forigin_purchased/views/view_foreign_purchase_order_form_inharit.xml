@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="forignpurchase_form_inherit" model="ir.ui.view">
+            <field name="name">fpo.forignpurchase.form</field>
+            <field name="model">foreign.purchase.order</field>
+            <field name="inherit_id" ref="usl_foreign_purchase.view_foreign_purchase_order_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_invoice']" position="before">
+                     <button string="Recived" name="action_view_picking" type="object" class="btn btn-secondary"
+                />
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

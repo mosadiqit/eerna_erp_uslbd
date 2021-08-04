@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Sequences for purchase.blanket.order -->
+    <record id="seq_user_creat_restriction" model="ir.sequence">
+        <field name="name">User Creation Restriction</field>
+        <field name="code">user.create.restriction</field>
+        <field name="prefix">Rest</field>
+        <field name="padding">3</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+     <record id="seq_back_order_restriction" model="ir.sequence">
+        <field name="name">Back Order Restriction</field>
+        <field name="code">back.order.restriction</field>
+        <field name="prefix">BO</field>
+        <field name="padding">3</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>

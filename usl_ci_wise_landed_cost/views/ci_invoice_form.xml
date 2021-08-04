@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="ic_invoice_form" model="ir.ui.view">
+        <field name="name">ic.invoice.form</field>
+        <field name="model">stock.landed.cost</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form string="Landed Costs Test">
+                    <field name="stock_valuation_layer_ids" invisible="1"/>
+                    <header>
+                        <button name="button_validate" string="Validate" states="draft" class="oe_highlight" type="object"/>
+                        <button name="button_cancel" string="Cancel" states="draft" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button string="Valuation" type="object" name="action_view_stock_valuation_layers" class="oe_stat_button" icon="fa-dollar" groups="stock.group_stock_manager" attrs="{'invisible': ['|' , ('state', 'not in', ['done']), ('stock_valuation_layer_ids', '=', [])]}"/>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Landed Cost"/>
+                            <h1>
+                                <field name="name" placeholder="Landed Cost Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="allowed_picking_ids" invisible="1"/>
+                                <field name="transfer_foreign" readonly="1" options="{'no_create_edit': True}"/>
+                            </group>
+                            <group>
+                                <label for="account_journal_id" string="Journal"/>
+                                <field name="account_journal_id" nolabel="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="account_move_id" attrs="{'invisible': [('account_move_id', '=', False)]}"/>
+                                <field name="vendor_bill_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Additional Costs">
+                                <field name="cost_lines">
+                                    <form string="Cost Lines">
+                                        <group>
+                                            <group>
+                                                <field name="product_id" domain="[('landed_cost_ok', '=', True)]" context="{'default_landed_cost_ok': True}"/>
+                                                <field name="price_unit"/>
+                                            </group>
+                                            <group>
+                                                <field name="split_method"/>
+                                                <field name="account_id" options="{'no_create': True}"/>
+                                            </group>
+                                        </group>
+                                        <label for="name"/>
+                                        <field name="name"/>
+                                    </form>
+                                    <tree string="Cost Lines" editable="bottom">
+                                        <field name="product_id" domain="[('landed_cost_ok', '=', True)]" context="{'default_landed_cost_ok': True, 'default_type': 'service'}"/>
+                                        <field name="name"/>
+                                        <field name="account_id" options="{'no_create': True}"/>
+                                        <field name="split_method"/>
+                                        <field name="price_unit"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="amount_total" widget="monetary"/>
+                                    <button colspan="2" name="compute_landed_cost_ci" string="Compute" type="object" class="oe_right btn-secondary" states="draft"/>
+                                </group>
+                            </page>
+                            <page string="Valuation Adjustments">
+                                <field name="valuation_adjustment_lines">
+                                    <form string="Valuation Adjustments">
+                                        <group>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="quantity"/>
+                                            </group>
+                                            <group>
+                                                <field name="former_cost"/>
+                                                <field name="additional_landed_cost"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                    <tree string="Valuation Adjustments" editable="bottom" create="0">
+                                        <field name="cost_line_id" readonly="1"/>
+                                        <field name="product_id" readonly="1"/>
+                                        <field name="weight" readonly="1" optional="hide"/>
+                                        <field name="volume" readonly="1" optional="hide"/>
+                                        <field name="quantity" readonly="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="former_cost" readonly="1" widget="monetary"/>
+                                        <field name="final_cost" readonly="1" widget="monetary"/>
+                                        <field name="additional_landed_cost"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+        </field>
+    </record>
+    <record id="ci_invoice_tree" model="ir.ui.view">
+        <field name="name">Landed Cost Tree</field>
+        <field name="model">stock.landed.cost</field>
+        <field name="arch" type="xml">
+                <tree string="Landed Cost Tree">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="activity_exception_decoration" widget="activity_exception"/>
+                </tree>
+        </field>
+    </record>
+    <record id="ic_invoice_action" model="ir.actions.act_window">
+        <field name="name">Landed Cost Action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.landed.cost</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="ic_invoice_form"></field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p>
+        </field>
+    </record>
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="ic_invoice_landed" name="Landed Cost" sequence="-1"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="ic_invoice_child" name="Landed Cost" parent="ic_invoice_landed" action="ic_invoice_action" sequence="1"/>
+</odoo>

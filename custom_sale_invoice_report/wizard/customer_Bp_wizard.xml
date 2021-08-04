@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="customer_bp_report_wizard" model="ir.ui.view" >
+        <field name="name">Customer(BP)</field>
+        <field name="model">customer.bp.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Customer BP Report">
+                <group>
+                    <group>
+                        <field name="date_start"/>
+                    </group>
+                    <group>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="company_id" string="Company" options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                    </group>
+                    <group>
+<!--                        <field name="branch_ids" string="Branch" options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>-->
+                        <field name="customer_ids"  widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                    </group>
+
+                </group>
+                <footer>
+                    <button name="get_report" string="Download PDF" type="object" class="oe_highlight"/>
+                    <button name="print_excel" string="Download Excel" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_customer_bp_report_wizard"
+        name="Customer BP"
+        res_model="customer.bp.report.wizard"
+        view_mode="form"
+        target="new"/>
+
+    <menuitem action="action_customer_bp_report_wizard"
+        id="menu_customer_bp_wizard"
+        parent="sale.menu_sale_report"/>
+</odoo>

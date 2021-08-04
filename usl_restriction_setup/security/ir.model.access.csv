@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_create_restriction,manage_user_create_restriction,model_user_create_restriction,base.group_user,1,1,1,1
+access_back_order_restriction,manage_back_order_restriction,model_back_order_restriction,base.group_user,1,1,1,1

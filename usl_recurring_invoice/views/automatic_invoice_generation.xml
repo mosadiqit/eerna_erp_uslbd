@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="automatic_invoice_generation_form" model="ir.ui.view">
+            <field name="name">automatic.invoice.generation</field>
+            <field name="model">automatic.invoice.generation</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Automatic Invoice Generation">
+                    <header>
+                        <button name="create_auto_invoice" type="object" string="Create Manually" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <separator col="2" string="Need Payment Every Month"/>
+                        </group>
+                        <group name="invoice_settings">
+                            <group>
+                                <field name="invoice"/>
+                                <field name="customer"/>
+                            </group>
+                            <group>
+                                <field name="status" widget="radio"/>
+                                <field name="notify_to"/>
+                                <field name="stop_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Product">
+                                <group>
+                                    <field name="invoice_line" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="product_id"/>
+                                            <field name="description"/>
+                                            <field name="quantity"/>
+                                            <field name="unit_price"/>
+                                            <field name="automatic_invoice_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Journal Items">
+                                <group>
+                                    <field name="line_ids" nolabel="1">
+                                        <tree editable="bottom" class="w-75">
+                                            <field name="account_id"/>
+                                            <field name="branch_id"/>
+                                            <field name="name"/>
+                                            <field name="debit" sum="debit"/>
+                                            <field name="credit" sum="credit"/>
+                                            <field name="price_unit" invisible="1"/>
+                                            <field name="quantity" invisible="1"/>
+                                            <field name="price_total" invisible="1"/>
+                                            <field name="price_subtotal" invisible="1"/>
+                                            <field name="partner_id" invisible="1"/>
+                                            <field name="product_id" invisible="1"/>
+                                            <field name="automatic_invoice_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="automatic_invoice_tree" model="ir.ui.view">
+            <field name="name">automatic.invoice.tree</field>
+            <field name="model">automatic.invoice.generation</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Automatic Invoice List">
+                    <field name='invoice'/>
+                    <field name='customer'/>
+                    <field name='notify_to'/>
+                    <field name='stop_date'/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_automatic_invoice" model="ir.actions.act_window">
+            <field name="name">Recurring Invoice</field>
+            <field name="res_model">automatic.invoice.generation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="automatic_invoice_tree"/>
+        </record>
+
+        <menuitem id="auto_invoice_menu" name="Auto Invoice" parent="base.menu_custom"/>
+        <menuitem parent="auto_invoice_menu" id="auto_invoice_id" action="action_automatic_invoice"/>
+    </data>
+</odoo>

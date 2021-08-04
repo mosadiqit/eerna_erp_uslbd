@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="stock_picking_inherit_for_transfer_edit_rest" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.for.transfer.edit.rest</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page/field[@name='move_ids_without_package']" position="attributes">
+                <field name="attrs">
+                    {'readonly': [('state', 'in', ['approval','done'])]
+                </field>
+            </xpath>
+            <xpath expr="//button[@name='do_unreserve']" position="after">
+                <button name="_do_partial_unreserved" type="object" string="Partial Unreserved" attrs="{'invisible': ['|', '|', '|', '|', ('picking_type_code', '=', 'incoming'), ('immediate_transfer', '=', True), ('is_locked', '=', False), '&amp;', ('state', 'not in', ('assigned', 'partially_available')), ('move_type', '!=', 'one'), '&amp;', ('state', 'not in', ('assigned', 'partially_available', 'confirmed')), ('move_type', '=', 'one')]}"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="inventory_approval_form_view" model="ir.ui.view">
+            <field name="name">inventory.approval.form.view</field>
+            <field name="model">inventory.approval</field>
+            <field name="arch" type="xml">
+                <form class="oe_form_configuration">
+                    <header>
+                        <button name="apply_configuration" type="object" string="Apply" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title oe_read_only">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Stock Approval Configuration">
+                                <field name="approve_stock_move"/>
+                                <field name="stock_move_approver_ids" widget="many2many_tags"
+                                       attrs="{'invisible': [('approve_stock_move', '=', False)], 'required':[('approve_stock_move', '=', True)]}"/>
+                                <!--                                <field name="approve_customer_credit"/>-->
+                                <!--                                <field name="cust_credit_approver_ids" widget="many2many_tags"-->
+                                <!--                                       attrs="{'invisible': [('approve_customer_credit', '=', False)],'required':[('approve_customer_credit', '=', True)]}"/>-->
+                            </group>
+                            <!--                            <group string="Vendor Configuration">-->
+                            <!--                                <field name="approve_vendor_bill"/>-->
+                            <!--                                <field name="bill_approver_ids" widget="many2many_tags"-->
+                            <!--                                       attrs="{'invisible': [('approve_vendor_bill', '=', False)],'required':[('approve_vendor_bill', '=', True)]}"/>-->
+                            <!--                                <field name="approve_vendor_credit"/>-->
+                            <!--                                <field name="vend_credit_approver_ids" widget="many2many_tags"-->
+                            <!--                                       attrs="{'invisible': [('approve_vendor_credit', '=', False)],'required':[('approve_vendor_credit', '=', True)]}"/>-->
+                            <!--                            </group>-->
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="inventory_approval_sub_menu_action" model="ir.actions.act_window">
+            <field name="name">Inventory Multi Approval</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inventory.approval</field>
+            <field name="res_id" ref="default_inventory_approval_config"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+
+        <menuitem id="inventory_approval_main_menu" name="Approvals" parent="stock.menu_stock_config_settings"
+                  sequence="10"
+                  groups="group_inventory_approval"/>
+        <menuitem id="stock_approval_sub_menu" name="Stock Move Approval Management" parent="inventory_approval_main_menu"
+                  action="inventory_approval_sub_menu_action" sequence="1"/>
+    </data>
+</odoo>

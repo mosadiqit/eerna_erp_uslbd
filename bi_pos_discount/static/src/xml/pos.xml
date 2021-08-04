@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<templates id="bi_pos_discount_template" inherit_id="point_of_sale.template" xml:space="preserve">
+
+	
+	
+	   <!-- Orderline WIdget -->
+	   <t t-extend="Orderline">
+			<t t-jquery=".info-list" t-operation="replace">
+				<ul class="info-list">
+					<t t-if="line.get_quantity_str() !== '1' || line.selected ">
+						<li class="info">
+							<em>
+								<t t-esc="line.get_quantity_str()" />
+							</em>
+							<t t-esc="line.get_unit().name" />
+							at
+							<t t-esc="widget.format_currency(line.get_unit_display_price(),'Product Price')" />
+							/
+							<t t-esc="line.get_unit().name" />
+						</li>
+					</t>
+					<t t-if="line.get_discount_str() !== '0'">
+						
+						<t t-if="widget.pos.config.discount_type == 'percentage'">
+							<li class="info">
+								With a
+								<em>
+									<t t-esc="line.get_discount_str()" />%
+								</em>
+								discount
+							</li>
+						</t>
+						
+						<t t-if="widget.pos.config.discount_type == 'fixed'">
+							<li class="info">
+								With a
+								<em>
+									 <t t-esc="widget.format_currency(line.get_discount_str())"/>
+							</em>
+								discount
+							</li>
+						</t>
+						
+					</t>
+				</ul>
+			</t>
+		</t>
+ 
+
+		<!-- Add discount_type in OrderReceipt -->		
+		<t t-extend="OrderReceipt">
+			<t t-jquery="t[t-if='line.discount !== 0']" t-operation="replace">
+				<t t-if='line.discount !== 0'>
+					<t t-if="widget.pos.config.discount_type == 'percentage'">
+						<div class="pos-receipt-left-padding">
+							Discount: <t t-esc='line.discount' />%
+						</div>
+					</t>
+					<t t-if="widget.pos.config.discount_type == 'fixed'">
+						<div class="pos-receipt-left-padding">
+							Discount: <t t-esc="widget.format_currency(line.discount)"/>
+						</div>
+					</t>
+				</t>
+			</t>
+			<t t-jquery="t[t-if='receipt.total_discount']" t-operation="replace">
+				<t t-if='receipt.total_discount'>
+					<div>
+						Discounts
+						<t t-if="widget.pos.config.discount_type == 'percentage'">
+							<span t-esc='widget.format_currency(receipt.total_discount)' class="pos-receipt-right-align"/>
+						</t>
+						<t t-if="widget.pos.config.discount_type == 'fixed'">
+							<span t-esc="widget.format_currency(order.get_fixed_discount())" class="pos-receipt-right-align"/>
+						</t>
+					</div>
+				</t>
+			</t>
+		</t>
+ 
+
+	</templates>
+
+

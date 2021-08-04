@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hs_product_form" model="ir.ui.view">
+        <field name="name">Product HS Code Form</field>
+        <field name="model">product.hs.code</field>
+        <field name="arch" type="xml">
+            <form string="Product HS Code">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="business_description"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="hs_code_lines" string="other Tax Type">
+                            <field
+                                name="hs_code_line">
+                                <tree editable="bottom">
+                                    <field name="tax_type_id"/>
+                                    <field name="partner_id"/>
+                                    <field name="account_id"/>
+                                    <field name="assessable_rate"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_hs_code_tree_with_onboarding" model="ir.ui.view">
+        <field name="name">Product HS Code Tree</field>
+        <field name="model">product.hs.code</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="business_description"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_product_hs_code" model="ir.actions.act_window">
+        <field name="name">Product HS Code</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.hs.code</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain" > []</field>
+        <field name="view_id" ref="view_product_hs_code_tree_with_onboarding"/>
+    </record>
+
+</odoo>

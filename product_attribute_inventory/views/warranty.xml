@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="product_warranty_id" model="ir.ui.view">
+            <field name="name">product.template.warranty</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="before">
+                    <label for="warranty" attrs="{'invisible': [('sale_ok', '=', False)]}"/>
+                    <div>
+                        <field name="warranty" class="oe_inline" style="vertical-align:baseline"/> months
+                    </div>
+                    <label for="is_lifetime_warranty" attrs="{'invisible': [('sale_ok', '=', False)]}"/>
+                    <div>
+                        <field name="is_lifetime_warranty" string="Lifetime Warranty" class="oe_inline" style="vertical-align:baseline"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

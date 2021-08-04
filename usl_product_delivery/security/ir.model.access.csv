@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_usl_product_delivery_usl_product_delivery,usl_product_delivery.usl_product_delivery,model_usl_product_delivery_usl_product_delivery,base.group_user,1,1,1,1

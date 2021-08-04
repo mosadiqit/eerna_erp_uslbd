@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ <template id="custom_header_with_musok">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+                    <div t-attf-class="header" >
+                        <div class="row">
+                            <div class="col-6" name="company_address">
+                                <div t-field="company.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                                 />
+                            </div>
+                            <div class="col-2 text-right md4 "></div>
+                            <div class="col-4 text-center md4 border" style="margin-bottom:40px" ><p >Mushak:6.3</p><p>VAT Reg. No:003237112-0401</p></div>
+                        </div>
+                    </div>
+    </template>
+
+    <template id="custom_invoice_report_without_header">
+                    <div t-attf-class="header">
+
+                    </div>
+    </template>
+
+
+
+
+
+        <template id="custom_sale_invoice_with_musok" >
+            <t t-call="web.html_container" style="margin-top:-30px">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_sale_invoice_report.custom_header_with_musok"/>
+                    <div  style="padding:10px">
+                        <t t-call="account.report_invoice_document"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+
+
+    <template id="custom_sale_invoice_without_header" >
+            <t t-call="web.html_container" style="margin-top:-30px">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_sale_invoice_report.custom_invoice_report_without_header"/>
+                    <div  style="padding:10px">
+                        <t t-call="account.report_invoice_document"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+
+
+</odoo>

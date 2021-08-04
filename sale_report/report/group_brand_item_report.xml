@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- QWeb Reports -->
+    <!-- NAME & FILE_NAME should be the same -->
+    <report
+            id="group_brand_wise_report"
+            model="sale.report.group_item_wise"
+            report_type="qweb-pdf"
+            string="Group Brand report"
+            name="sale_report.group_brand_wise_report_view"
+            file="sale_report.group_brand_wise_report_view"
+    />
+    <template id="group_brand_wise_report_view">
+
+        <t t-call="web.html_container">
+
+            <div class="page">
+                <div class="article mt1 o_report_layout_standard">
+                    <center>
+                        <b>
+                            <h3>Category and brand wise report </h3>
+                        </b>
+                    </center>
+                    <center>
+                        <b>
+                            <span t-esc="start_date"/>
+                            To
+                            <span t-esc="end_date"/>
+                        </b>
+                    </center>
+                    <br/>
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <th style="width: 2%">SL</th>
+                            <th style="width: 18%">Description</th>
+                            <th class="text-center" style="width: 20%">Qty</th>
+                            <th class="text-center" style="width: 17%">Value</th>
+                        </thead>
+                        <t t-foreach="data.keys()" t-as="category_key">
+                            <tr>
+                                <td class="text-left" colspan="7" style="background-color:#e6e1e1">
+                                    <t t-esc="category_key"/>
+                                </td>
+                            </tr>
+                            <t t-set="group_amount" t-value="0"/>
+
+                            <t t-foreach="data[category_key]" t-as="brand">
+                                <tr>
+                                    <td class="text-center" colspan="7" style="background-color:#AEACAC">
+                                        <t t-esc="brand"/>
+                                    </td>
+                                </tr>
+                                <t t-set="count" t-value="1"/>
+                                <t t-set="brand_amount" t-value="0"/>
+                                <tr t-foreach="data[category_key][brand]" t-as="line">
+                                    <td>
+                                        <t t-esc="count"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-esc="line[5]"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-esc="line[6]"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-esc="line[7]"/>
+                                    </td>
+                                    <t t-set="count" t-value="count + 1"/>
+                                    <t t-set="brand_amount" t-value="brand_amount + line[7]"/>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" colspan="3">Total
+                                        <t t-esc="brand"/>
+                                        Amount
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-esc="brand_amount"/>
+                                    </td>
+                                    <t t-set="group_amount" t-value="group_amount + brand_amount"/>
+                                </tr>
+
+                            </t>
+                            <tr>
+                                <td class="text-right" colspan="3">Total
+                                    <t t-esc="category_key"/>
+                                    Amount
+                                </td>
+                                <td class="text-left">
+                                    <t t-esc="group_amount"/>
+                                </td>
+
+                            </tr>
+
+                        </t>
+
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </t>
+
+    </template>
+
+
+</odoo>

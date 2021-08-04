@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_commercial_purchase_order,commercial.purchase.order,model_commercial_purchase_order,group_commercial_purchase_user,1,1,1,1
+access_commercial_purchase_order_manager,commercial.purchase.order,model_commercial_purchase_order,group_commercial_purchase_manager,1,1,1,1
+access_commercial_purchase_order_invoicing_payments,commercial.purchase.order,model_commercial_purchase_order,account.group_account_invoice,1,1,0,0
+access_commercial_purchase_order_portal,commercial.purchase.order.portal,model_commercial_purchase_order,base.group_portal,1,0,0,0
+access_commercial_purchase_order_line,commercial.purchase.order.line user,model_commercial_purchase_order_line,group_commercial_purchase_user,1,1,1,1
+access_commercial_purchase_order_line_manager,commercial.purchase.order.line,model_commercial_purchase_order_line,group_commercial_purchase_manager,1,1,1,1
+

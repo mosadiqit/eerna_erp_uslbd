@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <!-- NAME & FILE_NAME should be the same -->
+        <report id="cheque_history_report"
+                model="cheque.history.report"
+                string="Cheque History Report"
+                report_type="qweb-pdf"
+                name="accounting_report.cheque_history_report_view"
+
+                menu="False"/>
+        <template id="cheque_history_report_view">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <div class="article mt1 o_report_layout_standard">
+                        <center>
+                            <b>
+                                <h3>Cheque History Report </h3>
+                            </b>
+                        </center>
+                        <center>
+                            <b>
+                                <span t-esc="date_start"/>
+                                To
+                                <span t-esc="date_end"/>
+                            </b>
+                        </center>
+                        <br/>
+                        <table class="table table-condensed table-bordered">
+                            <thead style="font-size:13px">
+
+                                <th class="text-center" style="width: 20%">Cheque No</th>
+
+                                <th class="text-center" style="width: 10%">Rec Date</th>
+                                <th class="text-center" style="width: 20%">Cheque Date</th>
+                                <th class="text-center" style="width: 10%">Bank Name</th>
+                                <th class="text-center" style="width: 15%">Status</th>
+                                <th class="text-center" style="width: 10%">Placing Date</th>
+                                <th class="text-center" style="width: 10%">H/D Date</th>
+                                <th class="text-center" style="width: 10%">Amount</th>
+                                <!--                                <th class="text-center" style="width: 10%">Branch</th>-->
+                            </thead>
+
+                            <t t-set="grand_total" t-value="0"/>
+                            <tr style="font-size:12px" t-foreach="group_value" t-as="line">
+
+
+                                <td style="font-size:12px">
+                                    <t t-esc="line[0]"/>
+                                </td>
+                                <td class="text-left">
+                                    <t t-esc="line[1]"/>
+                                </td>
+                                <td class="text-left">
+                                    <t t-esc="line[2]"/>
+                                </td>
+                                <td class="text-left">
+                                    <t t-esc="line[3]"/>
+                                </td>
+                                <td class="text-left">
+                                    <t t-esc="line[4]"/>
+                                </td>
+                                <td class="text-left">
+                                    <t t-esc="line[5]"/>
+                                </td>
+                                <td>
+                                    <t t-if="line[4]=='honored'">
+
+                                        <t t-esc="line[6]"/>
+
+                                    </t>
+                                    <t t-if="line[4]=='dishonored'">
+
+                                        <t t-esc="line[7]"/>
+
+                                    </t>
+                                </td>
+                                <td class="text-left">
+                                    <t t-esc="line[8]"/>
+                                </td>
+                                <!--                                        <td class="text-left">-->
+                                <!--                                            <t t-esc="line[8]"/>-->
+                                <!--                                        </td>-->
+                                <t t-set="grand_total" t-value="grand_total + line[8]"/>
+
+                            </tr>
+
+
+                            <tr>
+                                <td class="text-right" colspan="7"> Buyer Total:
+                                </td>
+                                <td class="text-left">
+                                   <t t-esc="grand_total"/>
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+                        <!--                                                <p>Buyer Total:<t t-esc="grand_total"/></p>-->
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+
+
+
+
+

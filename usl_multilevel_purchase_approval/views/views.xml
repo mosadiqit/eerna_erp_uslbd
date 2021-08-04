@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="custom/usl_multilevel_purchase_approval.list">
+      <field name="name">custom/usl_multilevel_purchase_approval list</field>
+      <field name="model">custom/usl_multilevel_purchase_approval.custom/usl_multilevel_purchase_approval</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="custom/usl_multilevel_purchase_approval.action_window">
+      <field name="name">custom/usl_multilevel_purchase_approval window</field>
+      <field name="res_model">custom/usl_multilevel_purchase_approval.custom/usl_multilevel_purchase_approval</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="custom/usl_multilevel_purchase_approval.action_server">
+      <field name="name">custom/usl_multilevel_purchase_approval server</field>
+      <field name="model_id" ref="model_custom/usl_multilevel_purchase_approval_custom/usl_multilevel_purchase_approval"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="custom/usl_multilevel_purchase_approval" id="custom/usl_multilevel_purchase_approval.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="custom/usl_multilevel_purchase_approval.menu_1" parent="custom/usl_multilevel_purchase_approval.menu_root"/>
+    <menuitem name="Menu 2" id="custom/usl_multilevel_purchase_approval.menu_2" parent="custom/usl_multilevel_purchase_approval.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="custom/usl_multilevel_purchase_approval.menu_1_list" parent="custom/usl_multilevel_purchase_approval.menu_1"
+              action="custom/usl_multilevel_purchase_approval.action_window"/>
+    <menuitem name="Server to list" id="custom/usl_multilevel_purchase_approval" parent="custom/usl_multilevel_purchase_approval.menu_2"
+              action="custom/usl_multilevel_purchase_approval.action_server"/>
+-->
+  </data>
+</odoo>

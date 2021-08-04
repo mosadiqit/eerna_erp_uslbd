@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                string="Money Receipt"
+                id="batch_payment_money_receipt"
+                model="batch.payment"
+                report_type="qweb-pdf"
+                name="usl_cheque_management.batch_payment_money_receipt_view"
+
+        />
+
+
+        <template id="batch_payment_money_receipt_view">
+
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+
+                    <div style="border-bottom: 1px solid black;font-size: 13px;border:1px;border-style:solid">
+                        <t t-foreach="docs" t-as="o">
+                            <table class="table table-condensed table-borderless">
+                                <tr><td class="text-center" colspan="13" style="border-bottom: 1px solid #000000;">
+                                    <p><b>Money Receipt</b></p>
+                                </td>
+                                </tr>
+
+
+                                <tr style="border: 0;">
+                                    <td><b>Money Receipt No :</b></td>
+
+                                       <td><span t-field="o.name"/></td>
+
+                                    <td><b>Date : </b></td>
+                                    <td><span t-field="o.payment_date"/></td>
+                                </tr>
+
+                                <tr style="border: 0;">
+                                    <td><b>Received with Thanks from :</b></td>
+                                    <td><span t-field="o.partner_id.name"/></td>
+
+                                </tr>
+                                <tr style="border: 0;">
+                                    <td><b>Code :</b></td>
+                                    <td><span t-field="o.partner_id.id"/></td>
+
+                                </tr>
+                                <tr style="border: 0;">
+                                    <td><b>Address :</b></td>
+                                    <td><span t-field="o.partner_id.street"/></td>
+
+                                </tr>
+                                <tr style="border: 0;">
+                                    <td class="text-center" colspan="13" style="background-color:#ffff">
+                                        <p><![CDATA[&nbsp;]]></p>
+                                    </td>
+
+                                </tr>
+                                <tr style="border: 0;">
+                                    <td><b>The Amount of Taka (in words) :</b></td>
+                                    <td><span t-esc="o.batch_payment_line[0].currency_id.amount_to_text(sum(s.amount for s in o.batch_payment_line))"/></td>
+
+                                </tr>
+                                <tr style="border: 0;">
+                                    <td><b>Against our Bill No :</b></td>
+
+                                    <t t-if="o.batch_payment_line[0].collection_reference == 'previous_invoice'"><td>Previous</td></t>
+                                    <t t-if="o.batch_payment_line[0].collection_reference == 'advance_collection'"><td>Advance Payment</td></t>
+                                    <t t-if="o.batch_payment_line[0].collection_reference == 'cheque_adjustment'"><td>Cheque Adjustment</td></t>
+                                    <t t-if="o.batch_payment_line[0].collection_reference == 'multiple_invoice'">
+                                        <td>Multiple Invoices</td>
+<!--                                        <td><span t-esc="join(s.invoice_id.name for s in o.batch_payment_line[0].payment_invoice_ids)"/></td>-->
+                                    </t>
+                                    <td><b>By :</b></td>
+
+                                    <td><span t-field="o.partner_id.street"/></td>
+
+                                </tr>
+                                <tr style="border: 0;">
+                                    <td><b>Taka:</b></td>
+                                    <td><span t-esc="sum(s.amount for s in o.batch_payment_line)"/></td>
+
+                                </tr>
+<!--                                <tr style="border: 0;">-->
+<!--                                    <td><b>Remarks:</b></td>-->
+<!--                                    <td><span t-field="o.communication"/></td>-->
+
+<!--                                </tr>-->
+                                <tr style="border: 0;">
+                                    <td class="text-center" colspan="13" style="background-color:#ffff">
+                                        <p><![CDATA[&nbsp;]]></p>
+                                    </td>
+
+                                </tr>
+                                 <table class="table table-condensed table-borderless">
+                                        <thead style="border-bottom: 1px solid #000000;">
+                                            <th class="text-center">Cheque No</th>
+                                            <th class="text-center">Cheque Date</th>
+                                            <th class="text-center">Bank</th>
+                                            <th class="text-center">Amount</th>
+                                        </thead>
+                                     <t t-foreach="o.batch_payment_line" t-as="line">
+                                       <tr style="border: 0;">
+                                            <td class="text-center"><span t-field="line.cheque_reference"/></td>
+                                            <td class="text-center"><span t-field="line.effective_date"/></td>
+                                            <td class="text-center"><span t-field="line.bank_id.bank_name"/></td>
+                                            <td class="text-center"><span t-field="line.amount"/></td>
+                                        </tr>
+                                     </t>
+
+
+
+                                    </table>
+
+
+                            </table>
+                            <div style="bottom: 0">
+                                <p class="list-inline-item d-inline float-left"><b>Entry By:</b></p>
+                                <p class="list-inline-item d-inline pl-2"><span t-field="o.entry_by.name"/></p>
+                                <p class="list-inline-item d-inline pl-4"><b>Collected By:</b></p>
+                                <p class="list-inline-item d-inline pl-2"><span t-field="o.collected_by.name"/></p>
+                                <p class="list-inline-item d-inline pl-4"><b>Print By: </b><span t-esc="user.name"></span></p>
+                                <p class="list-inline-item d-inline pl-4"><b>Approved By :</b></p>
+                                <p class="list-inline-item d-inline pl-2"><span t-field="o.approved_by.name"/></p>
+                                <t t-if="o.approved_by">
+                                    <p class="list-inline-item d-inline float-right"><b>Approved</b></p>
+                                </t>
+                            </div>
+                        </t>
+
+                    </div>
+
+
+                    <div t-attf-class="footer o_standard_footer o_company_#02_layout">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p class="d-inline float-left" style="border-top: 1px solid black">Customer
+                                    Signature</p>
+                                <p class="d-inline float-right" style="border-top: 1px solid black">Authority
+                                    Signature</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="text-center" style="border-top: 1px solid black;">
+
+                            <div t-if="report_type == 'pdf'">
+                                <p class="list-inline-item d-inline float-left"><b><span
+                                        t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></b></p>
+                                <p class="list-inline-item d-inline"><b>User: <span t-esc="user.name"></span></b></p>
+                                <p class="list-inline-item d-inline"><b>www.uslbd.com</b></p>
+                                <p class="list-inline-item d-inline float-right"><b>Page: <span class="page"/> / <span
+                                        class="topage"/></b></p>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </t>
+
+
+            </t>
+
+        </template>
+
+<!--        <template id="internal_layout_inharit"-->
+<!--                  inherit_id="web.internal_layout">-->
+<!--            <xpath expr="//div[@class='col-2 offset-2 text-center']" position="replace">-->
+<!--                <div class="col-7 text-center">-->
+<!--                    <b><span t-esc="company.name"/></b>-->
+<!--                    <br/>-->
+<!--                    <span t-esc="company.street"/>-->
+<!--                    <br/>-->
+<!--                    <b>Phone : </b> <span t-esc="company.phone"/>-->
+<!--                    <b> Email : </b> <span t-esc="company.email"/>-->
+
+<!--                </div>-->
+<!--            </xpath>-->
+
+<!--        </template>-->
+
+
+    </data>
+</odoo>
+
+

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_send_email_on_po_change_send_email_on_po_change,send_email_on_po_change.send_email_on_po_change,model_send_email_on_po_change_send_email_on_po_change,base.group_user,1,1,1,1

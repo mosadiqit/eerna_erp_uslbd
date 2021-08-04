@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- QWeb Reports -->
+    <!-- NAME & FILE_NAME should be the same -->
+    <!--    invoice_datewise_sale_summary_report-->
+    <report
+            id="inv_datewise_sales_sum_report"
+            model="sale.order"
+            report_type="qweb-pdf"
+            string="Invoice Datewise Sales Summary"
+            name="sale_report.invoice_datewise_sale_summary_report_tmp"
+            file="sale_report.invoice_datewise_sale_summary_report_tmp"
+    />
+
+    <template id="invoice_datewise_sale_summary_report_tmp">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 style="text-align:center;">Invoice Date Wise Sales Summary</h2>
+                    <br></br>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sales Person</th>
+                                <th>Sale Order NO</th>
+                                <th>Invoice NO</th>
+                                <th>Remarks</th>
+                                <th>Buyer Name</th>
+                                <th>Brand</th>
+                                <th>Group</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total value</th>
+                                <th>Invoice Date</th>
+                                <th>Sale Order Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="query_list" t-as="item">
+                                <tr>
+                                    <td>
+                                        <t t-esc="item['SalesPerson']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['SO_Name']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['InvName']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['Remarks']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['BuyerName']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['P_Brand']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['P_Group']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['P_Name']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['Qty']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['PriceUnit']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['Total_Price']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['InvDate']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['SoDate']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

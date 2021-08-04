@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="menu_permission_server" model="ir.actions.server">
+            <field name="name">User Menu Permission</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.switch_user_dashboard()
+            </field>
+        </record>
+        <menuitem id="user_permission" name="User Security Permission" parent="base.menu_administration" action="menu_permission_server"/>
+    </data>
+</odoo>

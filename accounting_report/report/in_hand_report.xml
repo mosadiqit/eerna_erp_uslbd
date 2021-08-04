@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <!-- NAME & FILE_NAME should be the same -->
+         <report id="in_hand_report"
+            model="cheque.in.hand.report.wizard"
+            string="Cheque In Hand Report"
+            report_type="qweb-pdf"
+            name="accounting_report.cheque_in_hand_report"
+            menu="False"/>
+        <template id="cheque_in_hand_report">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <div class="article mt1 o_report_layout_standard">
+                        <center>
+                            <b>
+                                <h3>Cheque In Hand Report </h3>
+                            </b>
+                        </center>
+                        <center>
+                            <b>
+                                <span t-esc="start_date"/>
+                                To
+                                <span t-esc="end_date"/>
+                            </b>
+                        </center>
+                        <br/>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <th class="text-center" style="width: 20%">Cheque No</th>
+                                <th class="text-center" style="width: 10%">Date</th>
+                                <th class="text-center" style="width: 20%">Cheque Date</th>
+                                <th class="text-center" style="width: 10%">Bank Name</th>
+                                <th class="text-center" style="width: 15%">State</th>
+                                <th class="text-center" style="width: 10%">Honor Date</th>
+                                <th class="text-right" style="width: 10%">Cheque Amount</th>
+
+                            </thead>
+                                <t t-foreach="data.keys()" t-as="buyer_group">
+                                <tr>
+                                    <td class="text-center" colspan="7" style="background-color:#e6e1e1">
+                                    Buyer Group: <t t-esc="buyer_group"/>
+                                    </td>
+                                </tr>
+                                <t t-set="grand_total" t-value="0"/>
+                                <t t-foreach="data[buyer_group]" t-as="customer">
+                                    <tr>
+                                        <td class="text-center" colspan="7" style="background-color:#AEACAC">
+                                        Customer Name: <t t-esc="customer"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="count" t-value="1"/>
+                                    <t t-set="sub_total" t-value="0"/>
+
+
+                                    <tr t-foreach="data[buyer_group][customer]" t-as="line">
+
+                                        <td>
+                                            <t t-esc="line[2]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[3]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[4]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[5]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[6]"/>
+
+
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[7]"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-esc="line[8]"/>
+                                        </td>
+
+                                        <t t-set="count" t-value="count + 1"/>
+                                        <t t-set="sub_total" t-value="sub_total + line[8]"/>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right" colspan="6"> Sub Total
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="sub_total"/>
+                                        </td>
+                                        <t t-set="grand_total" t-value="grand_total + sub_total"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td class="text-right" colspan="6">Grand Total
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-esc="grand_total"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+
+

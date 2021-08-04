@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <!--    <template id="footer_custom_theme_test" inherit_id="website.layout" name="Footer">-->
+    <!--        <xpath expr="//div[@id='footer']" position="replace">-->
+    <!--            <div id="footer">-->
+    <!--                <div class="footer-area footer-padding" style="background-color: #fff;">-->
+    <!--                    <p>hello-->
+    <!--                        gjfdlhvlknhvlkblkbvhlkhvwlkhvlkhbvlkhnbvwlkhvlkhwbhlkbwhlkbwhlkwhlkwbkbwhlkwhkwbhbwlhbwlwhblwhwlkhwblhwblwhlwhwlhwblkw-->
+    <!--                        gvfggvekvbkjbvkjewbvkvwbkvwbvkjvbwkjwbkjwbkjvbkj-->
+    <!--                        hwvghvhvwhvwhvwhogvhbohhveovehpo-->
+    <!--                        nbvwbbwojbwojbw;oj-->
+    <!--                    </p>-->
+    <!--                </div>-->
+
+    <!--            </div>-->
+    <!--            &lt;!&ndash;        <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">&ndash;&gt;-->
+    <!--            &lt;!&ndash;            <p>test hellow</p>&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;            <section class="s_text_block pt16 pb8">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="container">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                    <div class="row">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                        <div class="col-lg-4">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            <h5>Our Products &amp; Services</h5>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            <ul class="list-unstyled">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <li><a href="/">Home</a></li>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            </ul>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                        </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                        <div class="col-lg-4" id="connect">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            <h5>Connect with us</h5>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            <ul class="list-unstyled">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <li><a href="/contactus">Contact us</a></li>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <li><i class="fa fa-phone"/> <span class="o_force_ltr" t-field="res_company.phone"/></li>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <li><i class="fa fa-envelope"/>  <span t-field="res_company.email"/></li>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            </ul>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            <p>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <a t-if="website.social_facebook" t-att-href="website.social_facebook" class="btn btn-sm btn-link"><i class="fa fa-2x fa-facebook-square"/></a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <a t-if="website.social_twitter" t-att-href="website.social_twitter" class="btn btn-sm btn-link"><i class="fa fa-2x fa-twitter"/></a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <a t-if="website.social_linkedin" t-att-href="website.social_linkedin" class="btn btn-sm btn-link"><i class="fa fa-2x fa-linkedin"/></a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <a t-if="website.social_youtube" t-att-href="website.social_youtube" class="btn btn-sm btn-link"><i class="fa fa-2x fa-youtube-play"/></a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <a t-if="website.social_github" t-att-href="website.social_github" class="btn btn-sm btn-link"><i class="fa fa-2x fa-github"/></a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <a t-if="website.social_instagram" t-att-href="website.social_instagram" class="btn btn-sm btn-link"><i class="fa fa-2x fa-instagram"/></a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            </p>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                        </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                        <div class="col-lg-4">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            <h5>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <span t-field="res_company.name"/>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                <small> - <a href="/aboutus">About us</a></small>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            </h5>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            <p>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                We are a team of passionate people whose goal is to improve everyone's&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                life through disruptive products. We build great products to solve your&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                business problems.&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            </p>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            <p>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                Our products are designed for small to medium size companies willing to optimize&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                                their performance.&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                            </p>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                        </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                    </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;            </section>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;        </div>&ndash;&gt;-->
+
+    <!--        </xpath>-->
+    <!--    </template>-->
+
+
+    <template id="footer_default_sample" inherit_id="website.layout"
+              name="Footer Sample">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer">
+                <div class="footer-area footer-padding" style="background-color: #fff;">
+                    <div class="container">
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="single-footer-caption mb-30">
+                                        <!-- logo -->
+                                        <div class="footer-logo">
+                                            <a href="index.html">
+                                                <img src="/cts_theme_perfume/static/src/img/logo/FRAG_LOGO.png"
+                                                     alt=""/>
+                                            </a>
+                                        </div>
+                                        <div class="footer-tittle">
+                                            <div class="footer-pera">
+                                                <p>Asorem ipsum adipolor
+                                                    sdit amet, consectetur
+                                                    adipisicing elitcf sed
+                                                    do eiusmod tem.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="footer-tittle">
+                                        <h4>Quick Links</h4>
+                                        <ul>
+                                            <li>
+                                                <a href="#">About</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Offers &amp;
+                                                    Discounts
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Get Coupon</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Contact Us</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="footer-tittle">
+                                        <h4>New Products</h4>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Woman Perfume
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Fashion
+                                                    Accessories
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Men Perfume</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Air Freshner</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="footer-tittle">
+                                        <h4>Support</h4>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Frequently Asked
+                                                    Questions
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Terms &amp;
+                                                    Conditions
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Privacy Policy
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Report a Payment
+                                                    Issue
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Footer bottom -->
+                        <div class="row align-items-center">
+                            <div class="col-xl-7 col-lg-8 col-md-7">
+                                <div class="footer-copy-right">
+                                    <p>
+                                        Copyright &#169;<script></script>
+                                        All rights reserved | This template
+                                        is made with <i class="fa fa-heart"
+                                    ></i> by
+                                        <a href="https://cybrosys.com"
+                                           target="_blank">Cybrosys
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-4 col-md-5">
+                                <div class="footer-copy-right f-right">
+                                    <!-- social -->
+                                    <div class="footer-social">
+                                        <a href="#">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                        <a href="https://www.facebook.com">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="fab fa-behance"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="fas fa-globe"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+            id="report_usl_report"
+            model="usl.lc.management"
+            string="LC Report"
+            report_type="qweb-pdf"
+            name="usl_lc_management.ucb_report_view"
+            file="usl_lc_management.ucb_report_view"
+    />
+</odoo>

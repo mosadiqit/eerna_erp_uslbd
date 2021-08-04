@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="web_slider_widget assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/web_slider_widget/static/src/js/slider.js"></script>
+                <link rel="stylesheet" href="/web_slider_widget/static/src/css/slider_style.css"/>
+            </xpath>
+        </template>
+    </data>
+</openerp>

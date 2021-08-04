@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="purchase_approval_settings_form" model="ir.ui.view">
+        <field name="name">purchase.approval.settings.form</field>
+        <field name="model">purchase.approval.settings</field>
+        <field name="arch" type="xml">
+            <form string="Approval Settings">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="allowed_company" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page name="approval_page" string="Approval Settings">
+                            <field name="approval_line_ids">
+                                <tree editable="bottom">
+                                    <field name="priority"/>
+                                    <field name="user"/>
+                                    <field name="purchase_approval_id" invisible="1" readonly="1"/>
+                                    <field name="status" invisible="1" readonly="1"/>
+                                    <field name="purchase_order" invisible="1" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_purchase_approval_settings" model="ir.actions.act_window">
+        <field name="name">Purchase Approval Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.approval.settings</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Please Add your Purchase Approval Settings
+            </p>
+        </field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_purchase_approval_settings" name="Purchase Approval Settings"
+              parent="purchase.menu_purchase_config" action="action_purchase_approval_settings" sequence="1"/>
+</odoo>

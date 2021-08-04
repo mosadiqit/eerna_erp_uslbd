@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<template id="test_style" inherit_id="web.assets_backend">
+        <xpath expr="link[last()]" position="after">
+            <link href="/usl_foreign_purchase_smart/static/src/scss/foreign_purchase.scss" rel="stylesheet" type="text/scss" />
+        </xpath>
+    </template>
+    </odoo>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <template id="custom_delivery_slip">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+<!--                    <t t-call="custom_sale_invoice_report.custom_header_new"/>-->
+                    <t t-call="custom_sale_invoice_report.new_delivary_slip" t-lang="lang"/>
+
+                </t>
+
+            </t>
+        </template>
+
+<!--        <template id="custom_header_digital_challan" inherit_id="custom_sale_invoice_report.custom_header_new" primary="True">-->
+<!--        <xpath expr="//div[@class='row']" position="after">-->
+<!--            <div class="row">-->
+<!--                <div class="col-8"></div>-->
+<!--                <div class="col-3 text-center border">-->
+<!--                    <span style="margin-bottom:40px;margin-top:40px;"><h4>CHALLAN</h4></span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+    <template id="new_delivary_slip" inherit_id="stock.report_delivery_document" primary="True">
+         <xpath expr="//div[@class='row mt32 mb32']" position="before">
+                   <div class="row" >
+               <div class="col-6">
+                   <h4>
+
+                        <span t-field="o.name"/>
+                    </h4>
+                   </div>
+               <div class="col-6 text-right">
+                        <h4>
+                          <span  t-if="o.date">Challan Date:</span>  <span class="m-0" t-field="o.date"/>
+                        </h4>
+               </div>
+           </div>
+              <div class="row" style="margin-top:15px">
+               <div class="col-6 text-left">
+                   <h4>
+                       <span >Ref. Invoice:</span>
+                        <span  t-esc="invoice_no"/>
+                   </h4>
+
+
+               </div>
+               <div id="test" class="col-6 text-right">
+			   </div>
+              </div>
+
+             <div class="row" style="margin-top:50px;">
+               <div class="col-6 text-left" >
+                   <span >Ship To:</span>
+
+               </div>
+
+               <div class="col-6">
+					<span>Shipping Date:</span>
+
+			</div>
+
+
+               </div>
+                <hr style="margin-top:-3px"></hr>
+
+
+            <div class="row" style="margin-top:-10px">
+               <div class="col-6 text-left">
+                <div t-esc="partner"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+               </div>
+               <div class="col-6 text-left">
+					<t t-if="o.state">
+                            <t t-if="o.state == 'done'">
+                                <span t-field="o.date_done"/>
+                            </t>
+                            <t t-if="o.state != 'done'">
+                                <span t-field="o.scheduled_date"/>
+                            </t>
+                        </t>
+			</div>
+            </div>
+             <br></br>
+
+            </xpath>
+        <xpath expr="//h2" position="replace">
+               <span></span>
+           </xpath>
+        <xpath expr="//div[@class='row mt32 mb32']" position="replace">
+                    <span></span>
+            </xpath>
+        <xpath expr="//t[@t-set='address']" position="replace">
+                    <span></span>
+            </xpath>
+
+        <xpath expr="//table[@class='table table-sm']" position="replace">
+            <table class="table table-sm" t-if="o.state!='done'" name="stock_move_table">
+             <thead style="background-color:#d3d3d3">
+                            <tr>
+                                <th name="th_sm_product">
+                                    <strong>Product</strong>
+                                </th>
+                                <th name="th_sm_quantity">
+                                    <strong>Quantity</strong>
+                                </th>
+                            </tr>
+                        </thead>
+            <tbody>
+                    <tr t-foreach="main_table" t-as="value">
+                        <td class="text-left">
+                            <t t-esc="value[1]"/>
+                        </td>
+                        <td class="text-right">
+                            <t t-esc="'%.0f'% value[2]"/> Units
+                        </td>
+
+                    </tr>
+            </tbody>
+            </table>
+        </xpath>
+
+         <xpath expr="//table[@class='table table-sm mt48']" position="replace">
+             <table class="table table-sm mt48" t-if="o.move_line_ids and o.state=='done'"
+                           name="stock_move_line_table">
+             <thead style="background-color:#d3d3d3">
+                            <tr>
+                                <th name="th_sml_product">
+                                    <strong>Product</strong>
+                                </th>
+                                <th name="th_sml_quantity">
+                                    <strong>Quantity</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                <tbody>
+                    <tr t-foreach="main_table" t-as="value">
+                        <td class="text-left">
+                            <div><span t-esc="value[1]"/></div>
+                              <div t-if="value[4]!=''"> [<span t-esc="value[4]"/>]</div>
+                        </td>
+                        <td class="text-right">
+                            <t t-esc="'%.0f'% value[2]"/> Units
+                        </td>
+
+                    </tr>
+            </tbody>
+             </table>
+        </xpath>
+
+        <xpath expr="//table[@class='table table-sm mt48']/tbody" position="inside">
+            <t t-set="grand_total" t-value="0"/>
+        </xpath>
+
+
+        <xpath expr="//table[@class='table table-sm mt48']" position="after">
+
+            <table class="table table-sm mt48" id="G_total">
+                <tr>
+                    <td class="text-right"><span>Total</span></td>
+                <td class="text-right"><t t-esc="'%.0f'% total_quantity"/> Units</td>
+            </tr>
+            </table>
+
+        </xpath>
+  
+
+        <xpath expr="//table[@id='G_total']" position="after">
+            <t t-call="custom_sale_invoice_report.custom_details_footer"/>
+            <t t-call="custom_sale_invoice_report.custom_footer"/>
+        </xpath>
+
+    </template>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_stock_picking" model="ir.ui.view">
+            <field name="name">inherit.stock.move</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//form/header" position="inside">-->
+<!--                    <field name="show_mark_as_todo" invisible="1"/>-->
+<!--                </xpath>-->
+
+                <xpath expr="//page/field[@name='move_ids_without_package']/tree" position="inside">
+                    <field name="visible_delivery_button" invisible="1"/>
+<!--                    <button name="action_show_details_for_delivery" string="Register lots, packs, location" type="object" icon="fa-list" width="0.1"-->
+<!--                                            options='{"warn": true}'/>-->
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

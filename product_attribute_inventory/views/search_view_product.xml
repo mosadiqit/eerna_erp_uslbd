@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="group_group_by" model="ir.ui.view">
+            <field name="name">product.template.search.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+<!--                <field name="name" position="replace">-->
+<!--                    <field name="name" string="Product" filter_domain="['|', '|', '|', ('default_code', 'ilike', self), ('name', 'ilike', self), ('barcode', 'ilike', self)]"/>-->
+<!--                </field>-->
+                <xpath expr="//search" position="inside">
+                    <filter string="Brand" name="Brand" context="{'group_by':'brand_id'}"/>
+                    <filter string="Model" name="Model" context="{'group_by':'product_model_id'}"/>
+                    <filter string="Group" name="Group" context="{'group_by':'group_id'}"/>
+                    <filter string="Part Number" name="Part Number" context="{'group_by':'part_number_id'}"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field string="Brand" name="brand_id" domain="[]"/>
+                    <field string="Model" name="product_model_id" domain="[]"/>
+                    <field string="Group" name="group_id" domain="[]"/>
+                    <field string="Part Number" name="part_number_id" domain="[]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

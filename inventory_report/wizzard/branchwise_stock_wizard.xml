@@ -1,0 +1,47 @@
+<odoo>
+	<data>
+
+	    <record id="branchwise_report_stock_form_view" model="ir.ui.view">
+			<field name="name">branchwise.report.stock.form</field>
+			<field name="model">branchwise.report.stock</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+
+		        <form string="Branch Wise Stock Report">
+	                <group>
+		        		<group>
+		                    <field name="product_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+		                    <field name="brand_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+<!--		                    <field name="categ_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>-->
+
+		                </group>
+		                <group>
+		                	<field name="location_ids" domain="[('usage','=','internal')]" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+<!--							<field name="model_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>-->
+							<field name="group_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+
+		                </group>
+		        	</group>
+
+	                <footer>
+	                    <button name="print_excel_report" string="Export" type="object" class="oe_highlight"/> or
+	                    <button string="Cancel" class="oe_link" special="cancel"/>
+	                </footer>
+
+		        </form>
+	    	</field>
+	    </record>
+
+	    <record id="branchwise_action_report_stock_xlsx" model="ir.actions.act_window">
+			<field name="name">Branch Wise Stock Report</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">branchwise.report.stock</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="branchwise_report_stock_form_view"/>
+			<field name="target">new</field>
+	    </record>
+
+		<menuitem id="branchwise_menu_report_stock_xlsx" action="branchwise_action_report_stock_xlsx" parent="stock.menu_warehouse_report"/>
+
+	</data>
+</odoo>

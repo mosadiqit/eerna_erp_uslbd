@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_sale_summary_report" model="report.paperformat">
+        <field name="name">Sale Summary</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_right">7</field>
+        <field name="margin_left">7</field>
+        <field name="header_line" eval="True"/>
+        <field name="header_spacing">15</field>
+        <field name="dpi">90</field>
+    </record>
+
+       <data>
+
+        <record id="draft" model="foreign.purchase.state">
+            <field name="state_name">draft</field>
+            <field name="product_count">10</field>
+            <field name="color">0</field>
+        </record>
+
+        <record id="pre-shipment" model="foreign.purchase.state">
+            <field name="state_name">pre-shipment</field>
+            <field name="product_count">02</field>
+            <field name="color">0</field>
+        </record>
+        <record id="shipment" model="foreign.purchase.state">
+            <field name="state_name">shipment</field>
+            <field name="product_count">30</field>
+            <field name="color">0</field>
+        </record>
+        <record id="invoice" model="foreign.purchase.state">
+            <field name="state_name">invoice</field>
+            <field name="product_count">20</field>
+            <field name="color">0</field>
+        </record>
+<!--         <record id="done" model="foreign.purchase.state">-->
+<!--            <field name="state_name">done</field>-->
+<!--            <field name="product_count">04</field>-->
+<!--            <field name="color">0</field>-->
+<!--        </record>-->
+<!--         <record id="expired" model="foreign.purchase.state">-->
+<!--            <field name="state_name">expired</field>-->
+<!--            <field name="product_count">60</field>-->
+<!--            <field name="color">0</field>-->
+<!--        </record>-->
+
+
+    </data>
+</odoo>

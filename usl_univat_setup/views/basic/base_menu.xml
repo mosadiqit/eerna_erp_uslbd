@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="univat_menu_root"
+        name="UniVAT"
+        sequence="10"/>
+
+<!--    Setup Start-->
+
+    <menuitem id="univat_setup_menu"
+        name="Setup"
+        parent="univat_menu_root"
+        sequence="2" />
+
+    <menuitem id="univat_other_tax_menu"
+        name="Other Tax Information"
+        parent="univat_setup_menu"
+        sequence="3"
+        action="action_other_tax_info"/>
+
+    <menuitem id="univat_hs_code_menu"
+        name="HS Code"
+        parent="univat_setup_menu"
+        sequence="4"
+        action="action_product_hs_code"/>
+
+    <menuitem id="univat_pc_value_added_item_menu"
+        name="Value Added Item"
+        parent="univat_setup_menu"
+        sequence="5"
+        action="action_pc_value_added_item"/>
+
+    <menuitem id="univat_vat_deduction_services_item_menu"
+        name="VAT Deduction Services"
+        parent="univat_setup_menu"
+        sequence="6"
+        action="action_vat_deduction_services_item"/>
+
+<!--    Setup End-->
+
+<!--    Price Declaration Start-->
+
+    <menuitem id="univat_price_declaration_menu"
+        name="Price Declaration"
+        parent="univat_menu_root"
+        sequence="3"/>
+
+<!--    Price Declaration End-->
+
+<!--    Adjustment Start-->
+
+    <menuitem id="univat_adjustment_menu"
+        name="Adjustment"
+        parent="univat_menu_root"
+        sequence="4"/>
+
+<!--    Adjustment End-->
+
+</odoo>

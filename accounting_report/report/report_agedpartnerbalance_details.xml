@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="report_agedpartnerbalance_details"
+        model="aged.partner.balance.inherit"
+        string="Aged Partner Balance Details"
+        report_type="qweb-pdf"
+        name="accounting_report.report_agedpartnerbalance_details_view"
+        paperformat="accounting_report.paperformat_accounting_summary_report"
+        menu="False"/>
+
+        <template id="report_agedpartnerbalance_details_view">
+            <t t-call="web.html_container">
+        <t t-call="web.internal_layout">
+            <div class="page">
+                <h2>Aged Partner Balance Details</h2>
+
+                <div class="row mt32">
+                    <div class="col-2">
+                        <strong>Start Date:</strong>
+                    </div>
+                    <div class="col-4">
+                        <p t-esc="data['date_from']"/>
+                    </div>
+                    <div class="col-2">
+                        <strong>Period Length (days):</strong>
+                    </div>
+                    <div class="col-4">
+                        <p t-esc="data['period_length']"/>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-2">
+                        <strong>Partner's:</strong>
+                    </div>
+                    <div class="col-4">
+                        <p>
+                            <span t-if="data['result_selection'] == 'customer'">Receivable Accounts</span>
+                            <span t-if="data['result_selection'] == 'supplier'">Payable Accounts</span>
+                            <span t-if="data['result_selection'] == 'customer_supplier'">Receivable and Payable Accounts</span>
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <strong>Target Moves: </strong>
+                    </div>
+                    <div class="col-4">
+                        <p>
+                            <span t-if="data['target_move'] == 'all'">All Entries</span>
+                            <span t-if="data['target_move'] == 'posted'">All Posted Entries</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb32">
+                    <div class="col-2">
+                        <strong>Company: </strong>
+                    </div>
+                    <div class="col-4">
+                        <p>
+                            <p t-esc="data['company_id'][1]"/>
+                        </p>
+                    </div>
+                    <t t-if="sale_person_id != 0">
+                        <div class="col-2">
+                            <strong>Sales Person:</strong>
+                        </div>
+                        <div class="col-4">
+                            <p t-esc="sale_person_name"/>
+                        </div>
+                    </t>
+                </div>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th><span>Partners</span></th>
+                            <th class="text-right">
+                                <span>Not due</span>
+                            </th>
+                            <th class="text-right"><span t-esc="data['4']['name']"/></th>
+                            <th class="text-right"><span t-esc="data['3']['name']"/></th>
+                            <th class="text-right"><span t-esc="data['2']['name']"/></th>
+                            <th class="text-right"><span t-esc="data['1']['name']"/></th>
+                            <th class="text-right"><span t-esc="data['0']['name']"/></th>
+                            <th class="text-right"><span>Total Receivable Amt. </span></th>
+                            <th class="text-right"><span>Security Amt. </span></th>
+                            <th class="text-right"><span>Tax Amt. </span></th>
+                            <th class="text-right"><span>BP Amt. </span></th>
+                            <th class="text-right"><span>VAT Amt. </span></th>
+                            <th class="text-right"><span>Grand Total</span></th>
+                        </tr>
+                        <tr t-if="get_partner_lines">
+                            <th>Account Total</th>
+                            <th class="text-right"><span t-esc="get_direction[6]" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></th>
+                            <th class="text-right"><span t-esc="get_direction[4]" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></th>
+                            <th class="text-right"><span t-esc="get_direction[3]" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></th>
+                            <th class="text-right"><span t-esc="get_direction[2]" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></th>
+                            <th class="text-right"><span t-esc="get_direction[1]" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></th>
+                            <th class="text-right"><span t-esc="get_direction[0]" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></th>
+                            <th class="text-right"><span t-esc="get_direction[5]" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="get_partner_lines" t-as="partner">
+                            <td>
+                                <span t-esc="partner['name']"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['direction']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['4']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['3']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['2']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['1']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['0']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['total']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['security_amt']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['tax_amt']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['bp_amt']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['vat_amt']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="partner['total']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </t>
+        </template>
+
+</odoo>

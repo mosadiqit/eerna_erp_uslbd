@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report id="account_payment_statement_report"
+            model="accounting.payment.report.wizard"
+            string="Payment Statement"
+            report_type="qweb-pdf"
+            name="accounting_report.payment_statement_report_view"
+            paperformat="accounting_report.paperformat_accounting_summary_report"
+            menu="False"/>
+
+    <report id="account_payment_statement_report_xls"
+            model="accounting.payment.report.wizard"
+            string="Payment Statement xls"
+            report_type="xlsx"
+            name="accounting_report.payment_statement_report_view_xls"
+            file="Payment Statement"
+            menu="False"/>
+
+    <template id="payment_statement_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <!--                <h3 class="text-center">Smart Technologies (BD) Ltd.-->
+                <!--                    <br></br>-->
+                <!--                    <span style="font-size: 12px;">Address: Yakub South Center, 67/D(Old), 156(New), Mirpur Road (2nd Floor), Lake Circus, Kalabagan.</span>-->
+                <!--                </h3>-->
+
+                <h4 class="text-center">Payment Statement
+                    <br></br>
+                    <span style="font-size: 12px;"><strong>From</strong>:
+                        <t t-esc="date_start"/>
+                        <strong>To</strong>:
+                        <t t-esc="date_end"/>
+                    </span>
+                </h4>
+            </div>
+            <br/>
+
+            <div class="article mt1 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <br/>
+                    <h4 class="text-center">
+                        <t t-esc="branch"/>
+                    </h4>
+                    <thead>
+                        <th style="width: 2%">SL</th>
+                        <th style="width: 18%">Party</th>
+                        <th class="text-center" style="width: 20%">Contact Person</th>
+                        <th class="text-center" style="width: 17%">Receipt No</th>
+                        <th class="text-center" style="width: 20%">Payment By</th>
+                        <th class="text-center" style="width: 15%">Invoice No</th>
+                        <th class="text-center" style="width: 8%">Payment Amount</th>
+                    </thead>
+<!--                    <tbody>-->
+<!--                        <t t-set="all_total_amount" t-value="0"/>-->
+<!--                        <t t-foreach="collection_statements" t-as="branch_name" style="top:5px">-->
+<!--                            <tr>-->
+<!--                                <td class="text-left" colspan="7" style="background-color:#e6e1e1">-->
+<!--                                    <t t-esc="branch_name"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+
+<!--                            <t t-foreach="branch_name_value" t-as="date_wise_collection">-->
+<!--                                <tr>-->
+<!--                                    <td class="text-center" colspan="7" style="background-color:#AEACAC">-->
+<!--                                        <t t-esc="date_wise_collection"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+
+<!--                            <t t-set="date_amount" t-value="0"/>-->
+<!--                            <t t-foreach="date_wise_collection_value" t-as="payment_method_collection">-->
+<!--                                <tr>-->
+<!--                                    <td class="text-center" colspan="7">-->
+<!--                                        <t t-esc="payment_method_collection"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <t t-set="payment_method_amount" t-value="0"/>-->
+<!--                                <t t-foreach="payment_method_collection_value" t-as="journal_collection">-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left" colspan="7">-->
+<!--                                            <t t-esc="journal_collection"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <t t-set="count" t-value="1"/>-->
+<!--                                    <t t-set="journal_amount" t-value="0"/>-->
+<!--                                    <t t-foreach="journal_collection_value" t-as="value">-->
+<!--                                        <tr>-->
+<!--                                            <td>-->
+<!--                                                <t t-esc="count"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-left">-->
+<!--                                                <t t-esc="value[3]"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-left">-->
+<!--                                                <t t-esc="value[4]"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-left">-->
+<!--                                                <t t-esc="value[5]"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-left">-->
+<!--                                                <t t-esc="value[6]"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-left">-->
+<!--                                                <t t-if="value[7] == null">-->
+<!--                                                    Partial Payment-->
+<!--                                                </t>-->
+<!--                                                <t t-esc="value[7]"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center">-->
+<!--                                                <t t-esc="value[-3]"/>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <t t-set="count" t-value="count + 1"/>-->
+<!--                                        <t t-set="journal_amount" t-value="journal_amount + value[8]"/>-->
+<!--                                    </t>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-right" colspan="6">Total-->
+<!--                                            <t t-esc="journal_collection"/>-->
+<!--                                            Amount-->
+<!--                                        </td>-->
+<!--                                        <td class="text-center">-->
+<!--                                            <t t-esc="journal_amount"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <t t-set="payment_method_amount" t-value="payment_method_amount + journal_amount"/>-->
+
+<!--                                </t>-->
+<!--                                <tr>-->
+<!--                                    <td class="text-right" colspan="6">Total-->
+<!--                                        <t t-esc="payment_method_collection"/>-->
+<!--                                        Amount-->
+<!--                                    </td>-->
+<!--                                    <td class="text-center">-->
+<!--                                        <t t-esc="payment_method_amount"/>-->
+<!--                                    </td>-->
+
+<!--                                </tr>-->
+
+<!--                                <t t-set="date_amount" t-value="date_amount + payment_method_amount"/>-->
+
+<!--                            </t>-->
+<!--&lt;!&ndash;                            Date Wise Total       &ndash;&gt;-->
+
+<!--                            <tr>-->
+<!--                                <td class="text-center" colspan="7">Total On [ <t t-esc="date_wise_collection"/> ]</td>-->
+<!--                            </tr>-->
+<!--                            <t t-foreach="date_wise_payment_method[date_wise_collection]" t-as="total_date">-->
+<!--                                <tr>-->
+<!--                                    <td class="text-right" colspan="6" style="background-color:#CFCDCD">Total <t t-esc="total_date"/> Amount</td>-->
+<!--                                    <td class="text-center" style="background-color:#CFCDCD"><t t-esc="total_date_value"/></td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
+<!--                            <tr>-->
+<!--                                <td class="text-right" colspan="6" style="background-color:#CFCDCD">Total Amount On (<t t-esc="date_wise_collection"/>)</td>-->
+<!--                                <td class="text-center" style="background-color:#CFCDCD"><t t-esc="date_amount"/></td>-->
+<!--                            </tr>-->
+<!--                            <t t-set="all_total_amount" t-value="all_total_amount + date_amount"/>-->
+<!--                            </t>-->
+
+<!--&lt;!&ndash;                            Branch Wise Total       &ndash;&gt;-->
+<!--                            <tr style="top:5px">-->
+<!--                                <td class="text-center" colspan="7">Total Of [ <t t-esc="branch_name"/> ]</td>-->
+<!--                            </tr>-->
+
+<!--                            <t t-foreach="branch_wise_payment_method[branch_name]" t-as="total">-->
+<!--                                <tr>-->
+<!--                                    <td class="text-right" colspan="6" style="background-color:#B5B3B3">Total-->
+<!--                                        <t t-esc="total"/>-->
+<!--                                        Amount-->
+<!--                                    </td>-->
+<!--                                    <td class="text-center" style="background-color:#B5B3B3">-->
+<!--                                        <t t-esc="total_value"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
+<!--                            <tr>-->
+<!--                                <td class="text-right" colspan="6" style="background-color:#B5B3B3">Grand Total Amount</td>-->
+<!--                                <td class="text-center" style="background-color:#B5B3B3">-->
+<!--                                    <t t-esc="all_total_amount"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <br>-->
+
+<!--                            </br>-->
+<!--                            <br></br>-->
+<!--                        </t>-->
+<!--                        <tr style="top:5px">-->
+<!--                            <td class="text-center" colspan="7">-&#45;&#45;&#45;&#45; GRAND TOTAL &#45;&#45;&#45;&#45;&#45;&#45;</td>-->
+<!--                        </tr>-->
+
+<!--                        <t t-foreach="total_collection" t-as="total">-->
+<!--                            <tr>-->
+<!--                                <td class="text-right" colspan="6" style="background-color:#B5B3B3">Total-->
+<!--                                    <t t-esc="total"/>-->
+<!--                                    Amount-->
+<!--                                </td>-->
+<!--                                <td class="text-center" style="background-color:#B5B3B3">-->
+<!--                                    <t t-esc="total_value"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                        <tr>-->
+<!--                            <td class="text-right" colspan="6" style="background-color:#B5B3B3">Grand Total Amount</td>-->
+<!--                            <td class="text-center" style="background-color:#B5B3B3">-->
+<!--                                <t t-esc="all_total_amount"/>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </tbody>-->
+                                        <tbody>
+                        <t t-set="grand_total_amount" t-value="0"/>
+                        <t t-set="all_total_amount" t-value="0"/>
+                        <t t-foreach="collection_statements" t-as="date_wise_collection">
+                            <tr>
+                                <td class="text-left" colspan="7" style="background-color:#e6e1e1">
+                                    <t t-esc="date_wise_collection"/>
+                                </td>
+                            </tr>
+
+                            <t t-foreach="date_wise_collection_value" t-as="branch_name">
+                                <tr>
+                                    <td class="text-center" colspan="7" style="background-color:#AEACAC">
+                                        <t t-esc="branch_name"/>
+                                    </td>
+                                </tr>
+
+                            <t t-set="date_amount" t-value="0"/>
+                            <t t-foreach="branch_name_value" t-as="payment_method_collection">
+                                <tr>
+                                    <td class="text-center" colspan="7">
+                                        <t t-esc="payment_method_collection"/>
+                                    </td>
+                                </tr>
+                                <t t-set="payment_method_amount" t-value="0"/>
+                                <t t-foreach="payment_method_collection_value" t-as="journal_collection">
+                                    <tr>
+                                        <td class="text-left" colspan="7">
+                                            <t t-esc="journal_collection"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="count" t-value="1"/>
+                                    <t t-set="journal_amount" t-value="0"/>
+                                    <t t-foreach="journal_collection_value" t-as="value">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="count"/>
+                                            </td>
+                                            <td class="text-left">
+                                                <t t-esc="value[3]"/>
+                                            </td>
+                                            <td class="text-left">
+                                                <t t-esc="value[4]"/>
+                                            </td>
+                                            <td class="text-left">
+                                                <t t-esc="value[5]"/>
+                                            </td>
+                                            <td class="text-left">
+                                                <t t-esc="value[6]"/>
+                                            </td>
+                                            <td class="text-left">
+                                                <t t-if="value[7] == null">
+                                                    Partial Payment
+                                                </t>
+                                                <t t-esc="value[7]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <t t-esc="value[-3]"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="count" t-value="count + 1"/>
+                                        <t t-set="journal_amount" t-value="journal_amount + value[8]"/>
+                                    </t>
+                                    <tr>
+                                        <td class="text-right" colspan="6">Total
+                                            <t t-esc="journal_collection"/>
+                                            Amount
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-esc="journal_amount"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="payment_method_amount" t-value="payment_method_amount + journal_amount"/>
+
+                                </t>
+                                <tr>
+                                    <td class="text-right" colspan="6">Total
+                                        <t t-esc="payment_method_collection"/>
+                                        Amount
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-esc="payment_method_amount"/>
+                                    </td>
+
+                                </tr>
+
+                                <t t-set="date_amount" t-value="date_amount + payment_method_amount"/>
+
+                            </t>
+<!--                            ****************************************branch Wise Total**********************************************      -->
+
+                            <tr>
+                                <td class="text-center" colspan="7">Total On [ <t t-esc="branch_name"/> ]</td>
+                            </tr>
+                            <t t-foreach="branch_wise_payment_method[branch_name][date_wise_collection]" t-as="total_date">
+                                <tr>
+                                    <td class="text-right" colspan="6" style="background-color:#CFCDCD">Total <t t-esc="total_date"/> Amount</td>
+                                    <td class="text-center" style="background-color:#CFCDCD"><t t-esc="total_date_value"/></td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td class="text-right" colspan="6" style="background-color:#CFCDCD">Total Amount On (<t t-esc="branch_name"/>)</td>
+                                <td class="text-center" style="background-color:#CFCDCD"><t t-esc="date_amount"/></td>
+                            </tr>
+<!--                            <t t-set="all_total_amount" t-value="all_total_amount + date_amount"/>-->
+                            </t>
+
+<!--                            ********************************date Wise Total*******************************************       -->
+                            <tr style="top:5px">
+                                <td class="text-center" colspan="7">Total Of [ <t t-esc="date_wise_collection"/> ]</td>
+                            </tr>
+                            <t t-set="date_wise_amount" t-value="0"/>
+                            <t t-foreach="date_wise_payment_method[date_wise_collection]" t-as="total">
+                                <tr>
+                                    <td class="text-right" colspan="6" style="background-color:#B5B3B3">Total
+                                        <t t-esc="total"/>
+                                        Amount
+                                    </td>
+                                    <td class="text-center" style="background-color:#B5B3B3">
+                                        <t t-esc="total_value"/>
+                                        <t t-set="date_wise_amount" t-value="date_wise_amount+total_value"/>
+                                    </td>
+
+                                </tr>
+                                <t t-set="all_total_amount" t-value="all_total_amount + total_value"/>
+
+                            </t>
+                            <tr>
+                                <td class="text-right" colspan="6" style="background-color:#B5B3B3">Total Amount On(<t t-esc="date_wise_collection"/>)</td>
+                                <td class="text-center" style="background-color:#B5B3B3">
+                                    <t t-esc="date_wise_amount"/>
+                                </td>
+                            </tr>
+                            <t t-set="grand_total_amount" t-value="grand_total_amount+date_wise_amount"/>
+                            <t t-set="all_total_amount" t-value="0"/>
+
+                        </t>
+                        <tr style="top:5px">
+                            <td class="text-center" colspan="7">----- GRAND TOTAL ------</td>
+                        </tr>
+
+                        <t t-foreach="total_collection" t-as="total">
+                            <tr>
+                                <td class="text-right" colspan="6" style="background-color:#B5B3B3">Total
+                                    <t t-esc="total"/>
+                                    Amount
+                                </td>
+                                <td class="text-center" style="background-color:#B5B3B3">
+                                    <t t-esc="total_value"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td class="text-right" colspan="6" style="background-color:#B5B3B3">Grand Total Amount</td>
+                            <td class="text-center" style="background-color:#B5B3B3">
+                                <t t-esc="grand_total_amount"/>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row">
+                    <div class="col col-12">
+                        <ul class="list-inline">
+                            <div class="text-left">
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+
+                                <li class="list-inline-item">
+                                    <t t-esc="username"/>
+                                </li>
+
+                            </div>
+                            <div class="text-center">
+                                <li class="list-inline-item">www.uslbd.com</li>
+                            </div>
+                            <div class="text-right">
+                                <li class="list-inline-item">Page:</li>
+                                <li class="list-inline-item">
+                                    <span class="page"/>
+                                </li>
+                                <li class="list-inline-item">/</li>
+                                <li class="list-inline-item">
+                                    <span class="topage"/>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

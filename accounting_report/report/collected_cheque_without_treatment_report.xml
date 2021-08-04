@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+            <report id="collected_cheque_without_treatment_report_xls"
+                model="collected.cheque.without.treatment"
+                string="Collected Cheque Without Treatment xls"
+                report_type="xlsx"
+                name="accounting_report.cheque_without_treatment_xls"
+                file="accounting_report.cheque_without_treatment_xls"
+                menu="False"/>
+    </data>
+
+    <data>
+        <!-- QWeb Reports -->
+        <!-- NAME & FILE_NAME should be the same -->
+
+
+         <report id="collected_cheque_without_treatment_report"
+            model="collected.cheque.without.treatment"
+            string="Collected Cheque Without Treatment"
+            report_type="qweb-pdf"
+            name="accounting_report.cheque_without_treatment_view"
+
+            menu="False"/>
+        <template id="cheque_without_treatment_view">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <div class="article mt1 o_report_layout_standard">
+                        <center>
+                            <b>
+                                <h3>Collected Cheque Without Treatment</h3>
+                            </b>
+                        </center>
+                        <center>
+                            <b>
+                                <span t-esc="date_start"/>
+                                To
+                                <span t-esc="date_end"/>
+                            </b>
+                        </center>
+                        <br/>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+
+                                <th class="text-center" style="width: 20%">Cheque No</th>
+
+                                <th class="text-center" style="width: 10%">Rec Date</th>
+                                <th class="text-center" style="width: 20%">Cheque Date</th>
+                                <th class="text-center" style="width: 10%">Bank Name</th>
+                                <th class="text-center" style="width: 15%">Collection No.</th>
+                                <th class="text-center" style="width: 10%">S.Person</th>
+                                <th class="text-center" style="width: 10%">Amount</th>
+<!--                                <th class="text-center" style="width: 10%">Branch</th>-->
+                            </thead>
+                            <t t-foreach="data.keys()" t-as="buyer_group">
+                                <tr>
+                                    <td class="text-center" colspan="7" style="background-color:#e6e1e1">
+                                    Buyer Group: <t t-esc="buyer_group"/>
+                                    </td>
+                                </tr>
+                                <t t-set="grand_total" t-value="0"/>
+                                <t t-foreach="data[buyer_group]" t-as="customer">
+                                    <tr>
+                                        <td class="text-center" colspan="7" style="background-color:#AEACAC">
+                                        Customer Name: <t t-esc="customer"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="count" t-value="1"/>
+                                    <t t-set="sub_total" t-value="0"/>
+                                    <tr t-foreach="data[buyer_group][customer]" t-as="line">
+                                        <td>
+                                            <t t-esc="line[1]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[2]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[3]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[4]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[5]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[6]"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="line[7]"/>
+                                        </td>
+<!--                                        <td class="text-left">-->
+<!--                                            <t t-esc="line[8]"/>-->
+<!--                                        </td>-->
+                                        <t t-set="count" t-value="count + 1"/>
+                                        <t t-set="sub_total" t-value="sub_total + line[7]"/>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right" colspan="6"> Sub Total
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-esc="sub_total"/>
+                                        </td>
+                                        <t t-set="grand_total" t-value="grand_total + sub_total"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td class="text-right" colspan="6">Grand Total
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-esc="grand_total"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+
+
+
+
+

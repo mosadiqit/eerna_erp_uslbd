@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="lc_management_form" model="ir.ui.view">
+        <field name="name">lc.management.form</field>
+        <field name="model">usl.lc.management</field>
+        <field name="arch" type="xml">
+            <form string="LC Management Form">
+                <sheet>
+                    <h3><field name="name_seq"/></h3>
+                    <group>
+                        <group>
+                            <field name="bank_name"/>
+                            <field name="bank_state"/>
+                            <field name="bank_country"/>
+                        </group>
+
+                        <group>
+                            <field name="stamp" widget="image" style="width: 50px; height: 50px;"/>
+                            <field name="lc_no"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <h3 class="text-center">APPLICATION AND AGREEMENT FOR CONFIRMED IRREVOCABLE WITHOUT RECOURSE TO
+                        DRAWERS LETTER OF CREDIT</h3>
+                    <hr/>
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td>
+                                Please open confirmed irrevocable letter of credit through<br/>
+                                your correspondent by brief details of which are as follows:
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <group>
+                                    <field name="is_mail"/>
+                                    <field name="is_teletransmission_in"/>
+                                </group>
+                            </td>
+                            <td>
+                                <group>
+                                    <field name="is_teletransmission_in_full"/>
+                                    <field name="is_swift"/>
+                                </group>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <group>
+                        <group>
+                            <field name="beneficiary_name"/>
+
+                        </group>
+                        <group>
+                            <field name="beneficiary_state"/>
+                            <field name="beneficiary_country"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="openers_name"/>
+
+                        </group>
+                        <group>
+                            <field name="openers_state"/>
+                            <field name="openers_country"/>
+                        </group>
+                    </group>
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td>
+<!--                                Draft amount: <field name="draft_amount"/><br/>-->
+<!--                                In words: <field name="draft_amount_in_word"/>-->
+<!--                                <field name="currency_id" groups="base.group_multi_currency"/>-->
+                                    Draft amount:<field name="draft_amount"/><br/>
+                                    <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                                    Draft amount in words:<field name="draft_amount_in_word" readonly="1"/>
+                                <field name="remaining_amount" invisible="1"/>
+                                <field name="reserved_amount" invisible="1"/>
+                            </td>
+                            <td>
+                                <group>
+                                    <field name="is_at_sight"/>
+                                    <field name="days_da_or_dp"/>
+                                </group>
+                            </td>
+                            <td>
+                                <group>
+                                    <field name="is_cif"/>
+                                    <field name="is_fob"/>
+                                    <field name="is_cfr"/>
+                                </group>
+                            </td>
+                            <td>
+                                Drawn on
+                                <group>
+                                    <field name="is_us"/>
+                                    <field name="is_them"/>
+                                </group>
+                            </td>
+                        </tr>
+                    </table>
+                    <group>
+                        <group>
+                            <field name="utilities"/>
+                        </group>
+                        <group>
+                            <field name="country_of_origin"/>
+                        </group>
+                    </group>
+                    <p>DOCUMENTS REQUIRED SA INDICATED BY CHECK(X)</p>
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td>
+                                <group>
+                                    <field name="is_commercial_invoice_in_sixtuplicate"/>
+                                </group>
+                            </td>
+                            <td>
+                                <group>
+                                    <field name="bangladesh_bank_reg_no"/>
+                                </group>
+                            </td>
+                            <td>
+                                <group>
+                                    <field name="import_licence"/>
+                                </group>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <group>
+                                    <field name="is_custom_invoice_in_duplicate"/>
+                                </group>
+                            </td>
+                            <td>
+                                <group>
+                                    <field name="hs_code" widget="many2many_tags"/>
+                                </group>
+                            </td>
+                            <td>
+                                <group>
+                                    <field name="irc_no"/>
+                                </group>
+                            </td>
+                        </tr>
+                    </table>
+                    <group>
+
+                        <group>
+                            <field name="is_others_doc"/>
+                        </group>
+
+                        <group>
+                             <field name="other_documents"
+                               placeholder="If Special documents are required please specify name of issuer"/>
+
+                        </group>
+                    </group>
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td>
+                                <group>
+                                    <field name="is_clean_bill_landing"/>
+                                </group>
+                            </td>
+                              <td>
+                                <group>
+                                    <field name="is_airway_bill"/>
+                                </group>
+                                  <field name="shipping_address" placeholder="From"/>
+                            </td>
+                              <td>
+                                <group>
+                                    <field name="is_post_parcel"/>
+                                </group>
+                                   <field name="destination_address" placeholder="To"/>
+                            </td>
+                              <td>
+                                <group>
+                                    <field name="is_rel_to_shipment"/>
+                                     <field name="is_tr"/>
+                                    <field name="is_rr"/>
+                                </group>
+                            </td>
+                        </tr>
+                    </table>
+                    <group>
+                        <group>
+                            <field name="insurance_cover_note_policy"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="insurance_amount"/>
+                            <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                            <field name="name_of_insurance_company"/>
+                        </group>
+                    </group>
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td>
+                                <group>
+                                    <field name="is_part_shipment"/>
+                                <field name="is_part_allowed"/>
+                                </group>
+
+                            </td>
+                            <td>
+                                <group>
+                                       <field name="is_part_prohibited"/>
+                                <field name="is_tran_shipment"/>
+                                </group>
+
+                            </td>
+                            <td>
+                                <group>
+                                     <field name="is_tran_allowed"/>
+                                <field name="is_tran_prohibited"/>
+                                </group>
+
+                            </td>
+                        </tr>
+                    </table>
+                    <group>
+                        <group>
+                            <field name="last_date_of_shipment"/>
+                        </group>
+                        <group>
+                            <field name="last_date_of_negotiation"/>
+                        </group>
+                    </group>
+
+                    <group>
+                          <field name="terms_and_conditions" placeholder="Other terms and condition if any"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="lc_management_tree" model="ir.ui.view">
+        <field name="name">lc.management.tree</field>
+        <field name="model">usl.lc.management</field>
+        <field name="arch" type="xml">
+            <tree string="All LC management records">
+                <field name="name_seq"/>
+                <field name="bank_name"/>
+                <field name="lc_no"/>
+                <field name="date"/>
+                <field name="beneficiary_name"/>
+                <field name="openers_name"/>
+                <field name="country_of_origin"/>
+                <field name="insurance_amount"/>
+                <field name="last_date_of_shipment"/>
+            </tree>
+        </field>
+    </record>
+    <record id="lc_management_action" model="ir.actions.act_window">
+        <field name="name">Lc Management</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">usl.lc.management</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+        </p>
+        </field>
+    </record>
+
+    <menuitem id="usl_lc_management" name="USL Lc Management" sequence="-1"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="usl_lc_form" name="LC management form" parent="usl_lc_management" action="lc_management_action"
+              sequence="1"/>
+</odoo>

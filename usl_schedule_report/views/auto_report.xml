@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="automatic_report_form" model="ir.ui.view">
+            <field name="name">auto.report.form</field>
+            <field name="model">auto.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Automatic Report Generation">
+                    <header>
+                        <button name="create_auto_report" type="object" string="Run Manually" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group col="4" colspan="4" class="text-center">
+                            <separator col="2" string="Schedule Report for Every month and auto Email"/>
+                        </group>
+                        <group name="report_settings">
+                            <group>
+                                <field name="report_heading"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="report_list" nolabel="1">
+                                <tree editable="bottom">
+                                    <!--                                            <field name="sequence" widget="handle"/>-->
+                                    <field name="report_list"/>
+                                    <field name="company_id"/>
+                                    <field name="branch_id" widget="many2many_tags"/>
+                                    <field name="status"/>
+                                    <field name="report_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="automatic_report_tree" model="ir.ui.view">
+            <field name="name">automatic.report.tree</field>
+            <field name="model">auto.report</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Automatic Tree List">
+                    <field name='report_heading'/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_automatic_report" model="ir.actions.act_window">
+            <field name="name">Schedule Report</field>
+            <field name="res_model">auto.report</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="automatic_report_tree"/>
+        </record>
+
+        <menuitem id="auto_report_menu" name="Schedule Report" parent="base.menu_custom"/>
+        <menuitem parent="auto_report_menu" id="auto_report_id" action="action_automatic_report"/>
+    </data>
+</odoo>

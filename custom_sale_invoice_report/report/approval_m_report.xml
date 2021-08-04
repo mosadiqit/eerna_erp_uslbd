@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+            id="report_nbr_report"
+            model="account.move"
+            string="Money Requisition"
+            report_type="qweb-pdf"
+            name="custom_sale_invoice_report.money_requisition_view"
+            file="custom_sale_invoice_report.money_requisition_view"
+    />
+</odoo>

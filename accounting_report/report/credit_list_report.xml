@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="account_credit_list_report"
+            model="credit.list.report"
+            string="Credit List Report"
+            report_type="qweb-pdf"
+            name="accounting_report.credit_list_report_view"
+            menu="True"/>
+
+    <template id="credit_list_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Credit List Report</h3>
+                <p class="text-center">
+                    For the Period of <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                    <t t-esc="date_start.date()"/>
+                    <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> To <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                    <t t-esc="date_end.date()"/>
+                </p>
+            </div>
+            <div class="article mt0 o_report_layout_standard">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <th class="text-center" style="width: 15%">Dealer Name</th>
+                        <th class="text-center" style="width: 15%">Bounce</th>
+                        <th class="text-center" style="width: 15%">Ledger Due</th>
+                        <th class="text-center" style="width: 20%">Cheque In Hand</th>
+                        <th class="text-center" style="width: 10%">Net Outstanding</th>
+                        <th class="text-center" style="width: 10%">C. Limit</th>
+                        <th class="text-center" style="width: 10%">Security Money</th>
+                        <th class="text-center" style="width: 5%">Allow Days</th>
+                    </thead>
+                    <t t-foreach="value" t-as="val">
+                        <tbody>
+                            <td class="text-left">
+                                <t t-esc="val[1]"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="val[2]"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="val[3]"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="val[4]"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="val[3]+val[4]"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-if="val[5] == None">
+                                    <t t-esc="0.0"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="val[5]"/>
+                                </t>
+                            </td>
+                            <td class="text-center">
+                                <t t-if="val[6] == None">
+                                    <t t-esc="0.0"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="val[6]"/>
+                                </t>
+                            </td>
+                            <td class="text-center">
+                                <t t-if="val[7] == None">
+                                    <t t-esc="0.0"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="val[7]"/>
+                                </t>
+                            </td>
+                        </tbody>
+                    </t>
+                </table>
+            </div>
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row">
+                    <div class="col col-12">
+                        <ul class="list-inline">
+                            <div class="text-left">
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+
+                                <li class="list-inline-item">
+                                    <t t-esc="username"/>
+                                </li>
+
+                            </div>
+                            <div class="text-center">
+                                <li class="list-inline-item">www.uslbd.com</li>
+                            </div>
+                            <div class="text-right">
+                                <li class="list-inline-item">Page:</li>
+                                <li class="list-inline-item">
+                                    <span class="page"/>
+                                </li>
+                                <li class="list-inline-item">/</li>
+                                <li class="list-inline-item">
+                                    <span class="topage"/>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

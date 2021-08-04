@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_stock_landed_cost_lines" model="ir.ui.view">
+            <field name="name">inherit.stock.landed.cost.lines</field>
+            <field name="model">stock.landed.cost</field>
+            <field name="inherit_id" ref="usl_foreign_purchase.ic_invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='cost_lines']" position="replace">
+                    <field name="cost_lines" context="{'picking_ids': picking_ids, 'default_type': 'service'}">
+                        <form string="Cost Lines">
+                            <group>
+                                <group>
+                                    <field name="product_id"
+                                           domain="[('landed_cost_ok', '=', True)]"
+                                           context="{'default_landed_cost_ok': True}"/>
+                                    <field name="price_unit"/>
+                                </group>
+                                <group>
+                                    <field name="split_method"/>
+                                    <field name="account_id" options="{'no_create': True}"/>
+                                </group>
+                            </group>
+                            <label for="name"/>
+                            <field name="name"/>
+                        </form>
+                        <tree string="Cost Lines" editable="bottom">
+                            <field name="product_id"
+                                   domain="[('landed_cost_ok', '=', True)]"
+                                   context="{'default_landed_cost_ok': True, 'default_type': 'service'}"/>
+                            <field name="invoice_line_product_name" />
+                            <field name="name"/>
+<!--                            <field name="account_id" options="{'no_create': True}"/>-->
+                            <field name="account_id" options="{'no_create': True}" invisible="1"/>
+                            <field name="split_method"/>
+                            <field name="price_unit"/>
+                            <field name="invoice_line_product_id" invisible="1"/>
+
+                        </tree>
+                    </field>
+
+                </xpath>
+                <xpath expr="//field[@name='cost_lines']/tree/field[@name='product_id']" position="after">
+                    <field name="partner"/>
+                    <!--                        <field name="test_field"/>-->
+                </xpath>
+                <xpath expr="//button[@name='compute_landed_cost']" position="replace">
+                    <div class="row" options="{'vertical': true}">
+<!--                        <div>-->
+<!--                            <button name="apply_cd_cost" string="Apply CD" type="object" class="oe_highlight"-->
+<!--                                    attrs="{'invisible': [('button_state', '!=', 'cd')]}"/>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <button name="apply_probational_cost" string="Apply Probational Cost" type="object"-->
+<!--                                    attrs="{'invisible': [('button_state', '!=', 'probation')]}" class="oe_highlight"/>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <button name="compute_landed_cost_foreign" string="Compute" type="object"-->
+<!--                                    attrs="{'invisible': [('button_state', '!=', 'compute')]}" class="oe_highlight"/>-->
+<!--                        </div>-->
+
+                        <div>
+                            <button name="apply_cd_cost"  string="Apply CD" type="object" class="oe_highlight"
+                                    />
+                        </div>
+                        <div>
+                            <button name="apply_probational_cost"  style="margin-top:5px" string="Apply Probational Cost"  type="object"
+                                     class="oe_highlight"/>
+                        </div>
+                        <div>
+                            <button name="compute_landed_cost_foreign" style="margin-top:5px" string="Compute" type="object"
+                                     class="oe_highlight"/>
+                        </div>
+                    </div>
+                </xpath>
+                 <xpath expr="//notebook" position="inside">
+                    <page string="Preview Costing">
+                        <field name="preview_costing">
+                            <!--                                    <form string="Preview Costing">-->
+                            <!--                                        <group>-->
+                            <!--                                            <group>-->
+                            <!--                                                <field name="product_id"/>-->
+
+                            <!--                                            </group>-->
+
+                            <!--                                        </group>-->
+                            <!--                                    </form>-->
+                            <tree string="Preview Costing" editable="bottom" create="0" class="test">
+                                <field name="product_id" readonly="1"/>
+
+                                <field name="product_average_price" invisible="1" />
+
+                                <field name="bank_rate" readonly="1" />
+                                <field name="bank_payment" readonly="1" />
+                                <field name="local_rate" readonly="1" />
+                                <field name="local_payment" readonly="1" />
+                                <field name="landed_cost" readonly="1" />
+                                <field name="provision" readonly="1" />
+                                <field name="cost_price" readonly="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+
+            </field>
+        </record>
+    </data>
+</odoo>

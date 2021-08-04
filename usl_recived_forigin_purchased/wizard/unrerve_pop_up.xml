@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="unreserved_pop_up_form" model="ir.ui.view">
+        <field name="name">Unreserved</field>
+        <field name="model">transfer.unreserved.popup</field>
+        <field name="arch" type="xml">
+            <form string="Warning">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <footer>
+                        <button name="action_cancel_reason_apply" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

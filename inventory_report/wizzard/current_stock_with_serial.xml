@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="current_stock_serial_form" model="ir.ui.view">
+        <field name="name">current.stock.serial.form</field>
+        <field name="model">current.stock.serial</field>
+        <field name="arch" type="xml">
+            <form string="Current stock report With serial">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="product_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                            <field name="group_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                            <field name="brand_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                            <field name="categ_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                        </group>
+                        <group>
+                            <field name="location_ids" widget="many2many_tags" options="{'no_create':True, 'no_open':True}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="get_report" string="Print Report" type="object" class="oe_highlight"/>
+                    <!--                    <button name="print_excel_report" string="Download Excel" type="object" class="oe_highlight"/>-->
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <act_window id="action_current_stock_serial_wizard"
+                name="Current stock report With serial"
+                res_model="current.stock.serial"
+                view_mode="form"
+                target="new"/>
+
+    <menuitem action="action_current_stock_serial_wizard"
+              id="menu_current_stock_serial_wizard"
+              name="Current stock report With serial"
+              parent="stock.menu_warehouse_report"/>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="credit_list_report_wizard" model="ir.ui.view" >
+        <field name="name">Credit List Report</field>
+        <field name="model">credit.list.report</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Credit List Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="partner_id" widget="many2many_tags"/>
+                    </group>
+                      <group>
+                        <field name="company_id" string="Company" options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                    </group>
+                </group>
+                  <footer>
+                    <button name="print_report" string="Download PDF" type="object" class="oe_highlight"/>
+<!--                    <button name="print_excel_report" string="Download Excel" type="object" class="oe_highlight"/>-->
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_credit_list_report_wizard"
+        name="Credit List Report"
+        res_model="credit.list.report"
+        view_mode="form"
+        target="new"/>
+
+    <menuitem action="action_credit_list_report_wizard"
+        id="menu_credit_list_report_wizard"
+        parent="account.menu_finance_reports"/>
+</odoo>

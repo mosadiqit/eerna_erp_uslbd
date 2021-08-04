@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_users_simple_form_inherit_menu" model="ir.ui.view">
+        <field name="name">res.users.simplified.form.inherit.menu</field>
+        <field name="model">res.users</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Users">
+                <sheet>
+<!--                    <button name="check_ac_menu" type="object" string="Check"/>-->
+                    <field name="id" invisible="1"/>
+                    <div class="alert alert-info text-center mb-3" attrs="{'invisible': [('id', '>', 0)]}" role="alert">
+                        You are inviting a new user.
+                    </div>
+                    <field name="image_1920" widget='image' class="oe_avatar"
+                           options='{"zoom": true, "preview_image": "image_128"}'/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" required="1"/></h1>
+                        <field name="email" invisible="1"/>
+                        <label for="login" class="oe_edit_only" string="Email Address"/>
+                        <h2>
+                            <field name="login"
+                                   placeholder="email@yourcompany.com"/>
+                        </h2>
+                        <label for="company_id" class="oe_edit_only" groups="base.group_multi_company"/>
+                        <field name="company_id" context="{'user_preference': 0}" groups="base.group_multi_company"/>
+                    </div>
+                    <group>
+                        <label for="groups_id" string="Access Rights"
+                               attrs="{'invisible': [('id', '>', 0)]}" groups="base.group_no_one"/>
+                        <div attrs="{'invisible': [('id', '>', 0)]}" groups="base.group_no_one">
+                            <field name="groups_id" readonly="1" widget="many2many_tags"
+                                   options="{'color_field': 'color'}" style="display: inline;"/> You will be able to
+                            define additional access rights by editing the newly created user under the Settings / Users
+                            menu.
+                        </div>
+                        <field name="mobile" widget="phone"/>
+                        <field name="phone" widget="phone"/>
+                        <notebook colspan="4">
+                        <page string="Menu Dashboard" groups="">
+                            <h3 class="text-center">User Menu Permission Dashboard</h3>
+                            <group>
+                                <div class="card-group">
+                                    <div class="card">
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample3"
+                                           role="button"
+                                           aria-expanded="false" aria-controls="collapseExample3">
+                                            Purchase | CRM | UNIVAT
+                                        </a>
+                                        <div class="collapse" id="collapseExample3">
+                                            <div class="card card-body">
+                                                <h5 class="card-title">Purchase</h5>
+                                                <field name="hide_menu" widget="many2many_checkboxes"
+                                                       context="{'group_by':'parent_id'}"/>
+                                                <hr/><h5 class="card-title">CRM</h5>
+                                                <field name="crm_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Univat</h5>
+                                                <field name="vat_menu" widget="many2many_checkboxes"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample1"
+                                           role="button"
+                                           aria-expanded="false" aria-controls="collapseExample1">
+                                            Inventory | Discuss
+                                        </a>
+                                        <div class="collapse" id="collapseExample1">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Inventory</h5>
+                                                <field name="inv_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Discuss</h5>
+                                                <field name="discuss_menu" widget="many2many_checkboxes"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2"
+                                           role="button"
+                                           aria-expanded="false" aria-controls="collapseExample2">
+                                            Sales | Employees
+                                        </a>
+                                        <div class="collapse" id="collapseExample2">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Sales</h5>
+                                                <field name="sales_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Employees</h5>
+                                                <field name="emp_menu" widget="many2many_checkboxes"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </group>
+                            <group>
+                                <div class="card-group">
+                                    <div class="card">
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample4"
+                                           role="button"
+                                           aria-expanded="false" aria-controls="collapseExample4">
+                                            Accounting | Expense | A/C Reports | Landed Cost
+                                        </a>
+                                        <div class="collapse" id="collapseExample4">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Accounting</h5>
+                                                <field name="accounting_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Expense</h5>
+                                                <field name="expense_menu" widget="many2many_checkboxes"/>
+<!--                                                <hr/><h5 class="card-title">LC</h5>-->
+<!--                                                <field name="lc_menu" widget="many2many_checkboxes"/>-->
+                                                <hr/><h5 class="card-title">Accounting Report Group</h5>
+                                        <field name="ac_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Landed Cost</h5>
+                                                <field name="cost_menu" widget="many2many_checkboxes"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample5"
+                                           role="button"
+                                           aria-expanded="false" aria-controls="collapseExample5">
+                                            Contacts | Payroll | POS | Website | Apps | Dashboard
+                                        </a>
+                                        <div class="collapse" id="collapseExample5">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Contacts</h5>
+                                                <field name="contact_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Payroll</h5>
+                                                <field name="payroll_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Point of Sale</h5>
+                                                <field name="pos_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Website</h5>
+                                                <field name="website_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Apps</h5>
+                                                <field name="apps_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Dashboard</h5>
+                                                <field name="dashboard_menu" widget="many2many_checkboxes"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample6"
+                                           role="button"
+                                           aria-expanded="false" aria-controls="collapseExample6">
+                                            Settings | Calendar | Events | Link
+                                        </a>
+                                        <div class="collapse" id="collapseExample6">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Settings</h5>
+                                                <field name="settings_menu" widget="many2many_checkboxes"
+                                                       context="{'groupby':'parent_id'}"/>
+                                                <hr/><h5 class="card-title">Calendar</h5>
+                                                <field name="calender_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Events</h5>
+                                                <field name="events_menu" widget="many2many_checkboxes"/>
+                                                <hr/><h5 class="card-title">Link Tracker</h5>
+                                                <field name="link_menu" widget="many2many_checkboxes"/>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </group>
+                            <group>
+                                <div class="card">
+                                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample8"
+                                       role="button"
+                                       aria-expanded="false" aria-controls="collapseExample8">
+                                        Reporting
+                                    </a>
+                                    <div class="collapse" id="collapseExample8">
+                                        <div class="card-group">
+                                            <div class="card">
+                                                <div class="card card-body">
+                                                    <h5 class="card-title">Accounting Report</h5>
+                                                    <field name="account_reporting" widget="many2many_checkboxes"/>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Inventory Report</h5>
+                                                    <field name="inventory_reporting" widget="many2many_checkboxes"/>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Sales Report</h5>
+                                                    <field name="sales_report" widget="many2many_checkboxes"/>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Purchase Report</h5>
+                                                    <field name="purchase_report" widget="many2many_checkboxes"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </group>
+                            <field name="users_menu" nolabel="1" style="column-count:2;" invisible="1"/>
+                            <field name="parent_menu" nolabel="1" style="column-count:2;" invisible="1"/>
+                        </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_users_tree_inherit_menu" model="ir.ui.view">
+        <field name="name">res.users.tree.inherit.menu</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <tree string="Users">
+                <field name="name"/>
+                <field name="login"/>
+                <field name="lang"/>
+                <field name="login_date"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_res_users_inherit_menu" model="ir.actions.act_window">
+        <field name="name">Users Menu</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="view_users_tree_inherit_menu"/>
+        <!--        <field name="search_view_id" ref="usl_menu_hide.view_users_search_menu_inherit"/>-->
+        <field name="context">{'search_default_no_share': 1}</field>
+        <field name="help">Create and manage users that will connect to the system. Users can be deactivated should
+            there be a period of time during which they will/should not connect to the system. You can assign them
+            groups in order to give them specific access to the applications they need to use in the system.</field>
+    </record>
+    <record id="action_res_users_view_menu_inherit" model="ir.actions.act_window.view">
+        <field eval="10" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_users_tree_inherit_menu"/>
+        <field name="act_window_id" ref="action_res_users_inherit_menu"/>
+    </record>
+    <record id="view_users_search_menu_inherit" model="ir.ui.view">
+        <field name="name">res.users.search.inherit</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <search string="Users">
+                <field name="name"
+                       filter_domain="['|', '|', ('name','ilike',self), ('login','ilike',self), ('email','ilike',self)]"
+                       string="User"/>
+                <field name="company_ids" string="Company" groups="base.group_multi_company"/>
+                <field name="share"/>
+                <filter name="no_share" string="Internal Users" domain="[('share','=',False)]"/>
+                <separator/>
+                <filter name="Inactive" string="Inactive Users" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_res_users_view2_menu_inherit" model="ir.actions.act_window.view">
+        <field eval="20" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_users_simple_form_inherit_menu"/>
+        <field name="act_window_id" ref="action_res_users_inherit_menu"/>
+    </record>
+
+
+    <menuitem id="menu_security_root" name="User Access Control" sequence="-1"/>
+    <menuitem id="menu_security_child" name="All Users List" parent="menu_security_root"
+              action="action_res_users_inherit_menu" sequence="1"/>
+</odoo>

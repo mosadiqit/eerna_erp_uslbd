@@ -1,0 +1,63 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="usl_customer_area.list">
+      <field name="name">usl_customer_area list</field>
+      <field name="model">customer.area.setup</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="area_name"/>
+          <field name="is_active" widget='radio' options="{'horizontal': true}"/>
+          <field name="parent_area"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="usl_customer_area.action_window">
+      <field name="name">Create Customer Area</field>
+      <field name="res_model">customer.area.setup</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="usl_customer_area.action_server">
+      <field name="name">usl_customer_area server</field>
+      <field name="model_id" ref="model_customer_area_setup"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="usl_customer_area" id="usl_customer_area.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="usl_customer_area.menu_1" parent="usl_customer_area.menu_root"/>
+    <menuitem name="Menu 2" id="usl_customer_area.menu_2" parent="usl_customer_area.menu_root"/>
+-->
+
+    <menuitem id="customer_area_setup_main_menu" name="Create Customer Area" parent="sale.menu_sale_config"
+                  sequence="16"/>
+    <menuitem id="customer_area_setup_menu" name="Create Customer Area" parent="customer_area_setup_main_menu"
+                  action="usl_customer_area.action_window" sequence="1"/>
+    <!-- actions -->
+
+<!--    <menuitem name="List" id="usl_customer_area.menu_1_list" parent="usl_customer_area.menu_1"-->
+<!--              action="usl_customer_area.action_window"/>-->
+
+
+  </data>
+</odoo>
